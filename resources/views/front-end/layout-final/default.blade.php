@@ -4,19 +4,8 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>MDBuddy Việt Nam - Thương hiệu đồ tập cao cấp</title>
-
-	<meta name="description" content="Nội thất oto luxury"/>
-	<link rel="canonical" href="https://noithatotoluxury.com/" />
-	<meta property="og:locale" content="vi_VN" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Nội thất oto luxury" />
-	<meta property="og:description" content="Nội thất oto luxury" />
-	<meta property="og:url" content="https://noithatotoluxury.com/" />
-	<meta property="og:site_name" content="Nội thất oto luxury Vietnam" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:description" content="Nội thất oto luxury Vietnam" />
-	<meta name="twitter:title" content="Nội thất oto luxury Vietnam" />
+	@yield('meta')
+	
 	<style type="text/css">
 		img.wp-smiley,
 		img.emoji {
@@ -224,6 +213,15 @@ var wc_single_product_params = {"i18n_required_rating_text":"Vui l\u00f2ng ch\u1
 /* ]]> */
 </script>
 <script type="text/javascript" src="{{asset('noithatotoluxury/js/single-product.min.js')}}"></script>
+<script src="{{asset('noithatotoluxury/js/popup-video/jquery-modal-video.min.js')}}"></script>
+<script>
+	$(".js-video-button").modalVideo({
+		youtube:{
+			controls:0,
+			nocookie: true
+		}
+	});
+</script>
 
 </body>
 </html>

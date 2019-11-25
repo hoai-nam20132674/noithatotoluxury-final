@@ -1,4 +1,19 @@
 @extends('front-end.layout-final.default')
+@section('meta')
+	<title>{{$cate->title}}</title>
+	<meta name="description" content="{{$cate->seo_description}}"/>
+	<meta name="keywords" content="{{$cate->seo_keyword}}"/>
+	<link rel="canonical" href="{{$cate->url}}" />
+	<meta property="og:locale" content="vi_VN" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="{{$cate->title}}" />
+	<meta property="og:description" content="{{$cate->seo_description}}" />
+	<meta property="og:url" content="{{$cate->url}}" />
+	<meta property="og:image" content="{{asset('uploads/images/categories/share_image/'.$cate->share_image)}}" />
+	<!-- <meta property="og:site_name" content="{{$cate->name}}" /> -->
+	<meta name="twitter:description" content="{{$cate->seo_description}}" />
+	<meta name="twitter:title" content="{{$cate->title}}" />
+@endsection
 @section('content')
 <div class="shop-page-title category-page-title page-title ">
 	<div class="page-title-inner flex-row  medium-flex-wrap container">

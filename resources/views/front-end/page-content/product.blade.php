@@ -1,4 +1,20 @@
 @extends('front-end.layout-final.default')
+@section('meta')
+  <title>{{$products->title}}</title>
+  <meta name="description" content="{{$products->seo_description}}"/>
+  <meta name="keywords" content="{{$products->seo_keyword}}"/>
+  <link rel="canonical" href="{{$products->url}}" />
+  <meta property="og:locale" content="vi_VN" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{$products->title}}" />
+  <meta property="og:description" content="{{$products->seo_description}}" />
+  <meta property="og:url" content="{{$products->url}}" />
+  <meta property="og:image" content="{{asset('uploads/images/products/share_image/'.$products->share_image)}}" />
+  <!-- <meta property="og:site_name" content="{{$products->name}}" /> -->
+  <meta name="twitter:description" content="{{$products->seo_description}}" />
+  <meta name="twitter:title" content="{{$products->title}}" />
+  <link rel="stylesheet" href="{{asset('noithatotoluxury/css/popup-video/modal-video.min.css')}}">
+@endsection
 @section('content')
   <main id="main" class="">
 
@@ -64,7 +80,8 @@
           </div> -->
           <div class="col large-12">
             <div class="col video-thumbnails" style="width: 25%; float: left;">
-                <a>
+              <!-- <button class="js-video-button" data-video-id='L61p2uyiMSo'>Youtube</button> -->
+              <a class="js-video-button" data-video-id='L61p2uyiMSo'>
                 <img width="100%" src="https://www.bhamcityschools.org/cms/lib/AL01001646/Centricity/Domain/3685/video%20icon.gif">
               </a>
             </div>
@@ -105,7 +122,7 @@
         <h1 class="product-title entry-title title-head" data-id="{{$products->products_detail_id}}" title="{{$products->name}}">{{$products->name}}</h1>
 
   	<div class="is-divider small"></div>
-    <ul class="next-prev-thumbs is-small show-for-medium">
+    <!-- <ul class="next-prev-thumbs is-small show-for-medium">
         <li class="prod-dropdown has-dropdown">
              <a href="https://mdbuddy.vn/product/dung-cu-tap-co-bap-chan-tai-nha-mdbuddy-md1477/"  rel="next" class="button icon is-outline circle">
                 <i class="icon-angle-left" ></i>              </a>
@@ -122,7 +139,7 @@
                 <img width="100" height="100" src="https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-100x100.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-100x100.jpg 100w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-150x150.jpg 150w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-300x300.jpg 300w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-250x250.jpg 250w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-510x510.jpg 510w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1.jpg 720w" sizes="(max-width: 100px) 100vw, 100px" /></a>
             </div>
         </li>
-    </ul>
+    </ul> -->
     <!-- đánh giá sao -->
   	<!-- <div class="woocommerce-product-rating">
   		<a href="#reviews" class="woocommerce-review-link" rel="nofollow"><div class="star-rating"><span style="width:100%"><strong class="rating">5.00</strong> trên 5 dựa trên <span class="rating">2</span> đánh giá</span></div></a></div> -->
@@ -130,8 +147,8 @@
 
   <div class="price-wrapper">
   	<p class="price product-page-price price-on-sale">
-      <del><span class="woocommerce-Price-amount amount">1.499.000<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></del>
-      <ins><span class="woocommerce-Price-amount amount price-detail" data-id="{{$products->products_detail_id}}" price="{{$products->price}}">{!!number_format($products->maxPrice)!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></ins>
+      <del><span class="woocommerce-Price-amount amount">{!!number_format($products->price)!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></del>
+      <ins><span class="woocommerce-Price-amount amount price-detail" data-id="{{$products->products_detail_id}}" price="{{$products->sale}}">{!!number_format($products->sale)!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></ins>
     </p>
   </div>
   <!-- mô tả ngắn -->
@@ -191,7 +208,7 @@
   		</div><!-- .summary -->
 
 
-  		<div id="product-sidebar" class="col large-2 hide-for-medium product-sidebar-small">
+  		<!-- <div id="product-sidebar" class="col large-2 hide-for-medium product-sidebar-small">
   			<div class="hide-for-off-canvas" style="width:100%"><ul class="next-prev-thumbs is-small nav-right text-right">         <li class="prod-dropdown has-dropdown">
                  <a href="https://mdbuddy.vn/product/dung-cu-tap-co-bap-chan-tai-nha-mdbuddy-md1477/"  rel="next" class="button icon is-outline circle">
                     <i class="icon-angle-left" ></i>              </a>
@@ -208,7 +225,7 @@
                     <img width="100" height="100" src="https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-100x100.jpg" class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image" alt="" srcset="https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-100x100.jpg 100w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-150x150.jpg 150w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-300x300.jpg 300w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-250x250.jpg 250w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1-510x510.jpg 510w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/day-thang-bo-phap-3-1.jpg 720w" sizes="(max-width: 100px) 100vw, 100px" /></a>
                 </div>
             </li>
-        </ul></div>		</div>
+        </ul></div>		</div> -->
 
   	</div><!-- .row -->
   </div><!-- .product-main -->

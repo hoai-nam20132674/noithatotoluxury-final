@@ -321,11 +321,12 @@ class ClientController extends Controller
             // dd($content);
             
         }
-        if(!$products->isEmpty()){
+        if(!$blogs->isEmpty()){
             $system = Systems::where('id',1)->get()->first();
             $cates = Categories::where('systems_id',1)->where('display',1)->get();
             $menus = Menus::select()->orderBy('stt','ASC')->get();
-            return view('front-end.page-content.blog',['system'=>$system,'cates'=>$cates,'products'=>$products,'images'=>$images,'properties_type'=>$properties_type,'properties'=>$properties, 'cate_parent'=>$cate_parent,'products_same'=>$products_same,'menus'=>$menus]);
+            $blog = Blogs::where('url',$url)->get()->first();
+            return view('front-end.page-content.blog',['system'=>$system,'cates'=>$cates,'menus'=>$menus,'blog'=>$blog]);
         }
     	
     }

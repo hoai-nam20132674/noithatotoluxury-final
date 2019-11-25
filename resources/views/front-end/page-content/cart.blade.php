@@ -1,4 +1,5 @@
 @extends('front-end.layout-final.default')
+
 @section('content')
 		<main id="main" class="">
 

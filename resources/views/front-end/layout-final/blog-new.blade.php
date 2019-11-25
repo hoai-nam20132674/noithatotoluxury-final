@@ -19,7 +19,7 @@
 				            					<div class="box-image">
 							  						<div class="image-cover" style="padding-top:16-9;">
 							  							<a href="{{$blog->url}}">
-							  								<img width="226" height="300" src="{{asset('uploads/images/blogs/'.$blog->image)}}" class="attachment-medium size-medium wp-post-image" alt="{{$blog->title}}" sizes="(max-width: 226px) 100vw, 226px">
+							  								<img width="100%" src="{{asset('uploads/images/blogs/'.$blog->image)}}" class="attachment-medium size-medium wp-post-image" alt="{{$blog->title}}" >
 							  							</a>
 							  						</div>
 				  						  		</div><!-- .box-image -->
