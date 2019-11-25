@@ -3,9 +3,9 @@
 <!-- FOOTER 2 -->
 <div class="footer-widgets footer footer-2 dark">
 		<div class="row dark large-columns-4 mb-0">
-	   		<div id="text-31" class="col pb-0 widget widget_text"><span class="widget-title">VỀ CHÚNG TÔI</span><div class="is-divider small"></div>			<div class="textwidget"><p>MDbuddy là thương hiệu nổi tiếng về các sản phẩm thể dục thể thao. Các sản phẩm của MDbuddy hiện phân phối trên hơn 40 quốc gia, và có mặt tại hơn 300 câu lạc bộ tập luyện hàng đầu trên thế giới.</p>
+	   		<div id="text-31" class="col pb-0 widget widget_text"><span class="widget-title">VỀ CHÚNG TÔI</span><div class="is-divider small"></div>			<div class="textwidget"><p>{{$system->seo_description}}</p>
 </div>
-		</div><div id="text-32" class="col pb-0 widget widget_text"><span class="widget-title">ĐỐI TÁC &#8211; KHÁCH HÀNG</span><div class="is-divider small"></div>			<div class="textwidget"><p><img class="alignnone wp-image-94" src="https://mdbuddy.vn/home/wp-content/uploads/2017/10/footer-cards.png" alt="" width="191" height="61" /></p>
+		</div><div id="text-32" class="col pb-0 widget widget_text"><span class="widget-title">ĐỐI TÁC &#8211; KHÁCH HÀNG</span><div class="is-divider small"></div>			<div class="textwidget"><p><img class="alignnone wp-image-94" src="{{asset('uploads/images/footer-cards.png')}}" alt="" width="80%" /></p>
 </div>
 		</div><div id="text-6" class="col pb-0 widget widget_text"><span class="widget-title">CHÍNH SÁCH BÁN HÀNG</span><div class="is-divider small"></div>			<div class="textwidget"><ul>
 <li><a href="#">Chính sách vận chuyển</a></li>
@@ -16,11 +16,14 @@
 </ul>
 </div>
 		</div><div id="text-28" class="col pb-0 widget widget_text"><span class="widget-title">LIÊN HỆ</span><div class="is-divider small"></div>			<div class="textwidget"><ul>
-<li>Tổng đài CSKH: 1900 633 438</li>
-<li>Email: sale.mdbuddy@gmail.com</li>
-<li>Showroom: D40-TT18, Văn Quán, Hà Đông, HN</li>
-<li>Trụ sở: R4, Royal City, Thanh Xuân, HN</li>
-<li>Tổng kho: Lô A2, KCN Quang Minh, Vĩnh Phúc</li>
+<li>Tổng đài CSKH: {{$system->phone}}</li>
+<li>Email: {{$system->email}}</li>
+<li>Showroom: {{$system->address}}</li>
+<li>
+	<span style=" font-size: 30px;"><i style="width: 25%; margin: 0 auto;text-align: center;" class="fa fa-facebook-square"></i></span>
+	<span style=" font-size: 30px;"><i style="width: 25%; margin: 0 auto;text-align: center;" class="fa fa-envelope"></i></span>
+	<span style=" font-size: 30px;"><i style="width: 25%; margin: 0 auto;text-align: center;" class="fa fa-youtube-square"></i></span>
+</li>
 </ul>
 </div>
 		</div>        
@@ -52,7 +55,7 @@
     
     <div class="footer-primary pull-left">
             <div class="copyright-footer">
-        Copyright 2019 © <strong>MDBUDDY VIETNAM</strong>      </div>
+        Copyright 2019 © <strong>NOITHATOTOLUXURY</strong> by NamNguyen</div>
           </div><!-- .left -->
   </div><!-- .container -->
 </div><!-- .absolute-footer -->

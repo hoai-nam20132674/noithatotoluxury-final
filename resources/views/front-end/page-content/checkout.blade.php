@@ -69,29 +69,53 @@
 		<h3>Thanh toán và giao hàng</h3>
 
 	
-	
-		<div class="woocommerce-billing-fields__field-wrapper">
-			<p class="form-row form-row-wide validate-required" id="billing_first_name_field" data-priority="10">
-				<span class="woocommerce-input-wrapper">
-					<input type="text" class="input-text " name="name" id="billing_first_name" placeholder="Họ và tên" required value="" autocomplete="given-name">
-				</span>
-			</p>
-			<p class="form-row form-row-wide validate-required validate-phone" id="billing_phone_field" data-priority="20">
-				<span class="woocommerce-input-wrapper">
-					<input type="tel" class="input-text " name="phone" id="billing_phone" placeholder="Số điện thoại" required value="" autocomplete="tel">
-				</span>
-			</p>
-			<p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="30">
-				<span class="woocommerce-input-wrapper">
-					<input type="email" class="input-text " name="email" id="billing_email" placeholder="Địa chỉ email" value="" required autocomplete="email username">
-				</span>
-			</p>
-			<p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="30">
-				<span class="woocommerce-input-wrapper">
-					<input type="email" class="input-text " name="address" id="billing_email" placeholder="Địa chỉ giao hàng" value="" autocomplete="email username">
-				</span>
-			</p>
-		</div>
+		@if(Auth::guard('users_client')->user())
+			<div class="woocommerce-billing-fields__field-wrapper">
+				<p class="form-row form-row-wide validate-required" id="billing_first_name_field" data-priority="10">
+					<span class="woocommerce-input-wrapper">
+						<input type="text" class="input-text " name="name" id="billing_first_name" placeholder="Họ và tên" required value="{{Auth::guard('users_client')->user()->name}}" autocomplete="given-name">
+					</span>
+				</p>
+				<p class="form-row form-row-wide validate-required validate-phone" id="billing_phone_field" data-priority="20">
+					<span class="woocommerce-input-wrapper">
+						<input type="tel" class="input-text " name="phone" id="billing_phone" placeholder="Số điện thoại" required value="{{Auth::guard('users_client')->user()->phone}}" autocomplete="tel">
+					</span>
+				</p>
+				<p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="30">
+					<span class="woocommerce-input-wrapper">
+						<input type="email" class="input-text " name="email" id="billing_email" placeholder="Địa chỉ email" value="{{Auth::guard('users_client')->user()->email}}" required autocomplete="email username">
+					</span>
+				</p>
+				<p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="30">
+					<span class="woocommerce-input-wrapper">
+						<input type="text" class="input-text " name="address" id="billing_email" placeholder="Địa chỉ giao hàng" value="#" required autocomplete="email username">
+					</span>
+				</p>
+			</div>
+		@else
+			<div class="woocommerce-billing-fields__field-wrapper">
+				<p class="form-row form-row-wide validate-required" id="billing_first_name_field" data-priority="10">
+					<span class="woocommerce-input-wrapper">
+						<input type="text" class="input-text " name="name" id="billing_first_name" placeholder="Họ và tên" required autocomplete="given-name">
+					</span>
+				</p>
+				<p class="form-row form-row-wide validate-required validate-phone" id="billing_phone_field" data-priority="20">
+					<span class="woocommerce-input-wrapper">
+						<input type="tel" class="input-text " name="phone" id="billing_phone" placeholder="Số điện thoại" required autocomplete="tel">
+					</span>
+				</p>
+				<p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="30">
+					<span class="woocommerce-input-wrapper">
+						<input type="email" class="input-text " name="email" id="billing_email" placeholder="Địa chỉ email" required autocomplete="email username">
+					</span>
+				</p>
+				<p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="30">
+					<span class="woocommerce-input-wrapper">
+						<input type="email" class="input-text " name="address" id="billing_email" placeholder="Địa chỉ giao hàng" value="#" required autocomplete="email username">
+					</span>
+				</p>
+			</div>
+		@endif
 
 	</div>
 
@@ -105,7 +129,7 @@
 
 		
 		<div class="woocommerce-additional-fields__field-wrapper">
-							<p class="form-row notes" id="order_comments_field" data-priority="10"><label for="order_comments" class="">Ghi chú đơn hàng&nbsp;<span class="optional">(tuỳ chọn)</span></label><span class="woocommerce-input-wrapper"><textarea name="messages" class="input-text " id="order_comments" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn." rows="2" cols="5"></textarea></span></p>					</div>
+							<p class="form-row notes" id="order_comments_field" data-priority="10"><label for="order_comments" class="">Ghi chú đơn hàng&nbsp;<span class="optional">(tuỳ chọn)</span></label><span class="woocommerce-input-wrapper"><textarea required name="messages" class="input-text " id="order_comments" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn." rows="2" cols="5">#</textarea></span></p>					</div>
 
 	
 	</div>

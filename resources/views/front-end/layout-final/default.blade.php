@@ -47,6 +47,7 @@
 	<link rel='stylesheet' id='animate-css-css'  href="{{asset('noithatotoluxury/css/animate.min.css')}}" type='text/css' media='all' />
 	<link rel="stylesheet" type="text/css" href="{{asset('noithatotoluxury/css/photoswipe.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('noithatotoluxury/css/default-skin.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 	<script type='text/javascript' src="{{asset('noithatotoluxury/js/jquery.js')}}"></script>

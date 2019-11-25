@@ -236,12 +236,74 @@ jQuery(document).on('click', '#add-to-cart', function(event) {
 							swal(text+" không đủ ", "Vui lòng chọn số lượng it hơn " +quantity+  " sản phẩm", "warning");
 						}
 						else{
-							// for(var i=0;i<data.length;i++){
-							// 	if(data[i] == ':'){
-							// 		var products_detail_id = data.substring(0,i);
-							// 	}
-							// }
 							
+							swal({
+							  title: "Thêm vào giỏ hàng thành công",
+							  text: "",
+							  icon: "success",
+							  buttons: true,
+							  buttons: ["Giỏ hàng", true],
+							})
+							.then((willDelete) => {
+							  if (willDelete) {
+							  	//cập nhật số lượng sản phẩm giỏ hàng
+							  	cartCount = jQuery(".cartCount").attr('cart-count');
+							  	cartCount = parseInt(cartCount);
+							  	quantity = parseInt(quantity);
+								jQuery(".cartCount").attr('data-icon-label',cartCount+quantity);
+								jQuery(".cartCount").attr('cart-count',cartCount+quantity);
+								//end
+								// --------------
+								// cập nhật item giỏ hàng
+								var element = jQuery(".product-cart[data-id="+products_detail_id+"]");
+								//kiểm tra sản phẩm đã có trong giỏ hàng chưa
+							    if( element.length ==0){ //chưa có
+							    	
+							    	var title = jQuery(".title-head[data-id="+products_detail_id+"]").attr('title');
+							    	var avatar = jQuery("img.avatar[data-id="+products_detail_id+"]").attr('src');
+							    	var price = jQuery(".price-detail[data-id="+products_detail_id+"]").attr('price');
+							    	var totalPrice = price*quantity;
+							    	var priceTg = price;
+							    	price = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+							    	// var html = '<li class="item product-cart" data-id="'+products_detail_id+'"><div class="border_list"><a class="product-image" href="'+product_url+'" title="'+title+'"><img alt="'+title+'" src="'+avatar+'" width="100"></a><div class="detail-item"><div class="product-details"><p class="product-name"><a href="'+product_url+'" title="'+title+'">'+title+' '+text+'</a></p></div><div class="product-details-bottom"><span class="price pricechange">Giá: '+price+'</span><a data-id="'+products_detail_id+'" title="Xóa" class="remove-item-cart fa fa-trash-o" price="'+totalPrice+'">&nbsp;</a><div class="quantity-select qty_drop_cart"><p data-id="'+products_detail_id+'" value="'+quantity+'">Số Lượng: '+quantity+'</p></div></div></div></div></li>';
+							    	var html ='<li class="woocommerce-mini-cart-item mini_cart_item item product-cart" data-id="'+products_detail_id+'"><a href="'+product_url+'" data-id="'+products_detail_id+'" class="remove remove_from_cart_button remove-item-cart" aria-label="Xóa sản phẩm này" price="'+priceTg+'">&times;</a><a href="'+product_url+'"><img width="250" height="250" src="'+avatar+'" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="'+title+'" sizes="(max-width: 250px) 100vw, 250px" />'+title+' '+text+'</a><span data-id="'+products_detail_id+'" value="'+quantity+'" class="quantity">'+quantity+'<span class="woocommerce-Price-amount amount"> &times; '+price+'<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></span></li>'
+							    	jQuery(".list-item-cart").append(html);
+							    	var price_plus = parseInt(totalPrice);
+									var old_total_price = parseInt(jQuery(".totalPrice").attr('price'));
+									var new_total_price = old_total_price + price_plus;
+									jQuery(".totalPrice").empty();
+									jQuery(".totalPrice").attr('price',new_total_price);
+									new_total_price = new_total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+'&#8363;';
+									jQuery(".totalPrice").append(new_total_price);
+							    }
+
+							    else{ //có sản phẩm trong giỏ hàng
+							    	var old_quantity = parseInt(jQuery(".quantity[data-id="+products_detail_id+"]").attr('value'));
+							    	var new_quantity = old_quantity + quantity;
+							    	var price = jQuery(".price-detail[data-id="+products_detail_id+"]").attr('price');
+							    	var priceTg = price;
+							    	price = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+							    	jQuery(".quantity[data-id="+products_detail_id+"]").attr('value',new_quantity);
+							    	jQuery(".quantity[data-id="+products_detail_id+"]").empty();
+							    	jQuery(".quantity[data-id="+products_detail_id+"]").append(new_quantity+'<span class="woocommerce-Price-amount amount"> &times; '+price+'<span class="woocommerce-Price-currencySymbol">&#8363;</span></span>');
+							    	var price = jQuery(".price-detail[data-id="+products_detail_id+"]").attr('price');
+							    	var price_plus = parseInt(price*quantity);
+							    	var old_total_price = parseInt(jQuery(".totalPrice").attr('price'));
+							    	var new_total_price = old_total_price + price_plus;
+							    	var old_total_price_item_cart = parseInt(jQuery(".remove-item-cart[data-id="+products_detail_id+"]").attr('price'));
+							    	var new_total_price_item_cart =old_total_price_item_cart + price_plus;
+							    	jQuery(".totalPrice").empty();
+									jQuery(".totalPrice").attr('price',new_total_price);
+									jQuery(".remove-item-cart[data-id="+products_detail_id+"]").attr('price',new_total_price_item_cart);
+									new_total_price = new_total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+'&#8363;';
+									jQuery(".totalPrice").append(new_total_price);
+
+							    }
+
+							  } else {
+							    window.location='/cart';
+							  }
+							});
 							
 							url = '/add-to-cart/'+products_detail_id+'-'+quantity;
 							jQuery.ajax({
@@ -249,73 +311,7 @@ jQuery(document).on('click', '#add-to-cart', function(event) {
 								url: url,
 								dataType: 'html',
 								success: function(data) {
-									swal({
-									  title: "Thêm vào giỏ hàng thành công",
-									  text: "",
-									  icon: "success",
-									  buttons: true,
-									  buttons: ["Giỏ hàng", true],
-									})
-									.then((willDelete) => {
-									  if (willDelete) {
-									  	//cập nhật số lượng sản phẩm giỏ hàng
-									  	cartCount = jQuery(".cartCount").attr('cart-count');
-									  	cartCount = parseInt(cartCount);
-									  	quantity = parseInt(quantity);
-										jQuery(".cartCount").attr('data-icon-label',cartCount+quantity);
-										jQuery(".cartCount").attr('cart-count',cartCount+quantity);
-										//end
-										// --------------
-										// cập nhật item giỏ hàng
-										var element = jQuery(".product-cart[data-id="+products_detail_id+"]");
-										//kiểm tra sản phẩm đã có trong giỏ hàng chưa
-									    if( element.length ==0){ //chưa có
-									    	
-									    	var title = jQuery(".title-head[data-id="+products_detail_id+"]").attr('title');
-									    	var avatar = jQuery("img.avatar[data-id="+products_detail_id+"]").attr('src');
-									    	var price = jQuery(".price-detail[data-id="+products_detail_id+"]").attr('price');
-									    	var totalPrice = price*quantity;
-									    	var priceTg = price;
-									    	price = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-									    	// var html = '<li class="item product-cart" data-id="'+products_detail_id+'"><div class="border_list"><a class="product-image" href="'+product_url+'" title="'+title+'"><img alt="'+title+'" src="'+avatar+'" width="100"></a><div class="detail-item"><div class="product-details"><p class="product-name"><a href="'+product_url+'" title="'+title+'">'+title+' '+text+'</a></p></div><div class="product-details-bottom"><span class="price pricechange">Giá: '+price+'</span><a data-id="'+products_detail_id+'" title="Xóa" class="remove-item-cart fa fa-trash-o" price="'+totalPrice+'">&nbsp;</a><div class="quantity-select qty_drop_cart"><p data-id="'+products_detail_id+'" value="'+quantity+'">Số Lượng: '+quantity+'</p></div></div></div></div></li>';
-									    	var html ='<li class="woocommerce-mini-cart-item mini_cart_item item product-cart" data-id="'+products_detail_id+'"><a href="'+product_url+'" data-id="'+products_detail_id+'" class="remove remove_from_cart_button remove-item-cart" aria-label="Xóa sản phẩm này" price="'+priceTg+'">&times;</a><a href="'+product_url+'"><img width="250" height="250" src="'+avatar+'" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="'+title+'" sizes="(max-width: 250px) 100vw, 250px" />'+title+' '+text+'</a><span data-id="'+products_detail_id+'" value="'+quantity+'" class="quantity">'+quantity+'<span class="woocommerce-Price-amount amount"> &times; '+price+'<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></span></li>'
-									    	jQuery(".list-item-cart").append(html);
-									    	var price_plus = parseInt(totalPrice);
-											var old_total_price = parseInt(jQuery(".totalPrice").attr('price'));
-											var new_total_price = old_total_price + price_plus;
-											jQuery(".totalPrice").empty();
-											jQuery(".totalPrice").attr('price',new_total_price);
-											new_total_price = new_total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+'&#8363;';
-											jQuery(".totalPrice").append(new_total_price);
-									    }
-
-									    else{ //có sản phẩm trong giỏ hàng
-									    	var old_quantity = parseInt(jQuery(".quantity[data-id="+products_detail_id+"]").attr('value'));
-									    	var new_quantity = old_quantity + quantity;
-									    	var price = jQuery(".price-detail[data-id="+products_detail_id+"]").attr('price');
-									    	var priceTg = price;
-									    	price = price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-									    	jQuery(".quantity[data-id="+products_detail_id+"]").attr('value',new_quantity);
-									    	jQuery(".quantity[data-id="+products_detail_id+"]").empty();
-									    	jQuery(".quantity[data-id="+products_detail_id+"]").append(new_quantity+'<span class="woocommerce-Price-amount amount"> &times; '+price+'<span class="woocommerce-Price-currencySymbol">&#8363;</span></span>');
-									    	var price = jQuery(".price-detail[data-id="+products_detail_id+"]").attr('price');
-									    	var price_plus = parseInt(price*quantity);
-									    	var old_total_price = parseInt(jQuery(".totalPrice").attr('price'));
-									    	var new_total_price = old_total_price + price_plus;
-									    	var old_total_price_item_cart = parseInt(jQuery(".remove-item-cart[data-id="+products_detail_id+"]").attr('price'));
-									    	var new_total_price_item_cart =old_total_price_item_cart + price_plus;
-									    	jQuery(".totalPrice").empty();
-											jQuery(".totalPrice").attr('price',new_total_price);
-											jQuery(".remove-item-cart[data-id="+products_detail_id+"]").attr('price',new_total_price_item_cart);
-											new_total_price = new_total_price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')+'&#8363;';
-											jQuery(".totalPrice").append(new_total_price);
-
-									    }
-
-									  } else {
-									    window.location='/cart';
-									  }
-									});
+									
 								}
 								
 							});

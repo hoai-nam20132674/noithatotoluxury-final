@@ -80,7 +80,7 @@
 						</div>
 					</form>
 				</aside> -->
-				<aside id="woocommerce_top_rated_products-2" class="widget woocommerce widget_top_rated_products">
+				<aside style="border-top: 1px solid #d0d0d0; padding-top: 15px; " id="woocommerce_top_rated_products-2" class="widget woocommerce widget_top_rated_products">
 					<span class="widget-title shop-sidebar">SẢN PHẨM NỔI BẬT</span>
 					<div class="is-divider small"></div>
 					<ul class="product_list_widget">

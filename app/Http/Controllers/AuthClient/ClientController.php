@@ -61,6 +61,7 @@ class ClientController extends Controller
     	$cates = Categories::where('url', $url)->get();
         $products = Products::where('url',$url)->get(); 
     	$systems = Systems::where('website',$url)->get();
+        $blogs = Blogs::where('url',$url)->get();
 
     	if(!$systems->isEmpty()){
     		$system = $systems->first();
@@ -319,6 +320,12 @@ class ClientController extends Controller
             return view('front-end.page-content.product',['system'=>$system,'cates'=>$cates,'products'=>$products,'images'=>$images,'properties_type'=>$properties_type,'properties'=>$properties, 'cate_parent'=>$cate_parent,'products_same'=>$products_same,'menus'=>$menus]);
             // dd($content);
             
+        }
+        if(!$products->isEmpty()){
+            $system = Systems::where('id',1)->get()->first();
+            $cates = Categories::where('systems_id',1)->where('display',1)->get();
+            $menus = Menus::select()->orderBy('stt','ASC')->get();
+            return view('front-end.page-content.blog',['system'=>$system,'cates'=>$cates,'products'=>$products,'images'=>$images,'properties_type'=>$properties_type,'properties'=>$properties, 'cate_parent'=>$cate_parent,'products_same'=>$products_same,'menus'=>$menus]);
         }
     	
     }
@@ -609,6 +616,7 @@ class ClientController extends Controller
         if(Auth::guard('users_client')->user()){
             if(Auth::guard('users_client')->user()->id == $id){
                 $system = Systems::where('id',1)->get()->first();
+                $menus = Menus::select()->orderBy('stt','ASC')->get();
                 $cates = Categories::where('systems_id',$system->id)->where('display',1)->get();
                 $cateRoot = array();
                 $x = 0;
@@ -620,7 +628,7 @@ class ClientController extends Controller
                     else{}
                 }
                 $cates = $cateRoot;
-                return view('front-end.page-content.account',['system'=>$system,'cates'=>$cates]);
+                return view('front-end.page-content.checkout-status',['system'=>$system,'cates'=>$cates,'menus'=>$menus]);
             }
             else{
                 return redirect()->route('account',Auth::guard('users_client')->user()->id);
@@ -814,7 +822,7 @@ class ClientController extends Controller
         // $products_detail = ProductsDetail::where('id',$id)->get()->first();
         $products_detail = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->where('products_detail.id',$id)->where('images_products.role',1)->select('products_detail.*','images_products.url AS avatar','products.name','products.url')->get()->first();
         if($products_detail->amount >= $quantity && $quantity >0){
-            Cart::add(array('id'=>$products_detail->id,'name'=>$products_detail->name,'quantity'=>$quantity,'price'=>$products_detail->price,'attributes'=>array('img'=>$products_detail->avatar,'url'=>$products_detail->url)));
+            Cart::add(array('id'=>$products_detail->id,'name'=>$products_detail->name,'quantity'=>$quantity,'price'=>$products_detail->sale,'attributes'=>array('img'=>$products_detail->avatar,'url'=>$products_detail->url)));
             // $products_detail = ProductsDetail::where('id',$id)->get()->first();
             // $products_detail->amount = $products_detail->amount - $quantity;
             // $products_detail->save();
