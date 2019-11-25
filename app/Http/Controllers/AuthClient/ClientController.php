@@ -38,10 +38,10 @@ class ClientController extends Controller
         $cates_highlight = Categories::where('display',1)->where('highlights',1)->get();
         $blogs = Blogs::where('display',1)->orderBy('id','ASC')->take(4)->get();
         $slides = Slides::select()->get();
-        $menus = Menus::select()->get();
+        $menus = Menus::select()->orderBy('stt','ASC')->get();
         $cate = $this->arrayColumn($cates,$col='id');
         $products_highlight = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->where('products.display',1)->where('products.highlights',1)->where('images_products.role',1)->orderBy('products.updated_at', 'DESC')
-            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id')
+            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id','products_detail.sale')
             ->get();
         $productsGroup = $this->groupProduct($products_highlight);
         $products_highlight = $this->filterProduct($productsGroup);
@@ -246,12 +246,12 @@ class ClientController extends Controller
     	if(!$cates->isEmpty()){
             $system = Systems::where('id',1)->get()->first();
             $cate = Categories::where('url',$url)->get()->first();
-            $menus = Menus::select()->get();
-            $cates = Categories::where('systems_id',1)->where('display',1)->get();
+            $menus = Menus::select()->orderBy('stt','ASC')->get();
+            $cates = Categories::where('systems_id',1)->where('id','!=',1)->where('display',1)->get();
             $cateRoot = array();
             $x = 0;
             for($i=0;$i<count($cates);$i++){
-                if($cates[$i]->id == $cates[$i]->parent_id){
+                if($cates[$i]->parent_id == 1){
                     $cateRoot[$x]=$cates[$i];
                     $x++;
                 }
@@ -265,24 +265,26 @@ class ClientController extends Controller
             //end lấy danh mục con của danh mục root_categorie_id
             // --------------------------------------
             $products = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->whereIn('products.categories_id',$arrayIdChild)->where('products.display',1)->where('images_products.role',1)
-            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id')
+            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id','products_detail.sale')
             ->get();
             $productsGroup = $this->groupProduct($products);
             $products = $this->filterProduct($productsGroup);
             $products = $this->paginateCustum($products, $perPage = 1, $page = null, $options = []);
             $products_highlight = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->where('products.display',1)->where('products.highlights',1)->where('images_products.role',1)->orderBy('products.updated_at', 'DESC')
-            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id')
+            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id','products_detail.sale')
             ->get();
             $productsGroup = $this->groupProduct($products_highlight);
             $products_highlight = $this->filterProduct($productsGroup);
             $cate = Categories::where('url',$url)->get()->first();
     		return view('front-end.page-content.categorie',['system'=>$system,'cates'=>$cates,'cate'=>$cate,'products'=>$products,'menus'=>$menus,'products_highlight'=>$products_highlight]);
+            
     	}
         if(!$products->isEmpty()){
             $system = Systems::where('id',1)->get()->first();
             $cates = Categories::where('systems_id',1)->where('display',1)->get();
+            $menus = Menus::select()->orderBy('stt','ASC')->get();
             $products = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->where('products.url',$url)->where('images_products.role',1)
-            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id')
+            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id','products_detail.sale')
             ->get();
             $productsGroup = $this->groupProduct($products);
             $products = $this->filterProduct($productsGroup);
@@ -314,7 +316,7 @@ class ClientController extends Controller
             ->get();
             $products_same_group = $this->groupProduct($products_same);
             $products_same = $this->filterProduct($products_same_group);
-            return view('front-end.page-content.product',['system'=>$system,'cates'=>$cates,'products'=>$products,'images'=>$images,'properties_type'=>$properties_type,'properties'=>$properties, 'cate_parent'=>$cate_parent,'products_same'=>$products_same]);
+            return view('front-end.page-content.product',['system'=>$system,'cates'=>$cates,'products'=>$products,'images'=>$images,'properties_type'=>$properties_type,'properties'=>$properties, 'cate_parent'=>$cate_parent,'products_same'=>$products_same,'menus'=>$menus]);
             // dd($content);
             
         }
@@ -661,6 +663,7 @@ class ClientController extends Controller
     public function cart(){
         
         $system = Systems::where('id',1)->get()->first();
+        $menus = Menus::select()->orderBy('stt','ASC')->get();
         $cates = Categories::where('systems_id',$system->id)->where('display',1)->get();
         $cateRoot = array();
         $x = 0;
@@ -673,7 +676,7 @@ class ClientController extends Controller
         }
         $cates = $cateRoot;
         
-        return view('front-end.page-content.cart',['system'=>$system,'cates'=>$cates]);
+        return view('front-end.page-content.cart',['system'=>$system,'cates'=>$cates,'menus'=>$menus]);
         // dd($order_details);
             
     }
@@ -681,8 +684,9 @@ class ClientController extends Controller
         
         $items = Cart::getContent();
         $system = Systems::where('id',1)->get()->first();
+        $menus = Menus::select()->orderBy('stt','ASC')->get();
         
-        return view('front-end.page-content.checkout',['system'=>$system,'items'=>$items]);
+        return view('front-end.page-content.checkout',['system'=>$system,'items'=>$items,'menus'=>$menus]);
         // dd($order_details);
             
     }

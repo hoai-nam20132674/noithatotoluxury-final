@@ -40,27 +40,28 @@
 					<span class="widget-title shop-sidebar">DANH MỤC</span>
 					<div class="is-divider small"></div>
 					<ul class="product-categories">
-						<li class="cat-item cat-item-15 cat-parent">
-							<a href="https://mdbuddy.vn/product-category/phu-kien-ho-tro1/">PHỤ KIỆN &amp; HỖ TRỢ</a>
-							<ul class='children'>
-								<li class="cat-item cat-item-547"><a href="https://mdbuddy.vn/product-category/phu-kien-ho-tro1/phu-kien-bao-ho/">Phụ kiện bảo hộ</a></li>
-								<li class="cat-item cat-item-548"><a href="https://mdbuddy.vn/product-category/phu-kien-ho-tro1/phu-kien-ho-tro/">Phụ kiện hỗ trợ</a></li>
-							</ul>
-						</li>
-						<li class="cat-item cat-item-1038 cat-parent"><a href="https://mdbuddy.vn/product-category/dung-cu-tap-ca-nhan/">DỤNG CỤ TẬP CÁ NHÂN</a>
-							<ul class='children'>
-								<li class="cat-item cat-item-1041"><a href="https://mdbuddy.vn/product-category/dung-cu-tap-ca-nhan/bong-power-ball/">Bóng Power Ball</a></li>
-								<li class="cat-item cat-item-1039"><a href="https://mdbuddy.vn/product-category/dung-cu-tap-ca-nhan/con-lan-tap-bung/">Con lăn tập bụng</a></li>
-								<li class="cat-item cat-item-915"><a href="https://mdbuddy.vn/product-category/dung-cu-tap-ca-nhan/day-nhay-the-duc/">Dây nhảy thể dục</a></li>
-								<li class="cat-item cat-item-926"><a href="https://mdbuddy.vn/product-category/dung-cu-tap-ca-nhan/day-tap-dan-hoi/">Dây tập đàn hồi</a></li>
-								<li class="cat-item cat-item-927"><a href="https://mdbuddy.vn/product-category/dung-cu-tap-ca-nhan/day-tap-khang-luc/">Dây tập kháng lực</a></li>
-								<li class="cat-item cat-item-1040"><a href="https://mdbuddy.vn/product-category/dung-cu-tap-ca-nhan/dia-xoay-thang-bang/">Đĩa xoay thăng bằng</a></li>
-								<li class="cat-item cat-item-918"><a href="https://mdbuddy.vn/product-category/dung-cu-tap-ca-nhan/dung-cu-ca-nhan-khac/">Dụng cụ cá nhân khác</a></li>
-							</ul>
-						</li>
+						@foreach($cates as $cate1)
+							<li class="cat-item cat-item-15 cat-parent">
+								<a style="font-weight: 700;" href="{{$cate1->url}}">{{$cate1->name}}</a>
+								@php
+        							$catesss = App\Categories::where('parent_id',$cate1->id)->where('display',1)->get();
+        						@endphp
+
+        						@if(count($catesss) !=0)
+									<ul class='children'>
+										@foreach($catesss as $cate2)
+											<li class="cat-item cat-item-{{$cate2->id}}">
+												<a href="{{$cate2->url}}">{{$cate2->name}}</a>
+											</li>
+										@endforeach
+									</ul>
+								@endif
+							</li>
+						@endforeach
+						
 					</ul>
 				</aside>
-				<aside id="woocommerce_price_filter-2" class="widget woocommerce widget_price_filter">
+				<!-- <aside id="woocommerce_price_filter-2" class="widget woocommerce widget_price_filter">
 					<span class="widget-title shop-sidebar">LỌC THEO GIÁ</span>
 					<div class="is-divider small"></div>
 					<form method="get" action="https://mdbuddy.vn/shop/">
@@ -78,25 +79,27 @@
 							</div>
 						</div>
 					</form>
-				</aside>
+				</aside> -->
 				<aside id="woocommerce_top_rated_products-2" class="widget woocommerce widget_top_rated_products">
 					<span class="widget-title shop-sidebar">SẢN PHẨM NỔI BẬT</span>
 					<div class="is-divider small"></div>
 					<ul class="product_list_widget">
-						<li>
-							<a href="https://mdbuddy.vn/product/bo-day-tap-the-duc-dan-hoi-resistance-loops-md1319/">
-								<img width="250" height="250" src="https://mdbuddy.vn/home/wp-content/uploads/2018/07/MDbuddy-MD1319-1-250x250.jpg" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://mdbuddy.vn/home/wp-content/uploads/2018/07/MDbuddy-MD1319-1-250x250.jpg 250w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/MDbuddy-MD1319-1-150x150.jpg 150w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/MDbuddy-MD1319-1-300x300.jpg 300w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/MDbuddy-MD1319-1-510x510.jpg 510w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/MDbuddy-MD1319-1-100x100.jpg 100w, https://mdbuddy.vn/home/wp-content/uploads/2018/07/MDbuddy-MD1319-1.jpg 750w" sizes="(max-width: 250px) 100vw, 250px" />
-								<span class="product-title">Bộ 4 dây tập thể dục đàn hồi Resistance Loops MD1319</span>
-							</a>
-							<div class="container-rating">
-								<div class="star-rating">
-									<span style="width:100%">Được xếp hạng <strong class="rating">5.00</strong> 5 sao</span>
-								</div>
-								<div class="count-rating">(1)</div>
-							</div>	
-							<del><span class="woocommerce-Price-amount amount">399.000<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></del>
-							<ins><span class="woocommerce-Price-amount amount">229.000<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></ins>
-						</li>
+						@foreach($products_highlight as $pr)
+							<li>
+								<a href="{{$pr->url}}">
+									<img width="250" height="250" src="{{asset('uploads/images/products/avatar/'.$pr->avatar)}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="{{$pr->name}}" sizes="(max-width: 250px) 100vw, 250px" />
+									<span class="product-title">{{$pr->name}}</span>
+								</a>
+								<div class="container-rating">
+									<div class="star-rating">
+										<span style="width:100%">Được xếp hạng <strong class="rating">5.00</strong> 5 sao</span>
+									</div>
+									<div class="count-rating">(1)</div>
+								</div>	
+								<del><span class="woocommerce-Price-amount amount">{!!number_format($pr->price)!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></del>
+								<ins><span class="woocommerce-Price-amount amount">{!!number_format($pr->sale)!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></ins>
+							</li>
+						@endforeach
 					</ul>
 				</aside>
 			</div><!-- .sidebar-inner -->

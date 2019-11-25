@@ -102,8 +102,6 @@
 <div class="woocommerce-additional-fields">
 	
 	
-		
-			<h3>Thông tin bổ sung</h3>
 
 		
 		<div class="woocommerce-additional-fields__field-wrapper">

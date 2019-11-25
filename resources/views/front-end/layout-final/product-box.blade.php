@@ -30,8 +30,8 @@
 						<div class="count-rating">(2)</div>
 					</div>
 					<span class="price">
-						<del><span class="woocommerce-Price-amount amount">1.499.000<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></del>
-						<ins><span class="woocommerce-Price-amount amount price-detail" data-id="{{$product->products_detail_id}}" price="{{$product->price}}">{!!number_format($product->price)!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></ins>
+						<del><span class="woocommerce-Price-amount amount">{!!number_format($product->price)!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></del>
+						<ins><span class="woocommerce-Price-amount amount price-detail" data-id="{{$product->products_detail_id}}" price="{{$product->price}}">{!!number_format($product->sale)!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></ins>
 					</span>
 					<input type="number" name="quantity" data-id="{{$product->products_detail_id}}" class="qty" value="1" style="display: none;">
 				</div>

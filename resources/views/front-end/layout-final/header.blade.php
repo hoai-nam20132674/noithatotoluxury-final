@@ -3,7 +3,7 @@
 		<div id="masthead" class="header-main nav-dark">
       		<div class="header-inner flex-row container logo-left medium-logo-center" role="navigation">
           		<div id="logo" class="flex-col logo">
-					<a href="https://mdbuddy.vn/" title="MDBuddy Vietnam - Fitness for all" rel="home">
+					<a href="/" title="MDBuddy Vietnam - Fitness for all" rel="home">
 					    <img width="200" height="100" src="{{asset('uploads/images/systems/logo/'.$system->logo)}}" class="header_logo header-logo" alt="MDBuddy Vietnam"/>
 					    <img  width="200" height="100" src="{{asset('uploads/images/systems/logo/'.$system->logo)}}" class="header-logo-dark" alt="MDBuddy Vietnam"/>
 					</a>
@@ -34,7 +34,7 @@
             					<li id="menu-item-{{$menu->id}}" class="menu-item menu-item-object-page menu-item-has-children has-dropdown">
             						<a href="{{$menu->url}}" class="nav-top-link">{{$menu->name}}<i class="icon-angle-down" ></i></a>
             						@php
-            							$cates = App\Categories::where('parent_id',$menu->categories_id)->get();
+            							$cates = App\Categories::where('parent_id',$menu->categories_id)->where('display',1)->get();
             						@endphp
             						@if(count($cates) !=0)
 	            						<ul class='nav-dropdown nav-dropdown-default'>
@@ -43,7 +43,7 @@
 		            								<li id="menu-item-{{$cate->id}}" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent menu-item-has-children nav-dropdown-col">
 		            									<a href="{{$cate->url}}">{{$cate->name}}</a>
 		            									@php
-					            							$catess = App\Categories::where('parent_id',$cate->id)->get();
+					            							$catess = App\Categories::where('parent_id',$cate->id)->where('display',1)->get();
 					            						@endphp
 					            						@if(count($catess) !=0)
 						            						<ul class='nav-column nav-dropdown-default'>
@@ -100,7 +100,7 @@
 							@include('front-end.layout-final.cart-dropdown')
 						</li>
 						<li class="html custom html_topbar_left">
-							<a href="https://mdbuddy.vn/my-account/" class="nav-top-link nav-top-not-logged-in" data-open="#login-form-popup">
+							<a href="#" class="nav-top-link nav-top-not-logged-in" data-open="#login-form-popup">
 							  	<span class="image-icon header-login-icon" data-icon-label="0">
 							    	<img class="login-img-icon" alt="Đăng nhập" src="https://mdbuddy.vn/home/wp-content/uploads/2018/06/login-icon.png">
 							  	</span>

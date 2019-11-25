@@ -45,6 +45,7 @@
 						    $products_properties = App\ProductsProperties::where('products_detail_id',$item->id)->get();
 						    $properties_id = App\Http\Controllers\AuthClient\ClientController::arrayColumn($products_properties,$col='properties_id');
 						    $properties = App\Properties::join('properties_type','properties.properties_type_id','=','properties_type.id')->whereIn('properties.id',$properties_id)->select('properties.*','properties_type.name')->get();
+						    $product_detail = App\ProductsDetail::where('id',$item->id)->get()->first();
 						@endphp
 						<tr class="woocommerce-cart-form__cart-item cart_item product-cart" item-number="{{$i}}" data-id="{{$item->id}}">
 							<td class="product-remove">
@@ -71,8 +72,9 @@
 								<div class="quantity buttons_added">
 									<input type="button" data-id="{{$item->id}}" value="-" id="minus" class="minus button is-form">
 									<label class="screen-reader-text" for="quantity_5dbd598f143fc">Số lượng</label>
-									<input type="number" data-id="{{$item->id}}" class="input-text qty text quantity" step="1" min="0" max="9999" old-value ="{{$item->quantity}}"value="{{$item->quantity}}" title="SL" size="4" pattern="[0-9]*" inputmode="numeric" >
+									<input type="number" data-id="{{$item->id}}" class="input-text qty text quantity" step="1" min="1" max="{{$product_detail->amount}}" old-value ="{{$item->quantity}}"value="{{$item->quantity}}" title="SL" size="4" pattern="[0-9]*" inputmode="numeric" >
 									<input type="button" data-id="{{$item->id}}" value="+" id="plus" class="plus button is-form">
+
 								</div>
 							</td>
 

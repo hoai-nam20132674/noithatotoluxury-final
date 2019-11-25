@@ -120,21 +120,82 @@ jQuery(document).on('click', '#update-cart', function(event) {
 // End thêm sản phẩm vào giỏ hàng
 // --------------------------------
 // cập nhật quantity item cart
-// jQuery(document).on('click', '#plus', function(event) {
-// 	event.preventDefault();
-// 	var data_id = jQuery(this).attr('data-id');
-// 	var currentVal = parseInt(jQuery(this).parent().children(".quantity").attr('new-value'));
-// 	jQuery(this).parent().children(".quantity").attr('new-value',currentVal + 1);
-// 	console.log(jQuery(this).parent().children(".quantity").attr('value'));
-// });
-// jQuery(document).on('click', '#minus', function(event) {
-// 	event.preventDefault();
-// 	var data_id = jQuery(this).attr('data-id');
-// 	var currentVal = parseInt(jQuery(this).parent().children(".quantity").attr('new-value'));
-// 	if(currentVal!=0){
-// 		jQuery(this).parent().children(".quantity").attr('new-value',currentVal - 1);
-// 	}
-// });
+jQuery(document).on('click', '#plus', function(event) {
+	event.preventDefault();
+	var data_id = jQuery(this).attr('data-id');
+	var max = jQuery(this).parent().children(".qty").attr('max');
+	var new_value = parseInt(jQuery(this).parent().children(".qty").val());
+	var old_value = parseInt(jQuery(this).parent().children(".qty").attr("old-value"));
+	if(old_value < max){
+		jQuery.ajax({
+			type: 'GET',
+			url: '/check-product-detail/'+data_id+'-'+new_value,
+			dataType: 'html',
+			success: function(data) {
+				
+				if(data=='đủ hàng'){
+					
+					var url ='/add-to-cart/'+data_id+'-1';
+					jQuery.ajax({
+						type: 'GET',
+						url: url,
+						dataType: 'html',
+						success: function(data) {
+							jQuery(".qty[data-id="+data_id+"]").attr('old-value',new_value);
+							console.log('thành công');
+						}
+					});
+					
+					
+				}
+				else {
+					swal("không đủ hàng vui lòng chọn số lượng nhỏ hơn", "warning");
+				}
+			}
+		});
+	}
+	else{
+		swal("XIN LỖI", "không đủ hàng vui lòng chọn số lượng nhỏ hơn "+old_value, "warning");
+	}
+});
+jQuery(document).on('click', '#minus', function(event) {
+	event.preventDefault();
+	var data_id = jQuery(this).attr('data-id');
+	var max = jQuery(this).parent().children(".qty").attr('max');
+	var new_value = parseInt(jQuery(this).parent().children(".qty").val());
+	var old_value = parseInt(jQuery(this).parent().children(".qty").attr("old-value"));
+	if(old_value > 1){
+		jQuery.ajax({
+			type: 'GET',
+			url: '/check-product-detail/'+data_id+'-'+new_value,
+			dataType: 'html',
+			success: function(data) {
+				
+				if(data=='đủ hàng'){
+					
+					var url ='/add-to-cart/'+data_id+'--1';
+					jQuery.ajax({
+						type: 'GET',
+						url: url,
+						dataType: 'html',
+						success: function(data) {
+							jQuery(".qty[data-id="+data_id+"]").attr('old-value',new_value);
+							console.log('thành công');
+						}
+					});
+					
+					
+				}
+				else {
+					swal("không đủ hàng vui lòng chọn số lượng nhỏ hơn", "warning");
+				}
+			}
+		});
+	}
+	else{
+		
+	}
+});
 // end cập nhật quantity item cart
 // cập nhật giỏ hàng
 jQuery(document).on('click', '#add-to-cart', function(event) {
