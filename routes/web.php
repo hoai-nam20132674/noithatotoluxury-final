@@ -18,6 +18,7 @@ Route::get('/',['as'=>'trang-chu','uses'=>'AuthClient\ClientController@index']);
 
 //search text
 Route::get('check:{email}-{password}',['as'=>'checkLogin','uses'=>'AuthClient\LoginController@checkLogin']);
+Route::get('search?{text}',['as'=>'searchText','uses'=>'AuthClient\ClientController@searchText']);
 Route::get('search:danh mục:{cate_id}.{cate_name}.tìm kiếm={search_text}',['as'=>'rootSearchText','uses'=>'AuthClient\ClientController@rootSearchText']);
 Route::get('/{system_url}/search:danh mục:{cate_id}.{cate_name}.tìm kiếm={search_text}',['as'=>'businessSearchText','uses'=>'AuthClient\ClientController@businessSearchText']);
 // end search text

@@ -69,7 +69,7 @@
 							 	<li class="header-search-form search-form html relative has-icon">
 							 		<div class="header-search-form-wrapper">
 							 			<div class="searchform-wrapper ux-search-box relative form- is-normal">
-							 				<form role="search" method="get" class="searchform" action="https://mdbuddy.vn/">
+							 				<form role="search" method="get" class="searchform" action="/search">
 								 				<div class="flex-row relative">
 													<div class="flex-col flex-grow">
 														<input type="search" class="search-field mb-0" name="s" value="" placeholder="Tìm kiếm&hellip;" />

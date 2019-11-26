@@ -328,6 +328,9 @@ class ClientController extends Controller
             $blog = Blogs::where('url',$url)->get()->first();
             return view('front-end.page-content.blog',['system'=>$system,'cates'=>$cates,'menus'=>$menus,'blog'=>$blog]);
         }
+        else{
+            echo "lỗi";
+        }
     	
     }
     public function businessPageContent($system_url,$url){
@@ -439,6 +442,17 @@ class ClientController extends Controller
     // end trả về mảng id danh mục con của danh mục lựa chọn
     // -------------------------------------------
     // tìm kiếm bằng từ khóa trang root
+    public function searchText($text){
+        $system = Systems::where('id',1)->get()->first();
+        $cate = Categories::where('display',1)->get();
+        $cate = $this->arrayColumn($cates,$col='id');
+        $menus = Menus::select()->orderBy('stt','ASC')->get();
+        $cates = Categories::where('systems_id',1)->where('id','!=',1)->where('display',1)->get();
+        $products = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->whereIn('products.categories_id',$cate)->where('products.display',1)->where('products.name', 'like', '%' .$text.'%')->where('images_products.role',1)
+            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id')
+            ->get();
+        return view('front-end.page-content.product_search',['system'=>$system,'cates'=>$cates,'products'=>$products,'menus'=>$menus]);
+    }
     public function rootSearchText($cate_id, $cate_name, $search_text){
         if($cate_id ==0){
             $system = Systems::where('id',1)->get()->first();
