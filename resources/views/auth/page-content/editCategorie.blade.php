@@ -87,31 +87,37 @@
 								
 							</div>
 							<div class="col-md-3">
-								<div class="file-upload">	
-								  	<div class="image-upload-wrap image-upload-wrap1000">
-									    <input class="file-upload-input file-upload-input1000" type='file' name="avatar" onchange="readURLTest(this,1000);" accept="image/*" required />
+								<div class="image-blog image-product1" style="width: 100%" >
+									<img class="img-thumbnail" width="100%" src="{{asset('uploads/images/categories/avatar/'.$cate->avatar)}}">
+								</div>
+								<div class="file-upload edit-image1">	
+								  	<div class="image-upload-wrap image-upload-wrap1">
+									    <input class="file-upload-input file-upload-input1" type='file' name="avatar" onchange="readURL1(this);" accept="image/*" />
 									    <div class="drag-text">
-									      <h3>Ảnh Đại Diện</h3>
+									      <h3>Đổi ảnh đại diện</h3>
 									    </div>
 								  	</div>
-								  	<div class="file-upload-content file-upload-content1000" style="position: relative;">
-								    	<img class="file-upload-image file-upload-image1000" src="#" alt="your image" />
-								    	<div class="image-title-wrap image-title-wrap1000" style="position: absolute;top: 0px; right: 0px;">
-								      		<button type="button" onclick="removeUploadTest(1000)" class="remove-image">Remove</button>
+								  	<div class="file-upload-content file-upload-content1">
+								    	<img class="file-upload-image file-upload-image1" src="#" alt="your image" />
+								    	<div class="image-title-wrap image-title-wrap1">
+								      		<button type="button" onclick="removeUpload1()" class="remove-image">Remove <span class="image-title image-title1 text-center">Uploaded Image</span></button>
 								    	</div>
 								  	</div>
 								</div>
-								<div class="file-upload">	
-								  	<div class="image-upload-wrap image-upload-wrap100">
-									    <input class="file-upload-input file-upload-input100" type='file' name="image_share" onchange="readURLTest(this,100);" accept="image/*" required />
+								<div class="image-blog image-product2" style="width: 100%" >
+									<img class="img-thumbnail" width="100%" src="{{asset('uploads/images/categories/share_image/'.$cate->share_image)}}">
+								</div>
+								<div class="file-upload edit-image2">	
+								  	<div class="image-upload-wrap image-upload-wrap2">
+									    <input class="file-upload-input file-upload-input2" type='file' name="share_image" onchange="readURL2(this);" accept="image/*" />
 									    <div class="drag-text">
-									      <h3>Ảnh chia sẻ mạng xã hội</h3>
+									      <h3>Đổi Chia Sẻ Social</h3>
 									    </div>
 								  	</div>
-								  	<div class="file-upload-content file-upload-content100" style="position: relative;">
-								    	<img class="file-upload-image file-upload-image100" src="#" alt="your image" />
-								    	<div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
-								      		<button type="button" onclick="removeUploadTest(100)" class="remove-image">Remove</button>
+								  	<div class="file-upload-content file-upload-content2">
+								    	<img class="file-upload-image file-upload-image2" src="#" alt="your image" />
+								    	<div class="image-title-wrap image-title-wrap2">
+								      		<button type="button" onclick="removeUpload2()" class="remove-image">Remove <span class="image-title image-title2 text-center">Uploaded Image</span></button>
 								    	</div>
 								  	</div>
 								</div>

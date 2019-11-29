@@ -270,7 +270,7 @@ class ClientController extends Controller
             ->get();
             $productsGroup = $this->groupProduct($products);
             $products = $this->filterProduct($productsGroup);
-            $products = $this->paginateCustum($products, $perPage = 1, $page = null, $options = []);
+            $products = $this->paginateCustum($products, $perPage = 9, $page = null, $options = []);
             $products_highlight = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->where('products.display',1)->where('products.highlights',1)->where('images_products.role',1)->orderBy('products.updated_at', 'DESC')
             ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id','products_detail.sale')
             ->get();
@@ -442,16 +442,22 @@ class ClientController extends Controller
     // end trả về mảng id danh mục con của danh mục lựa chọn
     // -------------------------------------------
     // tìm kiếm bằng từ khóa trang root
-    public function searchText($text){
+    public function searchText(Request $request){
         $system = Systems::where('id',1)->get()->first();
-        $cate = Categories::where('display',1)->get();
-        $cate = $this->arrayColumn($cates,$col='id');
         $menus = Menus::select()->orderBy('stt','ASC')->get();
         $cates = Categories::where('systems_id',1)->where('id','!=',1)->where('display',1)->get();
-        $products = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->whereIn('products.categories_id',$cate)->where('products.display',1)->where('products.name', 'like', '%' .$text.'%')->where('images_products.role',1)
-            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id')
+        $products = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->where('products.display',1)->where('products.name', 'like', '%' .$request->s.'%')->where('images_products.role',1)
+            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id','products_detail.sale')
             ->get();
-        return view('front-end.page-content.product_search',['system'=>$system,'cates'=>$cates,'products'=>$products,'menus'=>$menus]);
+        $productsGroup = $this->groupProduct($products);
+        $products = $this->filterProduct($productsGroup);
+        $products = $this->paginateCustum($products, $perPage = 9, $page = null, $options = []);
+        $products_highlight = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->where('products.display',1)->where('products.highlights',1)->where('images_products.role',1)->orderBy('products.updated_at', 'DESC')
+            ->select('products.*', 'images_products.url AS avatar','products_detail.price AS maxPrice','products_detail.products_id','products_detail.id AS products_detail_id','products_detail.sale')
+            ->get();
+        $productsGroup = $this->groupProduct($products_highlight);
+        $products_highlight = $this->filterProduct($productsGroup);
+        return view('front-end.page-content.product_search',['system'=>$system,'cates'=>$cates,'products'=>$products,'menus'=>$menus,'products_highlight'=>$products_highlight]);
     }
     public function rootSearchText($cate_id, $cate_name, $search_text){
         if($cate_id ==0){

@@ -25,9 +25,9 @@
 				  						  		</div><!-- .box-image -->
 					          					<div class="box-text text-center">
 													<div class="box-text-inner blog-post-inner">
-														<a href="{{$blog->url}}"><h5 class="post-title is-large ">{{$blog->title}}</h5></a>
+														<a href="{{$blog->url}}"><h5 class="post-title is-large ">{!! \Illuminate\Support\Str::words($blog->title, 10,'...')  !!}</h5></a>
 														<div class="is-divider"></div>
-														<p class="from_the_blog_excerpt ">{!! \Illuminate\Support\Str::words($blog->content, 10,'...')  !!}</p>
+														
 													</div><!-- .box-text-inner -->
 												</div><!-- .box-text -->
 											

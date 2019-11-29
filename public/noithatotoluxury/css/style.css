@@ -36,8 +36,8 @@ Version: 3.0
 .box {
 	background: #fff;
 }
-.box-text p {
-	font-size: 12px;
+.box-text .product-title {
+	font-size: 16px;
 }
 .loading:after {
 	animation: spin 500ms infinite linear;
@@ -57,4 +57,7 @@ Version: 3.0
 }
 .loading {
     display: none;
+}
+.blog-post-inner .is-large {
+    font-size: 0.9em; 
 }

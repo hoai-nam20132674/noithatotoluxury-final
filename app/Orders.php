@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\OrdersDetail;
 use App\ProductsDetail;
 use App\Products;
+use Mail;
 
 class Orders extends Model
 {
@@ -34,5 +35,8 @@ class Orders extends Model
             $product->amount = $product->amount - $item->quantity;
             $product->save();
     	}
+        // Mail::send('mailfb', array('name'=>$request["name"],'email'=>$request["email"]), function($message){
+        //     $message->to('namnguyen20132674@gmail.com', 'Visitor')->subject('Visitor Feedback!');
+        // });
     }
 }
