@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="{{asset('auth/vendor/jscrollpane/jquery.jscrollpane.css')}}">
 	<link rel="stylesheet" href="{{asset('auth/vendor/waves/waves.min.css')}}">
 	<link rel="stylesheet" href="{{asset('auth/vendor/switchery/dist/switchery.min.css')}}">
+	<link rel="stylesheet" href="{{asset('auth/css/upload-image.css')}}">
 @endsection()
 @section('content')
 	<div class="content-area py-1">
@@ -87,8 +88,20 @@
 								
 							</div>
 							<div class="col-md-3">
-								<div class="image-blog image-product1" style="width: 100%" >
-									<img class="img-thumbnail" width="100%" src="{{asset('uploads/images/categories/avatar/'.$cate->avatar)}}">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="image-blog image-product1" style="width: 100%" >
+											<img class="img-thumbnail" width="100%" src="{{asset('uploads/images/categories/avatar/'.$cate->avatar)}}">
+										</div>
+										
+									</div>
+									<div class="col-md-6">
+										<div class="image-blog image-product2" style="width: 100%" >
+											<img class="img-thumbnail" width="100%" src="{{asset('uploads/images/categories/share_image/'.$cate->share_image)}}">
+										</div>
+										
+									</div>
+
 								</div>
 								<div class="file-upload edit-image1">	
 								  	<div class="image-upload-wrap image-upload-wrap1">
@@ -103,9 +116,6 @@
 								      		<button type="button" onclick="removeUpload1()" class="remove-image">Remove <span class="image-title image-title1 text-center">Uploaded Image</span></button>
 								    	</div>
 								  	</div>
-								</div>
-								<div class="image-blog image-product2" style="width: 100%" >
-									<img class="img-thumbnail" width="100%" src="{{asset('uploads/images/categories/share_image/'.$cate->share_image)}}">
 								</div>
 								<div class="file-upload edit-image2">	
 								  	<div class="image-upload-wrap image-upload-wrap2">
@@ -131,18 +141,22 @@
 										<option value="0">Thư Mục Gốc</option>
 
 										@foreach($categorie as $cate)
-											<option value="{{$cate->id}}">$cate->name</option>
+											<option value="{{$cate->id}}">{{$cate->name}}</option>
 										@endforeach
 									</select>
 								</div>
 								
 								<div class="checkbox">
-									<label>
-										<input type="radio" id="optionsRadios1" name="display" value="1" checked>Hiển thị
-									</label>
-									<label>
-										<input type="radio" id="optionsRadios2" name="display" value="0">Tắt hiển thị
-									</label>
+									@if($cate->display ==1)
+										<label>
+											<input type="radio" name="display" value="1" checked>Hiển thị
+										</label>
+										<label>
+											<input type="radio" name="display" value="0">Tắt hiển thị
+										</label>
+									@else
+										
+									@endif
 									
 								</div>
 							</div>
@@ -172,4 +186,5 @@
 		<!-- Neptune JS -->
 		<script type="text/javascript" src="{{asset('auth/js/app.js')}}"></script>
 		<script type="text/javascript" src="{{asset('auth/js/demo.js')}}"></script>
+		<script type="text/javascript" src="{{asset('auth/js/upload-image.js')}}"></script>
 @endsection

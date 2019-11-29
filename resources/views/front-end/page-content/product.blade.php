@@ -81,7 +81,7 @@
           <div class="col large-12">
             <div class="col video-thumbnails" style="width: 25%; float: left;">
               <!-- <button class="js-video-button" data-video-id='L61p2uyiMSo'>Youtube</button> -->
-              <a class="js-video-button" data-video-id='L61p2uyiMSo'>
+              <a class="js-video-button" data-video-id='{{$products->video}}'>
                 <img width="100%" src="https://www.bhamcityschools.org/cms/lib/AL01001646/Centricity/Domain/3685/video%20icon.gif">
               </a>
             </div>

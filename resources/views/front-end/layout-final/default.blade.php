@@ -215,9 +215,10 @@ var wc_single_product_params = {"i18n_required_rating_text":"Vui l\u00f2ng ch\u1
 <script type="text/javascript" src="{{asset('noithatotoluxury/js/single-product.min.js')}}"></script>
 <script src="{{asset('noithatotoluxury/js/popup-video/jquery-modal-video.min.js')}}"></script>
 <script>
-	$(".js-video-button").modalVideo({
+	jQuery(".js-video-button").modalVideo({
 		youtube:{
-			controls:0,
+			controls:1,
+			autoplay:1,
 			nocookie: true
 		}
 	});

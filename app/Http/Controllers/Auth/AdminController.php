@@ -180,7 +180,7 @@ class AdminController extends Controller
         $product = Products::where('id',$id)->get()->first();
         return view('auth.page-content.editProduct',['product'=>$product]);
     }
-    public function editCategorie($id) {
+    public function editCategorie($system_id,$id) {
         $cate = Categories::where('id',$id)->get()->first();
         return view('auth.page-content.editCategorie',['cate'=>$cate]);
     }
