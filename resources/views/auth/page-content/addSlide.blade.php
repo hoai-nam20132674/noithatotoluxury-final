@@ -39,18 +39,11 @@
 							</div>
 						
 							<div class="file-upload">
-							  	<!-- <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button> -->
-								
-							  	<div class="image-upload-wrap image-upload-wrap0">
-								    <input class="file-upload-input file-upload-input0" type='file' name="image" onchange="readURL(this);" accept="image/*" />
-								    <div class="drag-text">
-								      <h3>Background</h3>
-								    </div>
-							  	</div>
-							  	<div class="file-upload-content file-upload-content0">
-							    	<img class="file-upload-image file-upload-image0" src="#" alt="your image" />
-							    	<div class="image-title-wrap image-title-wrap0">
-							      		<button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title image-title0 text-center">Uploaded Image</span></button>
+							  	<input style="z-index: 100;" class="file-upload-input file-upload-input0" type='file' name="share_image" onchange="readURLTest(this,0);" accept="image/*" />
+							  	<div class="file-upload-content file-upload-content0" style="position: relative;">
+							    	<img width="100%" class="file-upload-image file-upload-image0" src="https://i.pinimg.com/originals/4b/50/f9/4b50f9eeb7d6617cc9aaaa6405f27a07.gif" alt="your image" />
+							    	<div class="image-title-wrap image-title-wrap0" style="position: absolute;top: 0px; right: 0px;">
+							      		<button type="button" onclick="removeUploadTest(0)" class="remove-image">Slide</button>
 							    	</div>
 							  	</div>
 							</div>
@@ -58,7 +51,7 @@
 					</div>
 					<br>
 					<br>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button style="z-index: 1000;" type="submit" class="btn btn-primary">Submit</button>
 				</form>
 			</div>
 			

@@ -262,8 +262,8 @@ class AdminController extends Controller
         $system->phone = $request->phone;
         $system->email = $request->email;
         $system->script = $request->script;
-        if(Input::hasFile('image-share')){
-            $file1 = Input::file('image-share');
+        if(Input::hasFile('share_image')){
+            $file1 = Input::file('share_image');
             $file_name1 = $file1->getClientOriginalName();
             $file1->move('uploads/images/systems/share_image/',$file_name1);
             $system->share_image =$file_name1;

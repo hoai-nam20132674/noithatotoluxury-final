@@ -40,10 +40,10 @@
 					
 					<input type="hidden" name="_token" value="{{ csrf_token()}}">
 					<div class="row">
-						<div class="col-md-9 0848384333">
+						<div class="col-md-6 0848384333">
 							
 							<div class="row">
-								<div class="col-md-8">
+								<div class="col-md-12">
 									
 									<div class="form-group">
 										<label for="exampleInputEmail1">Tên gian hàng</label>
@@ -51,7 +51,7 @@
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">Tiêu đề</label>
-										<input type="text" class="form-control" name="title" placeholder="Nhập tiêu đề " value="{{$system->title}}" required >
+										<input onchange="appendTitle();" type="text" class="form-control" name="title" placeholder="Nhập tiêu đề " value="{{$system->title}}" required >
 									</div>
 									
 									<div class="form-group">
@@ -60,7 +60,7 @@
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">Seo description</label>
-										<input type="text" class="form-control" name="seo_description" placeholder="Description Seo" value="{{$system->seo_description}}" required >
+										<input onchange="appendDescription();" type="text" class="form-control" name="seo_description" placeholder="Description Seo" value="{{$system->seo_description}}" required >
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail1">Facebook</label>
@@ -98,22 +98,7 @@
 									
 									
 								</div>
-								<div class="col-md-4">
-									<div class="file-upload">	
-									  	<div class="image-upload-wrap image-upload-wrap100">
-										    <input class="file-upload-input file-upload-input100" type='file' name="image-share" onchange="readURLTest(this,100);" accept="image/*" />
-										    <div class="drag-text">
-										      <h3>Ảnh chia sẻ mạng xã hội</h3>
-										    </div>
-									  	</div>
-									  	<div class="file-upload-content file-upload-content100" style="position: relative;">
-									    	<img class="file-upload-image file-upload-image100" src="#" alt="your image" />
-									    	<div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
-									      		<button type="button" onclick="removeUploadTest(100)" class="remove-image">Remove</button>
-									    	</div>
-									  	</div>
-									</div>
-								</div>
+								
 							</div>
 							<br>
 							
@@ -122,42 +107,55 @@
 							
 				            
 						</div>
-						<div class="col-md-3">
-							
-							
-							<div class="file-upload">	
-							  	<div class="image-upload-wrap image-upload-wrap0">
-								    <input class="file-upload-input file-upload-input0" type='file' name="logo" onchange="readURLTest(this,0);" accept="image/*" />
-								    <div class="drag-text">
-								      <h3>Logo</h3>
-								    </div>
-							  	</div>
-							  	<div class="file-upload-content file-upload-content0" style="position: relative;">
-							    	<img class="file-upload-image file-upload-image0" src="#" alt="your image" />
-							    	<div class="image-title-wrap image-title-wrap0" style="position: absolute;top: 0px; right: 0px;">
-							      		<button type="button" onclick="removeUploadTest(0)" class="remove-image">Remove</button>
-							    	</div>
-							  	</div>
+						<div class="col-md-6">
+							<div class="row">
+								
+								<div class="col-md-6">
+									<div class="file-upload">
+										
+									  	<input style="z-index: 100;" class="file-upload-input file-upload-input0" type='file' name="logo" onchange="readURLTest(this,0);" accept="image/*" />
+										
+									  	<div class="file-upload-content file-upload-content0" style="position: relative;">
+									    	<img class="file-upload-image file-upload-image0" src="{{asset('uploads/images/systems/logo/'.$system->logo)}}" alt="your image" />
+									    	<div class="image-title-wrap image-title-wrap0" style="position: absolute;top: 0px; right: 0px;">
+									      		<button type="button" onclick="removeUploadTest(0)" class="remove-image">Logo</button>
+									    	</div>
+									  	</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="file-upload">
+										
+									  	<input style="z-index: 100;" class="file-upload-input file-upload-input1" type='file' name="shortcut_logo" onchange="readURLTest(this,1);" accept="image/*" />
+										
+									  	<div class="file-upload-content file-upload-content1" style="position: relative;">
+									    	<img class="file-upload-image file-upload-image1" src="{{asset('uploads/images/systems/logo/'.$system->shortcut_logo)}}" alt="your image" />
+									    	<div class="image-title-wrap image-title-wrap1" style="position: absolute;top: 0px; right: 0px;">
+									      		<button type="button" onclick="removeUploadTest(1)" class="remove-image">Shortcut Logo</button>
+									    	</div>
+									  	</div>
+									</div>
+								</div>
 							</div>
-							
-							
-							<div class="file-upload">	
-							  	<div class="image-upload-wrap image-upload-wrap1">
-								    <input class="file-upload-input file-upload-input1" type='file' name="shortcut_logo" onchange="readURLTest(this,1);" accept="image/*" />
-								    <div class="drag-text">
-								      <h3>shortcut logo</h3>
-								    </div>
-							  	</div>
-							  	<div class="file-upload-content file-upload-content1" style="position: relative;">
-							    	<img class="file-upload-image file-upload-image1" src="#" alt="your image" />
-							    	<div class="image-title-wrap image-title-wrap1" style="position: absolute;top: 0px; right: 0px;">
-							      		<button type="button" onclick="removeUploadTest(1)" class="remove-image">Remove</button>
-							    	</div>
-							  	</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="file-upload">
+										
+									  	<input style="z-index: 100;" class="file-upload-input file-upload-input2" type='file' name="share_image" onchange="readURLTest(this,2);" accept="image/*" />
+										
+									  	<div class="file-upload-content file-upload-content2" style="position: relative;">
+									    	<img class="file-upload-image file-upload-image2" src="{{asset('uploads/images/systems/share_image/'.$system->share_image)}}" alt="your image" />
+									    	<div class="image-title-wrap image-title-wrap2" style="position: absolute;top: 0px; right: 0px;">
+									      		<button type="button" onclick="removeUploadTest(2)" class="remove-image">Og:Image</button>
+									    	</div>
+									  	</div>
+									  	
+									</div>
+									<h1 class="append-title" style="font-size: 20px; color: #1a0dab; font-weight: 400;">{{$system->title}}</h1>
+								  	<span style="font-size: 14px; color: #006621; border: 1px solid #006621; border-radius: 3px; padding: 0px 3px 0px 2px; line-height: 11px;">Quảng cáo</span><a class="append-link" style="font-size: 14px; color: #006621;"> {{$system->website}}</a>
+								  	<p class="append-description" style="font-size: 14px; color: #545454;">{{$system->seo_description}}</p>
+								</div>
 							</div>
-							
-							
-							
 						</div>
 					</div>
 
@@ -185,19 +183,18 @@
 		<script type="text/javascript" src="{{asset('auth/js/app.js')}}"></script>
 		<script type="text/javascript" src="{{asset('auth/js/demo.js')}}"></script>
 		<script type="text/javascript" src="{{asset('auth/js/upload-image.js')}}"></script>
-
-		<!-- watches product -->
-		<!-- <script  src="{{asset('js/index.js')}}"></script> -->
-		<!-- end -->
-
-		<script type="text/javascript">
-			var i =2;
-			function more_image(){
-				var more_image = $("#more_image");
-				more_image.append('<div class="file-upload"><div class="image-upload-wrap image-upload-wrap' + i + '"><input class="file-upload-input file-upload-input' + i + '" type="file" name="image_detail[]" onchange="readURLTest(this,' + i + ');" accept="image/*" /><div class="drag-text"><h3>Ảnh detail</h3></div></div><div class="file-upload-content file-upload-content' + i + '" style="position: relative;"><img class="file-upload-image file-upload-image' + i + '" src="#" alt="your image" /><div class="image-title-wrap image-title-wrap' + i + '" style="position: absolute;top: 0px; right: 0px;"><button type="button" onclick="removeUploadTest(' + i + ')" class="remove-image">Remove</button></div></div></div>');
-				i++;
-			};
-			
-		</script>
 		<script type="text/javascript" src="{{asset('auth/js/add-remove-product-line.js')}}"></script>
+		<script type="text/javascript">
+			function appendTitle(){
+				var title = $("input[name=title]").val();
+				$('.append-title').empty();
+				$('.append-title').append(title);
+			}
+			function appendDescription(){
+				var description = $("input[name=seo_description]").val();
+				$('.append-description').empty();
+				$('.append-description').append(description);
+			}
+		</script>
+		
 @endsection

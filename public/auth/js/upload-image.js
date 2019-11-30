@@ -149,7 +149,7 @@ function readURLTest(input,i) {
     reader.readAsDataURL(input.files[0]);
 
   } else {
-    removeUploadTest(i);
+    // removeUploadTest(i);
   }
 }
 
