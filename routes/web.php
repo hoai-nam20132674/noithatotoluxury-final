@@ -134,6 +134,9 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::get('enable-categorie/{id}',['as'=>'enableCategorie','uses'=>'Auth\AdminController@enableCategorie']);
 	Route::get('disable-categorie/{id}',['as'=>'disableCategorie','uses'=>'Auth\AdminController@disableCategorie']);
 	Route::get('update-menu/{id}-{value}',['as'=>'updateMenu','uses'=>'Auth\AdminController@updateMenu']);
+	Route::get('update-slide-stt/{id}-{value}',['as'=>'updateSlideStt','uses'=>'Auth\AdminController@updateSlideStt']);
+	Route::get('slide-display-none/{id}',['as'=>'slideDisplayNone','uses'=>'Auth\AdminController@slideDisplayNone']);
+	Route::get('slide-display-block/{id}',['as'=>'slideDisplayBlock','uses'=>'Auth\AdminController@slideDisplayBlock']);
 	
 });
 

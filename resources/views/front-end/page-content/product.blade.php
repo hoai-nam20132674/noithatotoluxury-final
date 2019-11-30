@@ -153,7 +153,7 @@
   </div>
   <!-- mô tả ngắn -->
   <div class="product-short-description">
-  	
+  	{!!$products->short_description!!}
   </div>
   <!--End mô tả ngắn -->
   	

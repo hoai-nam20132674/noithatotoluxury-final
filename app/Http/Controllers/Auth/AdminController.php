@@ -289,6 +289,8 @@ class AdminController extends Controller
         $slide =new Slides;
         $slide->systems_id = Auth::user()->systems_id;
         $slide->url = $request->url;
+        $slide->stt = 0;
+        $slide->display = 1;
         $file = Input::file('image');
         $file_name = $file->getClientOriginalName();
         $file->move('uploads/images/systems/slides/',$file_name);
@@ -299,10 +301,12 @@ class AdminController extends Controller
     public function postEditSlide(Request $request,$id){
         $slide = Slides::where('id',$id)->get()->first();
         $slide->url = $request->url;
-        $file = Input::file('image');
-        $file_name = $file->getClientOriginalName();
-        $file->move('uploads/images/systems/slides/',$file_name);
-        $slide->url_image = $file_name;
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $file_name = $file->getClientOriginalName();
+            $file->move('uploads/images/systems/slides/',$file_name);
+            $slide->url_image = $file_name;
+        }
         $slide->save();
         return redirect()->route('listSlides')->with(['flash_level'=>'success','flash_message'=>'Sửa slide thành công']);
     }
@@ -408,6 +412,24 @@ class AdminController extends Controller
         $menu = Menus::where('id',$id)->get()->first();
         $menu->stt =$value;
         $menu->save();
+        echo "thành công";
+    }
+    public function updateSlideStt($id, $value){
+        $slide = Slides::where('id',$id)->get()->first();
+        $slide->stt = $value;
+        $slide->save();
+        echo "thành công";
+    }
+    public function slideDisplayNone($id){
+        $slide = Slides::where('id',$id)->get()->first();
+        $slide->display = 0;
+        $slide->save();
+        echo "thành công";
+    }
+    public function slideDisplayBlock($id){
+        $slide = Slides::where('id',$id)->get()->first();
+        $slide->display = 1;
+        $slide->save();
         echo "thành công";
     }
     

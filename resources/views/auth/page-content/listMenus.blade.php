@@ -129,17 +129,6 @@
 				}
 			});
 		});
-		// $(document).on('click', '.disable_categorie', function(event) {
-		// 	var cate_id = $(this).attr('value');
-		// 	url = '/auth/admin/disable-categorie/'+cate_id;
-		// 	$.ajax({
-		// 		type: 'GET',
-		// 		url: url,
-		// 		dataType: 'html',
-		// 		success: function(data) {
-					
-		// 		}
-		// 	});
-		// });
+		
 	</script>
 @endsection()

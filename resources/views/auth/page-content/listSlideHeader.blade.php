@@ -31,8 +31,12 @@
 					<thead>
 						<tr>
 							<th>STT</th>
-							<th>Bài tin tức</th>
-							<th>Ảnh background</th>
+							<th style="width: 20%">Ảnh background</th>
+							<th>Link</th>
+							<th style="width: 12%">Thứ tự</th>
+							<th>Xuất bản</th>
+							<th>Ngày tạo</th>
+							<th>Chỉnh sửa</th>
 							<th class="text-center" style="padding: 0px; background: green;">
 								<a href="{{URL::route('addSlide')}}" style="color: green;"><i class="ion-android-add" style=" font-size:30px;color:#fff;"></i></a>
 							</th>
@@ -46,10 +50,36 @@
 						@foreach ($slides as $slide)
 						<tr>
 							<td >{{$i++}}</td>	td>
-							<td>{{$slide->url}}</td>
 							<td>
-								<img width="30%" src="{{asset('uploads/images/systems/slides/'.$slide->url_image)}}">
+								<img width="100%" src="{{asset('uploads/images/systems/slides/'.$slide->url_image)}}">
 							</td>
+							<td>{{$slide->url}}</td>
+							
+							<td>
+								<input style="width: 50px;" slide-id="{{$slide->id}}" type="number" min="0" value="{{$slide->stt}}">
+								<a href="#" slide-id="{{$slide->id}}" class="update-slide-stt" data-type="success">
+									<span style="background: #3ec9bc; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-refresh" style="padding-right: 5px;"></i>Cập nhật</span>
+								</a>
+							</td>
+							<td>
+								@if($slide->display == 0)
+									<a style="opacity: 0.2;" href="#" slide-id="{{$slide->id}}" class="slide-display-block">
+										<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Xuất bản</span>
+									</a>
+									<a style="pointer-events: none;" href="#" slide-id="{{$slide->id}}" class="slide-display-none">
+										<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không xuất bản</span>
+									</a>
+								@else
+									<a style="pointer-events: none;" href="#" slide-id="{{$slide->id}}" class="slide-display-block">
+										<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Xuất bản</span>
+									</a>
+									<a style="opacity: 0.2;" href="#" slide-id="{{$slide->id}}" class="slide-display-none">
+										<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không xuất bản</span>
+									</a>
+								@endif
+							</td>
+							<td>{{$slide->created_at}}</td>
+							<td>{{$slide->updated_at}}</td>
 							<td class="text-center">
 								<a onclick="return confirmDelete('Bạn có chắc muốn xóa dịch vụ này không')" title="Xóa dịch vụ"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
 								<a href="{{ URL::route('editSlide',$slide->id)}}" title="Sửa slide"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
@@ -85,9 +115,63 @@
 	<script type="text/javascript" src="{{asset('auth/vendor/DataTables/Buttons/js/buttons.html5.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/vendor/DataTables/Buttons/js/buttons.print.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/vendor/DataTables/Buttons/js/buttons.colVis.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('auth/vendor/toastr/toastr.min.js')}}"></script>
 
 	<!-- Neptune JS -->
 	<script type="text/javascript" src="{{asset('auth/js/app.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/demo.js')}}"></script>
+	<script type="text/javascript" src="{{asset('auth/js/ui-notifications.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
+	<script type="text/javascript">
+		
+		$(document).on('click', '.update-slide-stt', function(event) {
+			event.preventDefault();
+			var slide_id = $(this).attr('slide-id');
+			var select = $("input[slide-id="+slide_id+"]");
+			var value = select.val();
+			url = '/auth/admin/update-slide-stt/'+slide_id+'-'+value;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+		});
+		$(document).on('click', '.slide-display-none', function(event) {
+			event.preventDefault();
+			var slide_id = $(this).attr('slide-id');
+			url = '/auth/admin/slide-display-none/'+slide_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$('.slide-display-none').css('opacity',1);
+			$('.slide-display-block').css('opacity',0.2);
+			$('.slide-display-none').css('pointer-events','none');
+			$('.slide-display-block').css('pointer-events','');
+		});
+		$(document).on('click', '.slide-display-block', function(event) {
+			event.preventDefault();
+			var slide_id = $(this).attr('slide-id');
+			url = '/auth/admin/slide-display-block/'+slide_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$('.slide-display-none').css('opacity',0.2);
+			$('.slide-display-block').css('opacity',1);
+			$('.slide-display-none').css('pointer-events','');
+			$('.slide-display-block').css('pointer-events','none');
+		});
+	</script>
 @endsection

@@ -22,11 +22,13 @@ class Products extends Model
         $avatar = $request->file('image')->getClientOriginalName();
     	$pr = new Products;
     	$pr->name = $request->name;
+        $pr->code = $request->code;
     	$pr->categories_id = $request->categories_id;
     	$pr->url = $request->url;
     	$pr->content = $request->content;
     	$pr->seo_keyword = $request->seo_keyword;
     	$pr->seo_description = $request->seo_description;
+        $pr->short_description = $request->short_description;
     	$pr->title = $request->title;
         $pr->share_image = $image_share;
         $pr->rate = 0;

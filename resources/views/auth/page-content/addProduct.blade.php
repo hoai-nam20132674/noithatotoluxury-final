@@ -68,6 +68,10 @@
 										<input type="text" class="form-control" name="name" placeholder="Nhập tiêu đề danh mục" value="{{old('name')}}" required>
 									</div>
 									<div class="form-group">
+										<label for="exampleInputEmail1">Mã sản phẩm</label>
+										<input type="text" class="form-control" name="code" placeholder="Nhập mã sản phẩm" value="{{old('code')}}" required>
+									</div>
+									<div class="form-group">
 										<label for="exampleInputEmail1">Tiêu đề</label>
 										<input type="text" class="form-control" name="title" placeholder="Nhập tiêu đề danh mục" value="{{old('title')}}" required >
 									</div>
@@ -127,6 +131,19 @@
 								</div>
 							</div>
 							<br>
+							<div class="form-group">
+								<label for="exampleTextarea">Mô tả ngắn</label>
+								<textarea class="form-control" name="short_description" rows="3" required>{{old('short_description')}}</textarea>
+								<script type="text/javascript">
+							      var editor = CKEDITOR.replace('short_description',{
+							       language:'vi',
+							       filebrowserImageBrowseUrl : '../ckfinder/ckfinder.html?type=Images',
+							       filebrowserFlashBrowseUrl : '../ckfinder/ckfinder.html?type=Flash',
+							       filebrowserImageUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+							       filebrowserFlashUploadUrl : '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+							       });
+							     </script>﻿
+							</div>
 							<div class="form-group">
 								<label for="exampleTextarea">Giới thiệu sản phẩm</label>
 								<textarea class="form-control" name="content" rows="3" required>{{old('content')}}</textarea>

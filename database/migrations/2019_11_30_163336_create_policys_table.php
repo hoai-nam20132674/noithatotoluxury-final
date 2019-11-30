@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSlidesTable extends Migration
+class CreatePolicysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSlidesTable extends Migration
      */
     public function up()
     {
-        Schema::create('slides', function (Blueprint $table) {
+        Schema::create('policys', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('stt');
-            $table->integer('systems_id')->unsigned();
-            $table->foreign('systems_id')->references('id')->on('systems')->onDelete('cascade');
-            $table->string('url_image');
+            $table->string('avatar');
+            $table->string('title');
             $table->string('url');
+            $table->string('stt');
             $table->boolean('display');
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ class CreateSlidesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('slides');
+        Schema::dropIfExists('policys');
     }
 }

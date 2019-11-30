@@ -22,8 +22,10 @@ class CreateProductsTable extends Migration
             $table->string('video');
             $table->longText('content');
             $table->string('seo_description');
+            $table->longText('short_description');
             $table->string('seo_keyword');
             $table->string('title');
+            $table->string('code');
             $table->string('share_image');
             $table->integer('rate');
             $table->integer('orders');

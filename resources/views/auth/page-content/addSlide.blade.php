@@ -39,19 +39,28 @@
 							</div>
 						
 							<div class="file-upload">
-							  	<input style="z-index: 100;" class="file-upload-input file-upload-input0" type='file' name="share_image" onchange="readURLTest(this,0);" accept="image/*" />
+							  	
 							  	<div class="file-upload-content file-upload-content0" style="position: relative;">
 							    	<img width="100%" class="file-upload-image file-upload-image0" src="https://i.pinimg.com/originals/4b/50/f9/4b50f9eeb7d6617cc9aaaa6405f27a07.gif" alt="your image" />
 							    	<div class="image-title-wrap image-title-wrap0" style="position: absolute;top: 0px; right: 0px;">
 							      		<button type="button" onclick="removeUploadTest(0)" class="remove-image">Slide</button>
 							    	</div>
+							    	<input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input0" type='file' name="image" onchange="readURLTest(this,0);" accept="image/*" />
 							  	</div>
+
 							</div>
+							
 						</div>
+						
 					</div>
 					<br>
 					<br>
-					<button style="z-index: 1000;" type="submit" class="btn btn-primary">Submit</button>
+					<div class="row">
+						<div class="col-md-6">
+							<button style="z-index: 1000;" type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+					
 				</form>
 			</div>
 			

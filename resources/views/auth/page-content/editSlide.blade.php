@@ -38,23 +38,13 @@
 								<input type="text" class="form-control" name="url" placeholder="nhập link bài tin tức" value="{{$slide->url}}" required>
 							</div>
 						
-							<div class="image-blog image-product1" style="width: 100%" >
-								<img class="img-thumbnail" width="100%" src="{{url('/uploads/images/systems/slides/'.$slide["url_image"])}}">
-							</div>
-							<div class="file-upload edit-image1">	
-							  	<div class="image-upload-wrap image-upload-wrap1">
-								    <input class="file-upload-input file-upload-input1" type='file' name="image" onchange="readURL1(this);" accept="image/*" />
-								    <div class="drag-text">
-								      <h3>Đổi background</h3>
-								    </div>
-							  	</div>
-							  	<div class="file-upload-content file-upload-content1">
-							    	<img class="file-upload-image file-upload-image1" src="#" alt="your image" />
-							    	<div class="image-title-wrap image-title-wrap1">
-							      		<button type="button" onclick="removeUpload1()" class="remove-image">Remove <span class="image-title image-title1 text-center">Uploaded Image</span></button>
+							<div class="file-upload-content file-upload-content0" style="position: relative;">
+							    	<img width="100%" class="file-upload-image file-upload-image0" src="{{asset('uploads/images/systems/slides/'.$slide->url_image)}}" alt="your image" />
+							    	<div class="image-title-wrap image-title-wrap0" style="position: absolute;top: 0px; right: 0px;">
+							      		<button type="button" onclick="removeUploadTest(0)" class="remove-image">Slide</button>
 							    	</div>
+							    	<input style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input0" type='file' name="image" onchange="readURLTest(this,0);" accept="image/*" />
 							  	</div>
-							</div>
 						</div>
 					</div>
 					<br>
