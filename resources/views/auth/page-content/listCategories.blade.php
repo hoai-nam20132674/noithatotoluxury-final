@@ -33,10 +33,13 @@
 		            @endif
 					<thead>
 						<tr>
+							<th width="8%">Hình ảnh</th>
 							<th>Tên danh mục</th>
 							<th>Url</th>
-							<th class="text-center">Hiển thị</th>
-							<th class="text-center">Tắt hiển thị</th>
+							<th class="text-center">Xuất bản</th>
+							<th class="text-center">Nổi bật</th>
+							<th>Ngày tạo</th>
+							<th>Chỉnh sửa</th>
 							<th class="text-center" style="padding: 0px; background: green;">
 								<a href="{{URL::route('addCategorie')}}" title="Thêm danh mục" style="color: green;"><i class="ion-android-add" style=" font-size:30px;color:#fff;"></i></a>
 							</th>
@@ -46,6 +49,7 @@
 					<tbody>
 						@foreach($category as $cate)
 						<tr>
+							<td><img src="{{asset('/uploads/images/categories/avatar/'.$cate["avatar"])}}"  width="100%" /></td>
 							<td>
 								@if(Auth::user()->systems_id == 1)
 								<a href="{{URL::route('addTagCategorie',$cate->id)}}">{{$cate->name}}</a>
@@ -54,48 +58,42 @@
 								@endif
 							</td>
 							<td>{{$cate->url}}</td>
-							@if($cate->display==0)
-								<td class="text-center">
-									<div class="checkbox">
-										<label>
-											<input onclick="enable{{$cate->id}}()" class="enable_categorie" value="{{$cate->id}}" id="enable{{$cate->id}}" type="checkbox">
-										</label>
-									</div>
-								</td>
-								<td class="text-center">
-									<div class="checkbox">
-										<label>
-											<input onclick="disable{{$cate->id}}()" class="disable_categorie" value="{{$cate->id}}" id="disable{{$cate->id}}" type="checkbox" checked>
-										</label>
-									</div>
-								</td>
-							@else
-								<td class="text-center">
-									<div class="checkbox">
-										<label>
-											<input onclick="enable{{$cate->id}}()" class="enable_categorie" value="{{$cate->id}}" id="enable{{$cate->id}}" type="checkbox" checked>
-										</label>
-									</div>
-								</td>
-								<td class="text-center">
-									<div class="checkbox">
-										<label>
-											<input onclick="disable{{$cate->id}}()" class="disable_categorie" value="{{$cate->id}}" id="disable{{$cate->id}}" type="checkbox">
-										</label>
-									</div>
-								</td>
-							@endif
-							<script type="text/javascript">
-								function enable1() {
-								    document.getElementById("enable{{$cate->id}}").checked = true;
-								    document.getElementById("disable{{$cate->id}}").checked = false;
-								}
-
-								function disable1() {
-								    document.getElementById("disable{{$cate->id}}").checked = true;
-								    document.getElementById("enable{{$cate->id}}").checked = false;
-								}
-							</script>
+							<td>
+								@if($cate->display == 0)
+									<a style="opacity: 0.2;" href="#" categorie-id="{{$cate->id}}" class="categorie-display-block">
+										<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Xuất bản</span>
+									</a>
+									<a style="pointer-events: none;" href="#" categorie-id="{{$cate->id}}" class="categorie-display-none">
+										<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không xuất bản</span>
+									</a>
+								@else
+									<a style="pointer-events: none;" href="#" categorie-id="{{$cate->id}}" class="categorie-display-block">
+										<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Xuất bản</span>
+									</a>
+									<a style="opacity: 0.2;" href="#" categorie-id="{{$cate->id}}" class="categorie-display-none">
+										<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không xuất bản</span>
+									</a>
+								@endif
+							</td>
+							<td>
+								@if($cate->highlights == 0)
+									<a style="opacity: 0.2;" href="#" categorie-id="{{$cate->id}}" class="categorie-highlight-block">
+										<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Nổi bật</span>
+									</a>
+									<a style="pointer-events: none;" href="#" categorie-id="{{$cate->id}}" class="categorie-highlight-none">
+										<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không nổi bật</span>
+									</a>
+								@else
+									<a style="pointer-events: none;" href="#" categorie-id="{{$cate->id}}" class="categorie-highlight-block">
+										<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Nổi bật</span>
+									</a>
+									<a style="opacity: 0.2;" href="#" categorie-id="{{$cate->id}}" class="categorie-highlight-none">
+										<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không nổi bật</span>
+									</a>
+								@endif
+							</td>
+							<td>{{$cate->created_at}}</td>
+							<td>{{$cate->updated_at}}</td>
 							
 							<td class="text-center">
 								<a onclick="return confirmDelete('Bạn có chắc muốn xóa danh mục này không')" href="{{ URL::route('deleteCategorie',$cate->id)}}" title="Xóa danh mục"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
@@ -140,29 +138,73 @@
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/display_categorie.js')}}"></script>
 	<script type="text/javascript">
-		$(document).on('click', '.enable_categorie', function(event) {
-			var cate_id = $(this).attr('value');
-			url = '/auth/admin/enable-categorie/'+cate_id;
+		$(document).on('click', '.categorie-display-none', function(event) {
+			event.preventDefault();
+			var categorie_id = $(this).attr('categorie-id');
+			url = '/auth/admin/categorie-display-none/'+categorie_id;
 			$.ajax({
 				type: 'GET',
 				url: url,
 				dataType: 'html',
 				success: function(data) {
-					
+					console.log(data);
 				}
 			});
+			$(".categorie-display-none[categorie-id="+categorie_id+"]").css('opacity',1);
+			$(".categorie-display-block[categorie-id="+categorie_id+"]").css('opacity',0.2);
+			$(".categorie-display-none[categorie-id="+categorie_id+"]").css('pointer-events','none');
+			$(".categorie-display-block[categorie-id="+categorie_id+"]").css('pointer-events','');
 		});
-		$(document).on('click', '.disable_categorie', function(event) {
-			var cate_id = $(this).attr('value');
-			url = '/auth/admin/disable-categorie/'+cate_id;
+		$(document).on('click', '.categorie-display-block', function(event) {
+			event.preventDefault();
+			var categorie_id = $(this).attr('categorie-id');
+			url = '/auth/admin/categorie-display-block/'+categorie_id;
 			$.ajax({
 				type: 'GET',
 				url: url,
 				dataType: 'html',
 				success: function(data) {
-					
+					console.log(data);
 				}
 			});
+			$(".categorie-display-none[categorie-id="+categorie_id+"]").css('opacity',0.2);
+			$(".categorie-display-block[categorie-id="+categorie_id+"]").css('opacity',1);
+			$(".categorie-display-none[categorie-id="+categorie_id+"]").css('pointer-events','');
+			$(".categorie-display-block[categorie-id="+categorie_id+"]").css('pointer-events','none');
+		});
+		$(document).on('click', '.categorie-highlight-none', function(event) {
+			event.preventDefault();
+			var categorie_id = $(this).attr('categorie-id');
+			url = '/auth/admin/categorie-highlight-none/'+categorie_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".categorie-highlight-none[categorie-id="+categorie_id+"]").css('opacity',1);
+			$(".categorie-highlight-block[categorie-id="+categorie_id+"]").css('opacity',0.2);
+			$(".categorie-highlight-none[categorie-id="+categorie_id+"]").css('pointer-events','none');
+			$(".categorie-highlight-block[categorie-id="+categorie_id+"]").css('pointer-events','');
+		});
+		$(document).on('click', '.categorie-highlight-block', function(event) {
+			event.preventDefault();
+			var categorie_id = $(this).attr('categorie-id');
+			url = '/auth/admin/categorie-highlight-block/'+categorie_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".categorie-highlight-none[categorie-id="+categorie_id+"]").css('opacity',0.2);
+			$(".categorie-highlight-block[categorie-id="+categorie_id+"]").css('opacity',1);
+			$(".categorie-highlight-none[categorie-id="+categorie_id+"]").css('pointer-events','');
+			$(".categorie-highlight-block[categorie-id="+categorie_id+"]").css('pointer-events','none');
 		});
 	</script>
 @endsection()

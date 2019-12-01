@@ -189,7 +189,7 @@
 
   	
   	
-  		<span class="sku_wrapper">Mã: <span class="sku">MD1366</span></span>
+  		<span class="sku_wrapper">Mã: <span class="sku">{{$products->code}}</span></span>
 
   	
   	<span class="posted_in">Danh mục: <a href="{{$cate_parent->url}}" rel="tag">{{$cate_parent->name}}</a></span>

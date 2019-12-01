@@ -27,6 +27,8 @@ use App\Http\Requests\addProductRequest;
 use App\Http\Requests\addCategorieRequest;
 use App\Http\Requests\addSystemRequest;
 use App\Http\Requests\addBlogRequest;
+use App\Http\Requests\editProductRequest;
+use App\Http\Requests\editCategorieRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use Illuminate\Support\Facades\Input;
@@ -111,7 +113,7 @@ class AdminController extends Controller
         return view('auth.page-content.listProductsDetail',['products_detail'=>$products_detail,'products'=>$products]);
     }
     public function listCategories() {
-        $category = Categories::where('systems_id', Auth::user()->systems_id)->get();
+        $category = Categories::where('systems_id', Auth::user()->systems_id)->where('id','!=',1)->get();
     	return view('auth.page-content.listCategories',['category'=>$category]);
     }
     public function listUsers() {
@@ -231,11 +233,15 @@ class AdminController extends Controller
     public function postEditUser(){
 
     }
-    public function postEditProduct(){
-
+    public function postEditProduct(editProductRequest $request, $id){
+        $product = new Products;
+        $product->editProduct($request,$id);
+        return redirect()->route('listProducts')->with(['flash_level'=>'success','flash_message'=>'Sửa sản phẩm thành công']);
     }
-    public function postEditCategorie(){
-
+    public function postEditCategorie(editCategorieRequest $request, $id){
+        $cate = new Categories;
+        $cate->editCategorie($request,$id);
+        return redirect()->route('listCategories')->with(['flash_level'=>'success','flash_message'=>'Sửa danh mục thành công']);
     }
     public function postAddHomeSystem(Request $request){
         $home_system = new HomeSystems;
@@ -432,5 +438,61 @@ class AdminController extends Controller
         $slide->save();
         echo "thành công";
     }
+    public function productDisplayNone($id){
+        $product = Products::where('id',$id)->get()->first();
+        $product->display = 0;
+        $product->save();
+        echo "thành công";
+    }
+    public function productDisplayBlock($id){
+        $product = Products::where('id',$id)->get()->first();
+        $product->display = 1;
+        $product->save();
+        echo "thành công";
+    }
+     public function productHighlightNone($id){
+        $product = Products::where('id',$id)->get()->first();
+        $product->highlights = 0;
+        $product->save();
+        echo "thành công";
+    }
+    public function productHighlightBlock($id){
+        $product = Products::where('id',$id)->get()->first();
+        $product->highlights = 1;
+        $product->save();
+        echo "thành công";
+    }
+    // --------------
+    public function categorieDisplayNone($id){
+        $categorie = Categories::where('id',$id)->get()->first();
+        $categorie->display = 0;
+        $categorie->save();
+        echo "thành công";
+    }
+    public function categorieDisplayBlock($id){
+        $categorie = Categories::where('id',$id)->get()->first();
+        $categorie->display = 1;
+        $categorie->save();
+        echo "thành công";
+    }
+     public function categorieHighlightNone($id){
+        $categorie = Categories::where('id',$id)->get()->first();
+        $categorie->highlights = 0;
+        $categorie->save();
+        echo "thành công";
+    }
+    public function categorieHighlightBlock($id){
+        $categorie = Categories::where('id',$id)->get()->first();
+        $categorie->highlights = 1;
+        $categorie->save();
+        echo "thành công";
+    }
+    // public function updateImage(Request $request,$id,$file_name){
+    //     $request->file->move('uploads/images/products/detail/',$file_name);
+    //     $image = ImagesProducts::where('id',$id)->get()->first();
+    //     $image->url = $file_name;
+    //     $image->save();
+    //     echo "thành công";
+    // }
     
 }

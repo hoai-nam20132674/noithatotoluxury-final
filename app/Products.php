@@ -18,8 +18,8 @@ class Products extends Model
 
 
     public function addProduct($request){
-        $image_share = $request->file('image-share')->getClientOriginalName();
-        $avatar = $request->file('image')->getClientOriginalName();
+        $image_share = $request->file('share_image')->getClientOriginalName();
+        $avatar = $request->file('avatar')->getClientOriginalName();
     	$pr = new Products;
     	$pr->name = $request->name;
         $pr->code = $request->code;
@@ -86,16 +86,51 @@ class Products extends Model
             }
         }
         
-    	$request->file('image-share')->move('uploads/images/products/image_share/',$image_share);
+    	$request->file('share_image')->move('uploads/images/products/image_share/',$image_share);
         $img_share = new ImageShare;
         $img_share->url = $image_share;
         $img_share->save();
-        $request->file('image')->move('uploads/images/products/avatar/',$avatar);
+        $request->file('avatar')->move('uploads/images/products/avatar/',$avatar);
         $img_avatar = new ImagesProducts;
         $img_avatar->role = 1;
         $img_avatar->url = $avatar;
         $img_avatar->products_id = $pr->id;
         $img_avatar->save();
+    }
+    public function editProduct($request,$id){
+        $pr= Products::where('id',$id)->get()->first();
+        $pr->name = $request->name;
+        $pr->code = $request->code;
+        $pr->categories_id = $request->categories_id;
+        $pr->url = $request->url;
+        $pr->content = $request->content;
+        $pr->seo_keyword = $request->seo_keyword;
+        $pr->seo_description = $request->seo_description;
+        $pr->short_description = $request->short_description;
+        $pr->title = $request->title;
+        if(Input::hasFile('share_image')){
+            
+                
+            $file_name = $request->file('share_image')->getClientOriginalName();
+            $pr->share_image = $file_name;
+            $request->file('share_image')->move('uploads/images/products/image_share/',$file_name);
+                
+            
+        }
+        if(Input::hasFile('avatar')){
+            
+            $ava_name = $request->file('avatar')->getClientOriginalName();
+            $request->file('avatar')->move('uploads/images/products/avatar/',$ava_name);
+            $image_ava = ImagesProducts::where('products_id',$id)->where('role',1)->get()->first();
+            $image_ava->url = $ava_name;
+            $image_ava->save();
+              
+           
+        }
+        $pr->display = $request->display;
+        $pr->highlights = $request->highlights;
+        $pr->video = $request->video;
+        $pr->save();
     }
     public function countAmount($countProperties,$request){
         $countAmount = 0;

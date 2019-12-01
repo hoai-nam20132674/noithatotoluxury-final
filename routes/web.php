@@ -117,7 +117,7 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::post('postAddMenu',['as'=>'postAddMenu','uses'=>'Auth\AdminController@postAddMenu']);
 	Route::post('postEditBlog',['as'=>'postEditBlog','uses'=>'Auth\AdminController@postEditBlog']);
 	Route::post('postAddCategorie',['as'=>'postAddCategorie','uses'=>'Auth\AdminController@postAddCategorie']);
-	Route::post('postEditCategorie',['as'=>'postEditCategorie','uses'=>'Auth\AdminController@postEditCategorie']);
+	Route::post('postEditCategorie/{id}',['as'=>'postEditCategorie','uses'=>'Auth\AdminController@postEditCategorie']);
 	Route::post('postAddSystem',['as'=>'postAddSystem','uses'=>'Auth\AdminController@postAddSystem']);
 	Route::post('postEditSystem/{id}',['as'=>'postEditSystem','uses'=>'Auth\AdminController@postEditSystem']);
 	Route::post('postAddHomeSystem',['as'=>'postAddHomeSystem','uses'=>'Auth\AdminController@postAddHomeSystem']);
@@ -137,7 +137,15 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::get('update-slide-stt/{id}-{value}',['as'=>'updateSlideStt','uses'=>'Auth\AdminController@updateSlideStt']);
 	Route::get('slide-display-none/{id}',['as'=>'slideDisplayNone','uses'=>'Auth\AdminController@slideDisplayNone']);
 	Route::get('slide-display-block/{id}',['as'=>'slideDisplayBlock','uses'=>'Auth\AdminController@slideDisplayBlock']);
-	
+	Route::get('product-display-none/{id}',['as'=>'productDisplayNone','uses'=>'Auth\AdminController@productDisplayNone']);
+	Route::get('product-display-block/{id}',['as'=>'productDisplayBlock','uses'=>'Auth\AdminController@productDisplayBlock']);
+	Route::get('product-highlight-none/{id}',['as'=>'productHighlightNone','uses'=>'Auth\AdminController@productHighlightNone']);
+	Route::get('product-highlight-block/{id}',['as'=>'productHighlightBlock','uses'=>'Auth\AdminController@productHighlightBlock']);
+	Route::get('categorie-display-none/{id}',['as'=>'categorieDisplayNone','uses'=>'Auth\AdminController@categorieDisplayNone']);
+	Route::get('categorie-display-block/{id}',['as'=>'categorieDisplayBlock','uses'=>'Auth\AdminController@categorieDisplayBlock']);
+	Route::get('categorie-highlight-none/{id}',['as'=>'categorieHighlightNone','uses'=>'Auth\AdminController@categorieHighlightNone']);
+	Route::get('categorie-highlight-block/{id}',['as'=>'categorieHighlightBlock','uses'=>'Auth\AdminController@categorieHighlightBlock']);
+	// Route::post('update-image/{id}-{file_name}',['as'=>'updateImage','uses'=>'Auth\AdminController@updateImage']);
 });
 
 

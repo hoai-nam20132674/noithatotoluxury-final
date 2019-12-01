@@ -35,9 +35,10 @@
 						<tr>
 							<th width="8%">Hình ảnh</th>
 							<th>Tên sản phẩm</th>
-							
-							<th class="text-center">Enable</th>
-							<th class="text-center">Disible</th>
+							<th>Xuất bản</th>
+							<th>Nổi bật</th>
+							<th>Ngày tạo</th>
+							<th>Chỉnh sửa</th>
 							<th class="text-center" style="padding: 0px; background: green;">
 								<a href="{{URL::route('addProduct')}}" title="Thêm sản phẩm" style="color: green;"><i class="ion-android-add" style=" font-size:30px; color:#fff;"></i></a>
 							</th>
@@ -52,48 +53,42 @@
 										
 								<td><a href="{{URL::route('listProductsDetail',$pr->id)}}">{{$pr->name}}</a></td>
 								
-								@if($pr->display==0)
-									<td class="text-center">
-										<div class="checkbox">
-											<label>
-												<input onclick="enable1()" value="1" class="enable_product" id="enable1" type="checkbox">
-											</label>
-										</div>
-									</td>
-									<td class="text-center">
-										<div class="checkbox">
-											<label>
-												<input onclick="disable1()" class="disable_product" value="1" id="disable1" type="checkbox" checked>
-											</label>
-										</div>
-									</td>
-								@else
-									<td class="text-center">
-										<div class="checkbox">
-											<label>
-												<input onclick="enable1()" class="enable_product" value="1" id="enable1" type="checkbox" checked>
-											</label>
-										</div>
-									</td>
-									<td class="text-center">
-										<div class="checkbox">
-											<label>
-												<input onclick="disable1()" value="1" class="disable_product" id="disable1" type="checkbox">
-											</label>
-										</div>
-									</td>
-								@endif
-								<script type="text/javascript">
-									function enable1() {
-									    document.getElementById("enable1").checked = true;
-									    document.getElementById("disable1").checked = false;
-									}
-
-									function disable1() {
-									    document.getElementById("disable1").checked = true;
-									    document.getElementById("enable1").checked = false;
-									}
-								</script>
+								<td>
+									@if($pr->display == 0)
+										<a style="opacity: 0.2;" href="#" product-id="{{$pr->id}}" class="product-display-block">
+											<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Xuất bản</span>
+										</a>
+										<a style="pointer-events: none;" href="#" product-id="{{$pr->id}}" class="product-display-none">
+											<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không xuất bản</span>
+										</a>
+									@else
+										<a style="pointer-events: none;" href="#" product-id="{{$pr->id}}" class="product-display-block">
+											<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Xuất bản</span>
+										</a>
+										<a style="opacity: 0.2;" href="#" product-id="{{$pr->id}}" class="product-display-none">
+											<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không xuất bản</span>
+										</a>
+									@endif
+								</td>
+								<td>
+									@if($pr->highlights == 0)
+										<a style="opacity: 0.2;" href="#" product-id="{{$pr->id}}" class="product-highlight-block">
+											<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Nổi bật</span>
+										</a>
+										<a style="pointer-events: none;" href="#" product-id="{{$pr->id}}" class="product-highlight-none">
+											<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không nổi bật</span>
+										</a>
+									@else
+										<a style="pointer-events: none;" href="#" product-id="{{$pr->id}}" class="product-highlight-block">
+											<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Nổi bật</span>
+										</a>
+										<a style="opacity: 0.2;" href="#" product-id="{{$pr->id}}" class="product-highlight-none">
+											<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không nổi bật</span>
+										</a>
+									@endif
+								</td>
+								<td>{{$pr->created_at}}</td>
+								<td>{{$pr->updated_at}}</td>
 								
 								<td class="text-center">
 									<a onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="{{URL::route('deleteProduct',$pr->id)}}" title="Xóa sản phẩm"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
@@ -139,5 +134,75 @@
 	<script type="text/javascript" src="{{asset('auth/js/demo.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/display_product.js')}}"></script>
+	<script type="text/javascript">
+		$(document).on('click', '.product-display-none', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-display-none/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-display-none[product-id="+product_id+"]").css('opacity',1);
+			$(".product-display-block[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-display-none[product-id="+product_id+"]").css('pointer-events','none');
+			$(".product-display-block[product-id="+product_id+"]").css('pointer-events','');
+		});
+		$(document).on('click', '.product-display-block', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-display-block/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-display-none[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-display-block[product-id="+product_id+"]").css('opacity',1);
+			$(".product-display-none[product-id="+product_id+"]").css('pointer-events','');
+			$(".product-display-block[product-id="+product_id+"]").css('pointer-events','none');
+		});
+		$(document).on('click', '.product-highlight-none', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-highlight-none/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-highlight-none[product-id="+product_id+"]").css('opacity',1);
+			$(".product-highlight-block[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-highlight-none[product-id="+product_id+"]").css('pointer-events','none');
+			$(".product-highlight-block[product-id="+product_id+"]").css('pointer-events','');
+		});
+		$(document).on('click', '.product-highlight-block', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-highlight-block/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-highlight-none[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-highlight-block[product-id="+product_id+"]").css('opacity',1);
+			$(".product-highlight-none[product-id="+product_id+"]").css('pointer-events','');
+			$(".product-highlight-block[product-id="+product_id+"]").css('pointer-events','none');
+		});
+	</script>
 	
 @endsection()
