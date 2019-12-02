@@ -35,9 +35,9 @@
 							<div class="row">
 
 								<div class="col-md-3">
-									<a href="http://bkshop.vn/" target="_blank">
+									<a href="http://creeauto.com/" target="_blank">
 										<div style="background: #0275d8;" class="text-center">
-											<span style="color: #fff; font-size:20px; ">http://bkshop.vn/</span>
+											<span style="color: #fff; font-size:20px; ">creeauto.com/</span>
 										</div>
 									</a>
 								</div>
@@ -84,20 +84,13 @@
 									<input type="radio" name="display" value="0">Tắt hiển thị
 								</label>
 							</div>
-							<div class="file-upload">
-							  	<!-- <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button> -->
-								
-							  	<div class="image-upload-wrap image-upload-wrap0">
-								    <input class="file-upload-input file-upload-input0" type='file' name="image" onchange="readURL(this);" accept="image/*" required/>
-								    <div class="drag-text">
-								      <h3>Ảnh đại diện </h3>
-								    </div>
-							  	</div>
-							  	<div class="file-upload-content file-upload-content0">
-							    	<img class="file-upload-image file-upload-image0" src="#" alt="your image" />
-							    	<div class="image-title-wrap image-title-wrap0">
-							      		<button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title image-title0 text-center">Uploaded Image</span></button>
+							<div class="file-upload">	
+							  	<div class="file-upload-content file-upload-content100" style="position: relative;">
+							    	<img width="100%" class="file-upload-image file-upload-image100" src="https://i.pinimg.com/originals/4b/50/f9/4b50f9eeb7d6617cc9aaaa6405f27a07.gif" alt="your image" />
+							    	<div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
+							      		<button type="button" onclick="removeUploadTest(100)" class="remove-image">Ảnh đại diện</button>
 							    	</div>
+							    	<input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input100" type='file' name="image" onchange="readURLTest(this,100);" accept="image/*" />
 							  	</div>
 							</div>
 						</div>

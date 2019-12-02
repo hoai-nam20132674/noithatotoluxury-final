@@ -19,7 +19,7 @@
 	
 	<div class="content-area py-1">
 		<div class="container-fluid">
-			<h4>Sản phẩm</h4>
+			<h4>Đơn hàng</h4>
 			<ol class="breadcrumb no-bg mb-1">
 				<li class="breadcrumb-item"><a href="{{URL::route('authIndex')}}">Trang chủ</a></li>
 				<li class="breadcrumb-item active">Danh sách sản đơn hàng</li>
@@ -33,8 +33,8 @@
 		            @endif
 					<thead>
 						<tr>
-							
-							<th>Tên người đặt hàng</th>
+							<th>Mã đơn hàng</th>
+							<th>Họ tên</th>
 							<th>số điện thoại</th>
 							<th>email</th>
 							<th>địa chỉ</th>
@@ -51,8 +51,9 @@
 						@foreach($orders as $order)
 							
 							<tr>
+								<td><a href="{{URL::route('listOrderDetail',$order->id)}}">CREEAUTO{{$order->id}}</a></td>
 
-								<td><a href="{{URL::route('listOrderDetail',$order->id)}}">{{$order->name}}</a></td>
+								<td>{{$order->name}}</td>
 								<td>{{$order->phone}}</td>
 								<td>{{$order->email}}</td>
 								<td>{{$order->address}}</td>
@@ -69,15 +70,7 @@
 								
 							</tr>
 						@endforeach
-							<tr style="background-color: #00f3ff; color: #000; font-weight: 600;font-size: 15px; ">
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td>TỔNG DOANH THU</td>								
-								<td>{!!number_format($totalPrice)!!}</td>
-								<td></td>
-							</tr>
+							
 					</tbody>
 				</table>
 			</div>

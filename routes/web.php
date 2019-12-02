@@ -115,7 +115,7 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::post('postEditProduct/{id}',['as'=>'postEditProduct','uses'=>'Auth\AdminController@postEditProduct']);
 	Route::post('postAddBlog',['as'=>'postAddBlog','uses'=>'Auth\AdminController@postAddBlog']);
 	Route::post('postAddMenu',['as'=>'postAddMenu','uses'=>'Auth\AdminController@postAddMenu']);
-	Route::post('postEditBlog',['as'=>'postEditBlog','uses'=>'Auth\AdminController@postEditBlog']);
+	Route::post('postEditBlog/{id}',['as'=>'postEditBlog','uses'=>'Auth\AdminController@postEditBlog']);
 	Route::post('postAddCategorie',['as'=>'postAddCategorie','uses'=>'Auth\AdminController@postAddCategorie']);
 	Route::post('postEditCategorie/{id}',['as'=>'postEditCategorie','uses'=>'Auth\AdminController@postEditCategorie']);
 	Route::post('postAddSystem',['as'=>'postAddSystem','uses'=>'Auth\AdminController@postAddSystem']);
@@ -145,6 +145,8 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::get('categorie-display-block/{id}',['as'=>'categorieDisplayBlock','uses'=>'Auth\AdminController@categorieDisplayBlock']);
 	Route::get('categorie-highlight-none/{id}',['as'=>'categorieHighlightNone','uses'=>'Auth\AdminController@categorieHighlightNone']);
 	Route::get('categorie-highlight-block/{id}',['as'=>'categorieHighlightBlock','uses'=>'Auth\AdminController@categorieHighlightBlock']);
+	Route::get('blog-display-none/{id}',['as'=>'blogDisplayNone','uses'=>'Auth\AdminController@blogDisplayNone']);
+	Route::get('blog-display-block/{id}',['as'=>'blogDisplayBlock','uses'=>'Auth\AdminController@blogDisplayBlock']);
 	// Route::post('update-image/{id}-{file_name}',['as'=>'updateImage','uses'=>'Auth\AdminController@updateImage']);
 });
 

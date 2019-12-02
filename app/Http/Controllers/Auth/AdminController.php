@@ -29,6 +29,7 @@ use App\Http\Requests\addSystemRequest;
 use App\Http\Requests\addBlogRequest;
 use App\Http\Requests\editProductRequest;
 use App\Http\Requests\editCategorieRequest;
+use App\Http\Requests\editBlogRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use Illuminate\Support\Facades\Input;
@@ -87,6 +88,7 @@ class AdminController extends Controller
         return view('auth.page-content.addMenu',['cates'=>$cates]);
     }
     // -------------------
+    
     public function listProducts() {
         $categories = Categories::where('systems_id',Auth::user()->systems_id)->get();
         $cate_id = array();
@@ -104,7 +106,7 @@ class AdminController extends Controller
         
     }
     public function listBlogs(){
-        $blogs = Blogs::select()->where('display',1)->orderBy('created_at','DESC')->get();
+        $blogs = Blogs::select()->orderBy('created_at','DESC')->get();
         return View('auth.page-content.listBlogs',['blogs'=>$blogs]);
     }
     public function listProductsDetail($id){
@@ -117,8 +119,13 @@ class AdminController extends Controller
     	return view('auth.page-content.listCategories',['category'=>$category]);
     }
     public function listUsers() {
-        $users = User::where('systems_id',Auth::user()->systems_id)->get();
-    	return view('auth.page-content.listUsers',['users'=>$users]);
+        if(Auth::user()->role ==1){
+            $users = User::where('systems_id',Auth::user()->systems_id)->get();
+        	return view('auth.page-content.listUsers',['users'=>$users]);
+        }
+        else{
+            return redirect()->route('authIndex');
+        }
     }
     public function listSlides(){
         $slides = Slides::where('systems_id',Auth::user()->systems_id)->get();
@@ -144,22 +151,22 @@ class AdminController extends Controller
         $products_detail_id = ClientController::arrayColumn($products_detail,$col='id');
         $orders_detail = OrdersDetail::whereIn('products_detail_id',$products_detail_id)->get();
         $orders_id = ClientController::arrayColumn($orders_detail,$col='orders_id');
-        $orders = Orders::whereIn('id',$orders_id)->orderBy('id','DESC')->get();
-        $totalPrice = 0;
-        foreach($orders as $order){
-            $orders_detail = OrdersDetail::where('orders_id',$order->id)->get();
-            $products_detail_id = ClientController::arrayColumn($orders_detail,$col='products_detail_id');
-            $cates = Categories::where('systems_id',Auth::user()->systems_id)->get();
-            $cate_id = ClientController::arrayColumn($cates,$col='id');
-            $products = Products::whereIn('categories_id',$cate_id)->get();
-            $products_id = ClientController::arrayColumn($products,$col='id');
-            $products_detail = ProductsDetail::whereIn('products_id',$products_id)->whereIn('id',$products_detail_id)->get();
-                foreach($products_detail as $pr){
-                    $order_detail = OrdersDetail::where('orders_id',$order->id)->where('products_detail_id',$pr->id)->get()->first();
-                    $totalPrice = $totalPrice + $order_detail->amount*$pr->price;
-                }
-        }
-        return view('auth.page-content.listOrder',['orders'=>$orders,'totalPrice'=>$totalPrice]);
+        $orders = Orders::select()->orderBy('id','DESC')->get();
+        // $totalPrice = 0;
+        // foreach($orders as $order){
+        //     $orders_detail = OrdersDetail::where('orders_id',$order->id)->get();
+        //     $products_detail_id = ClientController::arrayColumn($orders_detail,$col='products_detail_id');
+        //     $cates = Categories::where('systems_id',Auth::user()->systems_id)->get();
+        //     $cate_id = ClientController::arrayColumn($cates,$col='id');
+        //     $products = Products::whereIn('categories_id',$cate_id)->get();
+        //     $products_id = ClientController::arrayColumn($products,$col='id');
+        //     $products_detail = ProductsDetail::whereIn('products_id',$products_id)->whereIn('id',$products_detail_id)->get();
+        //         foreach($products_detail as $pr){
+        //             $order_detail = OrdersDetail::where('orders_id',$order->id)->where('products_detail_id',$pr->id)->get()->first();
+        //             $totalPrice = $totalPrice + $order_detail->amount*$pr->price;
+        //         }
+        // }
+        return view('auth.page-content.listOrder',['orders'=>$orders]);
         
     }
     public function listOrderDetail($id){
@@ -177,6 +184,10 @@ class AdminController extends Controller
     public function editUser($id) {
         $user=User::where('id',$id)->get()->first();
         return view('auth.page-content.editUser',['user'=>$user]);
+    }
+    public function editBlog($id){
+        $blog = Blogs::where('id',$id)->get()->first();
+        return view('auth.page-content.editBlog',['blog'=>$blog]);
     }
     public function editProduct($id) {
         $product = Products::where('id',$id)->get()->first();
@@ -232,6 +243,11 @@ class AdminController extends Controller
     }
     public function postEditUser(){
 
+    }
+    public function postEditBlog(editBlogRequest $request, $id){
+        $blog = new Blogs;
+        $blog->editBlog($request,$id);
+        return redirect()->route('listBlogs')->with(['flash_level'=>'success','flash_message'=>'Sửa tin tức thành công']);
     }
     public function postEditProduct(editProductRequest $request, $id){
         $product = new Products;
@@ -485,6 +501,19 @@ class AdminController extends Controller
         $categorie = Categories::where('id',$id)->get()->first();
         $categorie->highlights = 1;
         $categorie->save();
+        echo "thành công";
+    }
+    // ----------------
+    public function blogDisplayNone($id){
+        $blog = Blogs::where('id',$id)->get()->first();
+        $blog->display = 0;
+        $blog->save();
+        echo "thành công";
+    }
+    public function blogDisplayBlock($id){
+        $blog = Blogs::where('id',$id)->get()->first();
+        $blog->display = 1;
+        $blog->save();
         echo "thành công";
     }
     // public function updateImage(Request $request,$id,$file_name){

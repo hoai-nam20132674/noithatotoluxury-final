@@ -30,7 +30,7 @@
 		    	</div>
 		    	@endif
 				
-					<form action="{{ URL::route('postEditCategorie',$cate->id)}}" method="POST">
+					<form action="{{ URL::route('postEditCategorie',$cate->id)}}" method="POST" enctype="multipart/form-data">
 						<form action="" method="POST">
 						<input type="hidden" name="_token" value="{{ csrf_token()}}">
 						<div class="row">
@@ -40,9 +40,9 @@
 										<div class="row">
 
 											<div class="col-md-3">
-												<a href="http://bkshop.vn/" target="_blank">
+												<a href="http://creeauto.com/" target="_blank">
 													<div style="background: #0275d8;" class="text-center">
-														<span style="color: #fff; font-size:20px; ">http://bkshop.vn/</span>
+														<span style="color: #fff; font-size:20px; ">creeauto.com/</span>
 													</div>
 												</a>
 											</div>

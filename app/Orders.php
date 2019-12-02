@@ -26,6 +26,8 @@ class Orders extends Model
     		$order_detail->orders_id = $order->id;
     		$order_detail->products_detail_id = $item->id;
     		$order_detail->amount = $item->quantity;
+            $order_detail->comment = '';
+            $order_detail->status = 0;
     		$order_detail->save();
     		$product_detail = ProductsDetail::where('id',$item->id)->get()->first();
     		$old_amount = $product_detail->amount;

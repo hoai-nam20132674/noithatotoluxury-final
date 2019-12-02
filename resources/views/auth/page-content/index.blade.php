@@ -14,13 +14,20 @@
 	<div class="content-area py-1">
 		<div class="container-fluid">
 			<div class="row row-md">
-				
+				@php
+					$system = App\Systems::where('id',Auth::user()->systems_id)->get()->first();
+					$cates = App\Categories::where('systems_id',$system->id)->get();
+					$cate_id = App\Http\Controllers\AuthClient\ClientController::arrayColumn($cates,$col='id');
+					$products = App\Products::whereIn('categories_id',$cate_id)->get();
+					$blogs = App\Blogs::select()->get();
+					$orders = App\Orders::select()->get();
+				@endphp
 				<div class="col-lg-3 col-md-6 col-xs-12">
 					<div class="box box-block bg-white tile tile-1 mb-2">
 						<div class="t-icon right"><span class="bg-danger"></span><i class="ti-shopping-cart-full"></i></div>
 						<div class="t-content">
 							<h6 class="text-uppercase mb-1">Đơn hàng</h6>
-							<h1 class="mb-1">50</h1>
+							<h1 class="mb-1 countOrder">{{count($orders)}}</h1>
 							<span class="tag tag-danger mr-0-5">+17%</span>
 							<i class="fa fa-caret-up text-success mr-0-5"></i><span>12,350</span>
 							<!-- <span class="text-muted font-90"></span> -->
@@ -31,18 +38,13 @@
 					<div class="box box-block bg-white tile tile-1 mb-2">
 						<div class="t-icon right"><span class="bg-success"></span><i class="ti-bar-chart"></i></div>
 						<div class="t-content">
-							<h6 class="text-uppercase mb-1">Doanh thu</h6>
-							<h1 class="mb-1">$ 47,855</h1>
+							<h6 class="text-uppercase mb-1">Tin tức</h6>
+							<h1 class="mb-1 countBlog">{{count($blogs)}}</h1>
 							<i class="fa fa-caret-up text-success mr-0-5"></i><span>12,350</span>
 						</div>
 					</div>
 				</div>
-				@php
-					$system = App\Systems::where('id',Auth::user()->systems_id)->get()->first();
-					$cates = App\Categories::where('systems_id',$system->id)->get();
-					$cate_id = App\Http\Controllers\AuthClient\ClientController::arrayColumn($cates,$col='id');
-					$products = App\Products::whereIn('categories_id',$cate_id)->get();
-				@endphp
+				
 				<div class="col-lg-3 col-md-6 col-xs-12">
 					<div class="box box-block bg-white tile tile-1 mb-2">
 						<div class="t-icon right"><span class="bg-primary"></span><i class="ti-package"></i></div>

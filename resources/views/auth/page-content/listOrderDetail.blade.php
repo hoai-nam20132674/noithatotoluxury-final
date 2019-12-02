@@ -33,9 +33,9 @@
 		            @endif
 					<thead>
 						<tr>
-							
+							<th width="8%">Hình ảnh</th>
 							<th>Tên sản phẩm</th>
-							<th>Thuộc tính</th>
+							
 							<th>Số lượng</th>
 							<th width="10%">Giá</th>
 							<th>Tổng tiền</th>
@@ -56,12 +56,16 @@
 		                        $properties_id = App\Http\Controllers\AuthClient\ClientController::arrayColumn($products_properties,$col='properties_id');
 		                        $properties = App\Properties::join('properties_type','properties.properties_type_id','=','properties_type.id')->whereIn('properties.id',$properties_id)->select('properties.*','properties_type.name')->get();
 		                        $products = App\Products::where('id',$pr->products_id)->get()->first();
+		                        $image = App\ImagesProducts::where('products_id',$products->id)->where('role',1)->get()->first();
 		                        
 		                    @endphp
 							<tr>
-
-								<td><a href="http://localhost:8000/{{$products->url}}" target="_blank">{{$products->name}}</a> </td>
-								<td>@foreach($properties as $pp) {{$pp->name}} {{$pp->value}},@endforeach</td>
+								<td><img src="{{asset('/uploads/images/products/avatar/'.$image["url"])}}"  width="100%" /></td>
+								<td>
+									
+									<a href="/{{$products->url}}" target="_blank">{{$products->name}}</a> 
+								</td>
+								
 								<td>{{$order_detail->amount}}</td>
 								<td>{!!number_format($pr->price)!!} đ</td>
 								<td>{!!number_format($pr->price*$order_detail->amount)!!} đ</td>

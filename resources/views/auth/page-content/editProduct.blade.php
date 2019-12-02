@@ -39,7 +39,7 @@
 									<div class="row">
 
 										<div class="col-md-3">
-											<a href="https://bkmart.vn/" target="_blank"><button class="btn btn-primary" style="width: 100%;">https://bkmart.vn/</button></a>
+											<a href="https://creeauto.com/" target="_blank"><button class="btn btn-primary" style="width: 100%;">creeauto.com/</button></a>
 										</div>
 										<div class="col-md-9">
 											<div class="form-group">	
@@ -73,6 +73,55 @@
 									<div class="form-group">
 										<label for="exampleInputEmail1">Video</label>
 										<input type="text" class="form-control" name="video" placeholder="Link Video" value="{{$product->video}}">
+									</div>
+									@php
+										$categorie = App\Categories::where('id',$product->categories_id)->get()->first();
+										$cates = App\Categories::where('systems_id',Auth::user()->systems_id)->where('id','!=',$categorie->id)->get();
+
+									@endphp
+									<div class="form-group">
+										<label for="exampleInputEmail1">Danh mục</label>
+										<select class="form-control" name="categories_id">
+											<option value="{{$categorie->id}}">{{$categorie->name}}</option>
+											@foreach($cates as $cate)
+												<option value="{{$cate->id}}">{{$cate->name}}</option>
+											@endforeach
+											
+										</select>
+									</div>
+									<div class="checkbox">
+										@if($product->display==0)
+											<label>
+												<input type="radio"  name="display" value="1" >Hiển thị
+											</label>
+											<label>
+												<input type="radio"  name="display" value="0" checked>Tắt hiển thị
+											</label>
+										@else 
+											<label>
+												<input type="radio"  name="display" value="1" checked >Hiển thị
+											</label>
+											<label>
+												<input type="radio"  name="display" value="0" >Tắt hiển thị
+											</label>
+										@endif
+									</div>
+									<div class="checkbox">
+										@if($product->highlights==0)
+											<label>
+												<input type="radio"  name="highlights" value="1" >Nổi bật
+											</label>
+											<label>
+												<input type="radio"  name="highlights" value="0" checked>Không nổi bật
+											</label>
+										@else 
+											<label>
+												<input type="radio"  name="highlights" value="1" checked >Nổi bật
+											</label>
+											<label>
+												<input type="radio"  name="highlights" value="0" >Không nổi bật
+											</label>
+										@endif
 									</div>
 									<div class="form-group">
 										<label for="exampleTextarea">Mô tả ngắn</label>
@@ -118,55 +167,9 @@
 								</div>
 							</div>
 						</div>
-						@php
-							$categorie = App\Categories::where('id',$product->categories_id)->get()->first();
-							$cates = App\Categories::where('systems_id',Auth::user()->systems_id)->where('id','!=',$categorie->id)->get();
-
-						@endphp
+						
 						<div class="col-md-3">
-							<div class="form-group">
-								<select class="form-control" name="categories_id">
-									<option value="{{$categorie->id}}">{{$categorie->name}}</option>
-									@foreach($cates as $cate)
-										<option value="{{$cate->id}}">{{$cate->name}}</option>
-									@endforeach
-									
-								</select>
-							</div>
-							<div class="checkbox">
-								@if($product->display==0)
-									<label>
-										<input type="radio"  name="display" value="1" >Hiển thị
-									</label>
-									<label>
-										<input type="radio"  name="display" value="0" checked>Tắt hiển thị
-									</label>
-								@else 
-									<label>
-										<input type="radio"  name="display" value="1" checked >Hiển thị
-									</label>
-									<label>
-										<input type="radio"  name="display" value="0" >Tắt hiển thị
-									</label>
-								@endif
-							</div>
-							<div class="checkbox">
-								@if($product->highlights==0)
-									<label>
-										<input type="radio"  name="highlights" value="1" >Nổi bật
-									</label>
-									<label>
-										<input type="radio"  name="highlights" value="0" checked>Không nổi bật
-									</label>
-								@else 
-									<label>
-										<input type="radio"  name="highlights" value="1" checked >Nổi bật
-									</label>
-									<label>
-										<input type="radio"  name="highlights" value="0" >Không nổi bật
-									</label>
-								@endif
-							</div>
+							
 							
 							<div class="all-image-product">
 								<div class="row">

@@ -31,10 +31,12 @@
 		            @endif
 					<thead>
 						<tr>
+							<th width="8%">Hình ảnh</th>
 							<th>Tiêu đề</th>
 							<th>Link bài tin tức</th>
-							<th class="text-center">Enable</th>
-							<th class="text-center">Disible</th>
+							<th class="text-center">Xuất bản</th>
+							<th>Ngày tạo</th>
+							<th>Chỉnh sửa</th>
 							<th class="text-center" style="padding: 0px; background: green;">
 								<a href="{{URL::route('addBlog')}}" title="Thêm tin tức" style="color: green;"><i class="ion-android-add" style=" font-size:30px; color:#fff;"></i></a>
 							</th>
@@ -44,39 +46,28 @@
 					<tbody>
 						@foreach ($blogs as $blog)
 						<tr>
+							<td><img src="{{asset('/uploads/images/blogs/'.$blog["image"])}}"  width="100%" /></td>
 							<td>{{$blog -> title}}</td>
 							<td><a href="{{url('/'.$blog["url"])}}" target="_blank">{{$blog -> url}}</a></td>
-							@if($blog->display ==0)
-								<td class="text-center">
-									<div class="checkbox">
-										<label>
-											<input onclick="enable{{$blog->id}}()" class="enable_blog" value="{{$blog->id}}" id="enable{{$blog->id}}" type="checkbox">
-										</label>
-									</div>
-								</td>
-								<td class="text-center">
-									<div class="checkbox">
-										<label>
-											<input onclick="disable{{$blog->id}}()" class="disable_blog" value="{{$blog->id}}" id="disable{{$blog->id}}" type="checkbox" checked>
-										</label>
-									</div>
-								</td>
-							@else
-								<td class="text-center">
-									<div class="checkbox">
-										<label>
-											<input onclick="enable{{$blog->id}}()" class="enable_blog" value="{{$blog->id}}" id="enable{{$blog->id}}" type="checkbox" checked>
-										</label>
-									</div>
-								</td>
-								<td class="text-center">
-									<div class="checkbox">
-										<label>
-											<input onclick="disable{{$blog->id}}()" class="disable_blog" value="{{$blog->id}}" id="disable{{$blog->id}}" type="checkbox">
-										</label>
-									</div>
-								</td>
-							@endif
+							<td>
+								@if($blog->display == 0)
+									<a style="opacity: 0.2;" href="#" blog-id="{{$blog->id}}" class="blog-display-block">
+										<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Xuất bản</span>
+									</a>
+									<a style="pointer-events: none;" href="#" blog-id="{{$blog->id}}" class="blog-display-none">
+										<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không xuất bản</span>
+									</a>
+								@else
+									<a style="pointer-events: none;" href="#" blog-id="{{$blog->id}}" class="blog-display-block">
+										<span style="background: #008000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-check-square" style="padding-right: 5px;"></i>Xuất bản</span>
+									</a>
+									<a style="opacity: 0.2;" href="#" blog-id="{{$blog->id}}" class="blog-display-none">
+										<span style="background: red; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-times-circle" style="padding-right: 5px;"></i>Không xuất bản</span>
+									</a>
+								@endif
+							</td>
+							<td>{{$blog->created_at}}</td>
+							<td>{{$blog->updated_at}}</td>
 							<script type="text/javascript">
 								function enable{{$blog->id}}() {
 								    document.getElementById("enable{{$blog->id}}").checked = true;
@@ -130,5 +121,40 @@
 	<script type="text/javascript" src="{{asset('auth/js/demo.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/display_blog.js')}}"></script>
-	
+	<script type="text/javascript">
+		$(document).on('click', '.blog-display-none', function(event) {
+			event.preventDefault();
+			var blog_id = $(this).attr('blog-id');
+			url = '/auth/admin/blog-display-none/'+blog_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".blog-display-none[blog-id="+blog_id+"]").css('opacity',1);
+			$(".blog-display-block[blog-id="+blog_id+"]").css('opacity',0.2);
+			$(".blog-display-none[blog-id="+blog_id+"]").css('pointer-events','none');
+			$(".blog-display-block[blog-id="+blog_id+"]").css('pointer-events','');
+		});
+		$(document).on('click', '.blog-display-block', function(event) {
+			event.preventDefault();
+			var blog_id = $(this).attr('blog-id');
+			url = '/auth/admin/blog-display-block/'+blog_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".blog-display-none[blog-id="+blog_id+"]").css('opacity',0.2);
+			$(".blog-display-block[blog-id="+blog_id+"]").css('opacity',1);
+			$(".blog-display-none[blog-id="+blog_id+"]").css('pointer-events','');
+			$(".blog-display-block[blog-id="+blog_id+"]").css('pointer-events','none');
+		});
+	</script>
 @endsection()

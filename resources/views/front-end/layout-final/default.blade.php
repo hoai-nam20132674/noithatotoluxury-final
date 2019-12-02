@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="vi-VN" prefix="og: http://ogp.me/ns#" class="loading-site no-js">
 <head>
+	{!!$system->script!!}
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	@yield('meta')
