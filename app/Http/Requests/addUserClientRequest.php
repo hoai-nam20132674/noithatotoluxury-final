@@ -24,16 +24,18 @@ class addUserClientRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            'email' => 'unique:users,email',
-            'email' => 'unique:users_clients,email',
+
+            'email' => 'required|unique:users,email|unique:users_clients,email',
+            'confirm_password'=>'same:password'
             
             
         ];
     }
     public function messages(){
         return [
+            'email.required'=>'Vui lòng nhập email',
             'email.unique' => 'Email này đã được sử dụng',
+            'confirm_password.same'=>'Xác thực mật khẩu không chính xác'
             
         ];
     }

@@ -52,7 +52,7 @@
 										<td>{{$us->email}}</td>
 										<td class="text-center">
 											<a style="pointer-events: none;cursor: default;" onclick="return confirmDelete('Bạn có chắc muốn xóa dịch vụ này không')" title="Xóa thành viên"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-											<a href="{{ URL::route('editUser',$us->id)}}" title="Sửa thông tin tài khoản"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
+											<a style="pointer-events: none;" href="{{ URL::route('editUser',$us->id)}}" title="Sửa thông tin tài khoản"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
 										</td>
 									</tr>
 								@else
@@ -61,8 +61,8 @@
 										<td>{{$us->name}}</td>
 										<td>{{$us->email}}</td>
 										<td class="text-center">
-											<a onclick="return confirmDelete('Bạn có chắc muốn xóa tài khoản này không')" title="Xóa thành viên"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-											<a href="{{ URL::route('editUser',$us->id)}}" title="Sửa thông tin tài khoản"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
+											<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa tài khoản này không')" title="Xóa thành viên"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
+											<a style="pointer-events: none;" href="{{ URL::route('editUser',$us->id)}}" title="Sửa thông tin tài khoản"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
 										</td>
 									</tr>
 								@endif
@@ -76,7 +76,7 @@
 										<td>{{$us->email}}</td>
 										<td class="text-center">
 											<a style="pointer-events: none;cursor: default;" onclick="return confirmDelete('Bạn có chắc muốn xóa tài khoản này không')" title="Xóa thành viên"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-											<a href="{{ URL::route('editUser',$us->id)}}" title="Sửa thông tin tài khoản"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
+											<a style="pointer-events: none;" href="{{ URL::route('editUser',$us->id)}}" title="Sửa thông tin tài khoản"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
 										</td>
 									</tr>
 								@else

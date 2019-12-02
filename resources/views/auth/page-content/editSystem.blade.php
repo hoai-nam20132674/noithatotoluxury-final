@@ -46,7 +46,7 @@
 								<div class="col-md-12">
 									
 									<div class="form-group">
-										<label for="exampleInputEmail1">Tên gian hàng</label>
+										<label for="exampleInputEmail1">Tên Website</label>
 										<input type="text" class="form-control" name="name" placeholder="Nhập tên gian hàng" value="{{$system->name}}" required>
 									</div>
 									<div class="form-group">

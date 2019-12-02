@@ -20,7 +20,7 @@
 
 			<div class="box-text box-text-products">
 				<div class="title-wrapper">
-					<p class="name product-title title-head" data-id="{{$product->products_detail_id}}" title="{{$product->name}}"><a href="/{{$product->url}}">{!! \Illuminate\Support\Str::words($product->name, 8,'...')  !!}</a></p>
+					<p class="name product-title title-head" data-id="{{$product->products_detail_id}}" title="{{$product->name}}"><a href="/{{$product->url}}">{!! \Illuminate\Support\Str::words($product->name, 5,'...')  !!}</a></p>
 				</div>
 				<div class="price-wrapper">
 					<div class="container-rating">

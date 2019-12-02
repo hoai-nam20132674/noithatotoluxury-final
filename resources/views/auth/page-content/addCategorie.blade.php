@@ -72,6 +72,7 @@
 										<input onchange="appendDescription()" type="text" class="form-control" name="seo_description" placeholder="Description Seo" value="{{old('seo_description')}}" required>
 									</div>
 									<div class="form-group">
+										<label for="exampleInputEmail1">Danh mục cha</label>
 										<select class="form-control" name="parent_id">
 											@if(count($category) ==0)
 											<option value="0">Thư Mục Gốc</option>

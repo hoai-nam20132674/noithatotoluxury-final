@@ -76,7 +76,7 @@
 							
 							<td class="text-center">
 								<a onclick="return confirmDelete('Bạn có chắc muốn xóa menu này không')" href="{{ URL::route('deleteMenu',$menu->id)}}" title="Xóa menu"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-								<a href="{{ URL::route('editMenu',$menu->id)}}" title="Sửa menu"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
+								<a style="pointer-events: none;" href="{{ URL::route('editMenu',$menu->id)}}" title="Sửa menu"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
 							</td>
 						</tr>
 						@endforeach

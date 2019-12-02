@@ -14,18 +14,18 @@
 	<div style="margin: 0px auto;" class="row large-columns-3 medium-columns- small-columns-1 row-small slider row-slider slider-nav-reveal slider-nav-push"  data-flickity-options='{"imagesLoaded": true, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": true,"prevNextButtons": true,"percentPosition": true,"pageDots": false, "rightToLeft": false, "autoPlay" : true}'>
 		@foreach($cates_highlight as $cate_hl)
 			<div class="product-small col has-hover post-7084 product type-product status-publish has-post-thumbnail first instock sale shipping-taxable purchasable product-type-simple">
-				<div class="vc_column-inner">
-					<div class="wpb_wrapper">
-						<div  class="wpb_single_image wpb_content_element vc_align_center   zoom">
+				<!-- <div class="vc_column-inner">
+					<div class="wpb_wrapper"> -->
+						<!-- <div  class="wpb_single_image wpb_content_element vc_align_center   zoom"> -->
 							
-							<figure class="wpb_wrapper vc_figure">
+							<!-- <figure class="wpb_wrapper vc_figure"> -->
 								<a href="{{$cate_hl->url}}" target="_self" class="vc_single_image-wrapper   vc_box_border_grey"><img width="100%" src="{{asset('uploads/images/categories/avatar/'.$cate_hl->avatar)}}" class="vc_single_image-img attachment-full" alt="" sizes="(max-width: 720px) 100vw, 720px" /></a>
-							</figure>
-						</div>
+							<!-- </figure> -->
+						<!-- </div> -->
 
 						
-					</div>
-				</div>
+					<!-- </div>
+				</div> -->
 			</div>
 		@endforeach
 	</div>	
