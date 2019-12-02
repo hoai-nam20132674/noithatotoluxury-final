@@ -61,3 +61,33 @@ Version: 3.0
 .blog-post-inner .is-large {
     font-size: 0.9em; 
 }
+.order-success{
+    float: right;
+    font-size: 12px;
+    margin: 0.5em 0;
+}
+.vc_grid-loading {
+    display: none;
+}
+.vc_custom_1530871875824 {
+    background-image: url(http://creeauto.com/uploads/images/banner.jpg);
+}
+@media screen and (max-width: 768px){
+    #add-to-cart {
+        font-size: 12px;
+    }
+    span.price {
+        font-size: 13px;
+    }
+    .star-rating {
+        font-size: 9px;
+    }
+    .container-rating .count-rating{
+        font-size: 9px;
+    }
+    .order-success{
+        float: right;
+        font-size: 9px;
+        margin: 0.5em 0;
+    }
+}

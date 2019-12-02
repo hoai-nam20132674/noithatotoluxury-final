@@ -396,6 +396,11 @@ class AdminController extends Controller
 
         return redirect()->back()->with(['flash_level'=>'success','flash_message'=>'Xóa sản phẩm chi tiết thành công']);
     }
+    public function deleteMenu($id){
+        $menu = Menus::where('id',$id)->get()->first();
+        $menu->delete();
+        return redirect()->route('listMenus')->with(['flash_level'=>'success','flash_message'=>'Xóa menu thành công']);
+    }
 
 
 
@@ -514,6 +519,24 @@ class AdminController extends Controller
         $blog = Blogs::where('id',$id)->get()->first();
         $blog->display = 1;
         $blog->save();
+        echo "thành công";
+    }
+    public function updateProductDetailPrice($id,$value) {
+        $product_detail = ProductsDetail::where('id',$id)->get()->first();
+        $product_detail->price = $value;
+        $product_detail->save();
+        echo "thành công";
+    }
+    public function updateProductDetailSale($id,$value) {
+        $product_detail = ProductsDetail::where('id',$id)->get()->first();
+        $product_detail->sale = $value;
+        $product_detail->save();
+        echo "thành công";
+    }
+    public function updateProductDetailAmount($id,$value) {
+        $product_detail = ProductsDetail::where('id',$id)->get()->first();
+        $product_detail->amount = $value;
+        $product_detail->save();
         echo "thành công";
     }
     // public function updateImage(Request $request,$id,$file_name){

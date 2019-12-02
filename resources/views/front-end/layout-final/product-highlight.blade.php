@@ -13,9 +13,11 @@
 				</div>
 				<div class="woocommerce columns-4 ">
 					<div class="products row row-small large-columns-4 medium-columns-3 small-columns-2 has-equal-box-heights">
-						@foreach($products_highlight as $product)	
-							@include('front-end.layout-final.product-box')
-						@endforeach
+						<div style="margin: 0px auto;" class="row large-columns-4 medium-columns- small-columns-2 row-small slider row-slider slider-nav-reveal slider-nav-push"  data-flickity-options='{"imagesLoaded": true, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": true,"prevNextButtons": true,"percentPosition": true,"pageDots": false, "rightToLeft": false, "autoPlay" : true}'>
+							@foreach($products_highlight as $product)	
+								@include('front-end.layout-final.product-box')
+							@endforeach
+						</div>
 					</div><!-- row -->
 				</div>
 			</div>

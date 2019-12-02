@@ -30,10 +30,9 @@
 		            @endif
 					<thead>
 						<tr>
-							<th>STT</th>
+							
 							<th style="width: 20%">Ảnh background</th>
-							<th>Link</th>
-							<th style="width: 12%">Thứ tự</th>
+							<th>Thứ tự</th>
 							<th>Xuất bản</th>
 							<th>Ngày tạo</th>
 							<th>Chỉnh sửa</th>
@@ -49,16 +48,18 @@
 						
 						@foreach ($slides as $slide)
 						<tr>
-							<td >{{$i++}}</td>	td>
+							
 							<td>
 								<img width="100%" src="{{asset('uploads/images/systems/slides/'.$slide->url_image)}}">
 							</td>
-							<td>{{$slide->url}}</td>
 							
 							<td>
 								<input style="width: 50px;" slide-id="{{$slide->id}}" type="number" min="0" value="{{$slide->stt}}">
 								<a href="#" slide-id="{{$slide->id}}" class="update-slide-stt" data-type="success">
 									<span style="background: #3ec9bc; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-refresh" style="padding-right: 5px;"></i>Cập nhật</span>
+								</a>
+								<a slide-id="{{$slide->id}}" class="ajaxload" style="width: 20px;">
+									<span style="background-image: url(https://data.vietnambooking.com/common/gif/icon_img_default.gif);background-size: cover ; padding: 5px 14px;border-radius: 2px; color: #fff; font-weight: 800;"></span>
 								</a>
 							</td>
 							<td>
@@ -88,6 +89,7 @@
 						@endforeach
 					</tbody>
 				</table>
+				
 			</div>
 		</div>
 	</div>
@@ -123,10 +125,14 @@
 	<script type="text/javascript" src="{{asset('auth/js/ui-notifications.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
 	<script type="text/javascript">
-		
+		$(document).ready(function(){
+			$(".ajaxload").hide();
+		});
 		$(document).on('click', '.update-slide-stt', function(event) {
 			event.preventDefault();
+			
 			var slide_id = $(this).attr('slide-id');
+			$(".ajaxload[slide-id="+slide_id+"]").show();
 			var select = $("input[slide-id="+slide_id+"]");
 			var value = select.val();
 			url = '/auth/admin/update-slide-stt/'+slide_id+'-'+value;
@@ -136,6 +142,7 @@
 				dataType: 'html',
 				success: function(data) {
 					console.log(data);
+					$(".ajaxload[slide-id="+slide_id+"]").hide();
 				}
 			});
 		});

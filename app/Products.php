@@ -109,28 +109,45 @@ class Products extends Model
         $pr->short_description = $request->short_description;
         $pr->title = $request->title;
         if(Input::hasFile('share_image')){
-            
-                
             $file_name = $request->file('share_image')->getClientOriginalName();
             $pr->share_image = $file_name;
-            $request->file('share_image')->move('uploads/images/products/image_share/',$file_name);
-                
-            
+            $request->file('share_image')->move('uploads/images/products/image_share/',$file_name); 
         }
         if(Input::hasFile('avatar')){
-            
             $ava_name = $request->file('avatar')->getClientOriginalName();
             $request->file('avatar')->move('uploads/images/products/avatar/',$ava_name);
             $image_ava = ImagesProducts::where('products_id',$id)->where('role',1)->get()->first();
             $image_ava->url = $ava_name;
             $image_ava->save();
-              
-           
         }
         $pr->display = $request->display;
         $pr->highlights = $request->highlights;
         $pr->video = $request->video;
         $pr->save();
+        // ------
+        $image_detail = ImagesProducts::where('products_id',$id)->where('role',0)->get();
+        foreach($image_detail as $image){
+            if(Input::hasFile($image->id)){
+                $file = $request->file($image->id);
+                $file_name = $file->getClientOriginalName();
+                $image->url = $file_name;
+                $file->move('uploads/images/products/detail/',$file_name); 
+                $image->save();
+            }
+        }
+        if(Input::hasFile('image_detail')){
+            foreach(Input::file('image_detail') as $file){
+                if(isset($file)){
+                    $file_name = $file->getClientOriginalName();
+                    $file->move('uploads/images/products/detail/',$file_name);
+                    $img_detail = new ImagesProducts;
+                    $img_detail->role = 0;
+                    $img_detail->url = $file_name;
+                    $img_detail->products_id = $pr->id;
+                    $img_detail->save();
+                }
+            }
+        }
     }
     public function countAmount($countProperties,$request){
         $countAmount = 0;

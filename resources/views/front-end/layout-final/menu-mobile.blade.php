@@ -5,7 +5,7 @@
             <li class="header-search-form search-form html relative has-icon">
             	<div class="header-search-form-wrapper">
             		<div class="searchform-wrapper ux-search-box relative form- is-normal">
-            			<form role="search" method="get" class="searchform" action="https://mdbuddy.vn/">
+            			<form role="search" method="get" class="searchform" action="{{$system->website}}">
             				<div class="flex-row relative">
 								<div class="flex-col flex-grow">
 									<input type="search" class="search-field mb-0" name="s" value="" placeholder="Tìm kiếm&hellip;" />
@@ -24,7 +24,7 @@
 			</li>
 			@foreach($menus as $menu)
 				@if($menu->type ==0)
-					<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-{{$menu->id}}"><a href="https://mdbuddy.vn/" class="nav-top-link">{{$menu->name}}</a></li>
+					<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-{{$menu->id}}"><a href="{{$menu->url}}" class="nav-top-link">{{$menu->name}}</a></li>
 
 				@else
 					<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-{{$menu->id}}">

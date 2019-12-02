@@ -94,7 +94,7 @@
 
 							<a href="cart" title="Giỏ hàng" class="header-cart-link is-small">
 								<span class="image-icon header-cart-icon cartCount" cart-count="{{$totalQuantity}}" data-icon-label="{{$totalQuantity}}">
-							    	<img class="cart-img-icon" alt="Giỏ hàng" src="https://mdbuddy.vn/home/wp-content/uploads/2018/06/shopping-cart.png"/>
+							    	<img class="cart-img-icon" alt="Giỏ hàng" src="{{asset('uploads/images/shopping-cart.png')}}"/>
 							  	</span><!-- .cart-img-inner -->
 							</a>
 							@include('front-end.layout-final.cart-dropdown')
@@ -102,7 +102,7 @@
 						<li class="html custom html_topbar_left">
 							<a href="#" class="nav-top-link nav-top-not-logged-in" data-open="#login-form-popup">
 							  	<span class="image-icon header-login-icon" data-icon-label="0">
-							    	<img class="login-img-icon" alt="Đăng nhập" src="https://mdbuddy.vn/home/wp-content/uploads/2018/06/login-icon.png">
+							    	<img class="login-img-icon" alt="Đăng nhập" src="{{asset('uploads/images/login-icon.png')}}">
 							  	</span>
 							</a>
 						</li>
@@ -114,7 +114,7 @@
 						<li class="cart-item has-icon">
 							<a href="cart" class="header-cart-link off-canvas-toggle nav-top-link is-small" data-open="#cart-popup" data-class="off-canvas-cart" title="Giỏ hàng" data-pos="right">
 								<span class="image-icon header-cart-icon cartCount" cart-count="{{$totalQuantity}}" data-icon-label="{{$totalQuantity}}">
-									<img class="cart-img-icon" alt="Giỏ hàng" src="https://mdbuddy.vn/home/wp-content/uploads/2018/06/shopping-cart.png"/> 
+									<img class="cart-img-icon" alt="Giỏ hàng" src="{{asset('uploads/images/shopping-cart.png')}}"/> 
 								</span><!-- .cart-img-inner -->
 							</a>
 
@@ -151,8 +151,8 @@
 											<span class="woocommerce-Price-amount amount price totalPrice" price="{{Cart::getTotal()}}">{!!number_format(Cart::getTotal())!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span>
 										</p>
 										<p class="woocommerce-mini-cart__buttons buttons">
-											<a href="https://mdbuddy.vn/cart/" class="button wc-forward">Xem giỏ hàng</a>
-											<a href="https://mdbuddy.vn/checkout/" class="button checkout wc-forward">Thanh toán</a>
+											<a href="cart" class="button wc-forward">Xem giỏ hàng</a>
+											<a href="checkout" class="button checkout wc-forward">Thanh toán</a>
 										</p>
 								    </div>
 								    <div class="cart-sidebar-content relative"></div>

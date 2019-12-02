@@ -13,9 +13,9 @@
 	<div class="page-title-inner flex-row medium-flex-wrap container">
 	  <div class="flex-col flex-grow medium-text-center">
   	 	 <nav class="breadcrumbs heading-font checkout-breadcrumbs text-center h2 strong">
-    	   <a href="https://mdbuddy.vn/cart/" class="hide-for-small">Chọn sản phẩm</a>
+    	   <a href="cart" class="hide-for-small">Chọn sản phẩm</a>
     	   <span class="divider hide-for-small"><i class="icon-angle-right" ></i></span>
-    	   <a href="https://mdbuddy.vn/checkout/" class="hide-for-small">Thông tin thanh toán</a>
+    	   <a href="checkout" class="hide-for-small">Thông tin thanh toán</a>
     	   <span class="divider hide-for-small"><i class="icon-angle-right" ></i></span>
     	   <a href="#" class="no-click current">Hoàn thành</a>
 		 </nav>

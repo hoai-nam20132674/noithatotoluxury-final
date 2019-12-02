@@ -12,7 +12,7 @@
 						<div class="entry-divider is-divider small"></div>
 
 						<div class="entry-meta uppercase is-xsmall">
-							<span class="posted-on">Ngày đăng <a href="{{$blog->url}}" rel="bookmark"><time class="entry-date published" datetime="2018-12-20T15:32:22+07:00">{{ \Carbon\Carbon::createFromTimestamp(strtotime($blog->created_at))->diffForHumans()}}</time><time class="updated" datetime="2018-12-20T15:32:53+07:00">20/12/2018</time></a></span><span class="byline"> by <span class="meta-author vcard"><a class="url fn n" href="https://mdbuddy.vn/author/tuanle/">Admin</a></span></span>	
+							<span class="posted-on">Ngày đăng <a href="{{$blog->url}}" rel="bookmark"><time class="entry-date published" datetime="2018-12-20T15:32:22+07:00">{{ \Carbon\Carbon::createFromTimestamp(strtotime($blog->created_at))->diffForHumans()}}</time><time class="updated" datetime="2018-12-20T15:32:53+07:00">20/12/2018</time></a></span><span class="byline"> by <span class="meta-author vcard"><a class="url fn n" href="#">Admin</a></span></span>	
 						</div><!-- .entry-meta -->
 					</div>
 				</header>

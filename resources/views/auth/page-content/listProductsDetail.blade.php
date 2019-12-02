@@ -35,11 +35,13 @@
 						<tr>
 							
 							<th>Tên sản phẩm</th>
-							<th>Thuộc tính</th>
-							<th width="10%">Giá</th>
 							
-							<th class="text-center">Enable</th>
-							<th class="text-center">Disible</th>
+							<th>Giá</th>
+							
+							<th class="text-center">Sale</th>
+							<th class="text-center">Số lượng</th>
+							<th>Ngày tạo</th>
+							<th>Chỉnh sửa</th>
 							<th class="text-center" style="padding: 0px; background: green;">
 								<a href="{{URL::route('addProduct')}}" title="Thêm sản phẩm" style="color: green;"><i class="ion-android-add" style=" font-size:30px; color:#fff;"></i></a>
 							</th>
@@ -57,54 +59,39 @@
 							<tr>
 
 								<td>{{$products->name}} </td>
-								<td>@foreach($properties as $pp) {{$pp->name}} {{$pp->value}},@endforeach</td>
-								<td>{{$pr->price}} đ</td>
 								
-								@if($pr->display==0)
-									<td class="text-center">
-										<div class="checkbox">
-											<label>
-												<input onclick="enable1()" value="1" class="enable_product" id="enable1" type="checkbox">
-											</label>
-										</div>
-									</td>
-									<td class="text-center">
-										<div class="checkbox">
-											<label>
-												<input onclick="disable1()" class="disable_product" value="1" id="disable1" type="checkbox" checked>
-											</label>
-										</div>
-									</td>
-								@else
-									<td class="text-center">
-										<div class="checkbox">
-											<label>
-												<input onclick="enable1()" class="enable_product" value="1" id="enable1" type="checkbox" checked>
-											</label>
-										</div>
-									</td>
-									<td class="text-center">
-										<div class="checkbox">
-											<label>
-												<input onclick="disable1()" value="1" class="disable_product" id="disable1" type="checkbox">
-											</label>
-										</div>
-									</td>
-								@endif
-								<script type="text/javascript">
-									function enable1() {
-									    document.getElementById("enable1").checked = true;
-									    document.getElementById("disable1").checked = false;
-									}
-
-									function disable1() {
-									    document.getElementById("disable1").checked = true;
-									    document.getElementById("enable1").checked = false;
-									}
-								</script>
+								<td>
+									<input style="width: 50%;" product-detail-id="{{$pr->id}}" type="number" min="0" value="{{$pr->price}}" name="price">
+									<a href="#" product-detail-id="{{$pr->id}}" class="update-product-detail-price">
+										<span style="background: #3ec9bc; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-refresh" style="padding-right: 5px;"></i>Cập nhật</span>
+									</a>
+									<a class="ajaxload" name="price" product-detail-id="{{$pr->id}}" style="width: 20px;">
+										<span style="background-image: url(https://data.vietnambooking.com/common/gif/icon_img_default.gif);background-size: cover ; padding: 5px 14px;border-radius: 2px; color: #fff; font-weight: 800;"></span>
+									</a>
+								</td>
+								<td>
+									<input style="width: 50%;" product-detail-id="{{$pr->id}}" type="number" min="0" value="{{$pr->sale}}" name="sale">
+									<a href="#" product-detail-id="{{$pr->id}}" class="update-product-detail-sale">
+										<span style="background: #3ec9bc; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-refresh" style="padding-right: 5px;"></i>Cập nhật</span>
+									</a>
+									<a class="ajaxload" name="sale" product-detail-id="{{$pr->id}}" style="width: 20px;">
+										<span style="background-image: url(https://data.vietnambooking.com/common/gif/icon_img_default.gif);background-size: cover ; padding: 5px 14px;border-radius: 2px; color: #fff; font-weight: 800;"></span>
+									</a>
+								</td>
+								<td>
+									<input style="width: 50%;" product-detail-id="{{$pr->id}}" type="number" min="0" value="{{$pr->amount}}" name="amount">
+									<a href="#" product-detail-id="{{$pr->id}}" class="update-product-detail-amount">
+										<span style="background: #3ec9bc; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-refresh" style="padding-right: 5px;"></i>Cập nhật</span>
+									</a>
+									<a class="ajaxload" name="amount" product-detail-id="{{$pr->id}}" style="width: 20px;">
+										<span style="background-image: url(https://data.vietnambooking.com/common/gif/icon_img_default.gif);background-size: cover ; padding: 5px 14px;border-radius: 2px; color: #fff; font-weight: 800;"></span>
+									</a>
+								</td>
 								
+								<td>{{$pr->created_at}}</td>
+								<td>{{$pr->updated_at}}</td>
 								<td class="text-center">
-									<a onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="{{URL::route('deleteProductDetail',$pr->id)}}" title="Xóa sản phẩm"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
+									<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="{{URL::route('deleteProductDetail',$pr->id)}}" title="Xóa sản phẩm"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
 									<a href="{{URL::route('editProductDetail',$pr->id)}}" title="Sửa danh mục"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
 								</td>
 								
@@ -147,5 +134,67 @@
 	<script type="text/javascript" src="{{asset('auth/js/demo.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/display_product.js')}}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".ajaxload").hide();
+		});
+		$(document).on('click', '.update-product-detail-price', function(event) {
+			event.preventDefault();
+			var product_detail_id = $(this).attr('product-detail-id');
+			var old = $(this).hide();
+			var load = $(this).parent().children('.ajaxload').show();
+			var select = $(this).parent().children('input');
+			var value = select.val();
+			url = '/auth/admin/update-product-detail-price/'+product_detail_id+'-'+value;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+					load.hide();
+					old.show();
+				}
+			});
+		});
+		$(document).on('click', '.update-product-detail-sale', function(event) {
+			event.preventDefault();
+			var product_detail_id = $(this).attr('product-detail-id');
+			var old = $(this).hide();
+			var load = $(this).parent().children('.ajaxload').show();
+			var select = $(this).parent().children('input');
+			var value = select.val();
+			url = '/auth/admin/update-product-detail-sale/'+product_detail_id+'-'+value;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+					load.hide();
+					old.show();
+				}
+			});
+		});
+		$(document).on('click', '.update-product-detail-amount', function(event) {
+			event.preventDefault();
+			var product_detail_id = $(this).attr('product-detail-id');
+			var old = $(this).hide();
+			var load = $(this).parent().children('.ajaxload').show();
+			var select = $(this).parent().children('input');
+			var value = select.val();
+			url = '/auth/admin/update-product-detail-amount/'+product_detail_id+'-'+value;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+					load.hide();
+					old.show();
+				}
+			});
+		});
+	</script>
 	
 @endsection()

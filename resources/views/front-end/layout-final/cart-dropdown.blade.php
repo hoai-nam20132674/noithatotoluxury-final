@@ -24,8 +24,8 @@
 				<span class="woocommerce-Price-amount amount price totalPrice" price="{{Cart::getTotal()}}">{!!number_format(Cart::getTotal())!!}<span class="woocommerce-Price-currencySymbol">&#8363;</span></span>
 			</p>
 			<p class="woocommerce-mini-cart__buttons buttons">
-				<a href="https://mdbuddy.vn/cart/" class="button wc-forward">Xem giỏ hàng</a>
-				<a href="https://mdbuddy.vn/checkout/" class="button checkout wc-forward">Thanh toán</a>
+				<a href="cart" class="button wc-forward">Xem giỏ hàng</a>
+				<a href="checkout" class="button checkout wc-forward">Thanh toán</a>
 			</p>
 		</div>
     </li>

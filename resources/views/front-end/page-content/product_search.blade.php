@@ -65,30 +65,7 @@
 									<a class="next page-number" href="{{$products->url($products->currentPage()+1)}}"><i class="icon-angle-right"></i></a>
 								</li>
 							@endif
-	   						<!-- <li>
-	   							<span aria-current='page' class='page-number current'>1</span>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/2/'>2</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/3/'>3</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/4/'>4</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/5/'>5</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/6/'>6</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/7/'>7</a>
-	   						</li>
-	   						<li>
-	   							<a class="next page-number" href="https://mdbuddy.vn/shop/page/2/"><i class="icon-angle-right"></i></a>
-	   						</li> -->
+	   						
 	   					</ul>
 	   				</nav>
 	   			</div>

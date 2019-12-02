@@ -7,10 +7,10 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="shortcut icon" href="{{asset('uploads/images/icon/icon-short-cut.jpg')}}">
+		<link rel="shortcut icon" href="{{asset('uploads/images/systems/shortcut_logo/icon-short-cut.jpg')}}">
 
 		<!-- Title -->
-		<title>BKMART ADMIN</title>
+		<title>CREEAUTO ADMIN</title>
 		<script type="text/javascript" src="{{asset('auth/ckeditor/ckeditor.js')}}"></script>
 		<script type="text/javascript" src="{{asset('auth/ckfinder/ckfinder.js')}}"></script>
 

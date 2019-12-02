@@ -20,7 +20,7 @@
 					</label>
 				</p>
 				<p class="woocommerce-LostPassword lost_password">
-					<a href="https://mdbuddy.vn/my-account/lost-password/">Quên mật khẩu?</a>
+					<a href="#">Quên mật khẩu?</a>
 				</p>
 			</form>
 		</div><!-- .login-inner -->

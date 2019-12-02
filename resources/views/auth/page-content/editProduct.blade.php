@@ -182,7 +182,7 @@
 										@foreach($product_image as $image)
 																		
 											@if($image->role ==1)
-												<div class="col-md-6" style="padding: 15px;">
+												<div class="col-md-12" style="padding: 0 15px 15px 15px;">
 													<div class="file-upload-content file-upload-content0" style="position: relative;">
 												    	<img width="100%" class="file-upload-image file-upload-image0" src="{{asset('uploads/images/products/avatar/'.$image->url)}}" alt="your image" />
 												    	<div class="image-title-wrap image-title-wrap0" style="position: absolute;top: 0px; right: 0px;">
@@ -194,14 +194,19 @@
 												<?php
 													$i++;
 												?>
-											@else
+											@endif
+										@endforeach
+										</div>
+										<div class="row"> 
+										@foreach($product_image as $image)
+											@if($image->role ==0)
 												<div class="col-md-6" style="padding: 15px;">
 													<div class="file-upload-content file-upload-content{{$i}}" style="position: relative;">
-												    	<img width="100%" class="file-upload-image file-upload-image{{$i}}" src="{{asset('uploads/images/products/avatar/'.$image->url)}}" alt="your image" />
+												    	<img width="100%" class="file-upload-image file-upload-image{{$i}}" src="{{asset('uploads/images/products/detail/'.$image->url)}}" alt="your image" />
 												    	<div class="image-title-wrap image-title-wrap{{$i}}" style="position: absolute;top: 0px; right: 0px;">
 												      		<button type="button" onclick="removeUploadTest({{$i}})" class="remove-image">Ảnh chi tiết</button>
 												    	</div>
-												    	<input image-id="{{$image->id}}" style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input{{$i}}" type='file' name="image_detail[]" onchange="readURLTest(this,{{$i}}); updateImage({{$image->id}},this.files[0]);" accept="image/*" />
+												    	<input image-id="{{$image->id}}" style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input{{$i}}" type='file' name="{{$image->id}}" onchange="readURLTest(this,{{$i}}); updateImage({{$image->id}},this.files[0]);" accept="image/*" />
 												  	</div>
 												</div>
 												<?php

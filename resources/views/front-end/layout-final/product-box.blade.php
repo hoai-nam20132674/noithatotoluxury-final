@@ -28,7 +28,7 @@
 							<span style="width:100%">Được xếp hạng <strong class="rating">5.00</strong> 5 sao</span>
 						</div>
 						<div class="count-rating">({{FLOOR($product->views/3)}})</div>
-						<div class="order-success" title="lượt mua" style="float: right; font-size: 12px; margin: 0.5em 0;">
+						<div class="order-success" title="lượt mua">
 							<i class="fa fa-tags"> ({{FLOOR($product->views/2)}})</i>
 						</div>
 					</div>

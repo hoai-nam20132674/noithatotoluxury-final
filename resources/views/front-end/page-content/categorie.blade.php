@@ -20,7 +20,7 @@
 	  	<div class="flex-col flex-grow medium-text-center">
 	  	 	<h1 class="shop-page-title is-xlarge">Sản phẩm</h1>
 			<div class="is-small">
-				<nav class="woocommerce-breadcrumb breadcrumbs"><a href="https://mdbuddy.vn">Trang chủ</a> <span class="divider">&#47;</span> Sản phẩm</nav>
+				<nav class="woocommerce-breadcrumb breadcrumbs"><a href="/">Trang chủ</a> <span class="divider">&#47;</span> Sản phẩm</nav>
 			</div>
 			<div class="category-filtering category-filter-row show-for-medium">
 				<a href="#" data-open="#shop-sidebar" data-visible-after="true" data-pos="left" class="filter-button uppercase plain"><i class="icon-menu"></i><strong>Lọc</strong></a>
@@ -76,30 +76,7 @@
 									<a class="next page-number" href="{{$products->url($products->currentPage()+1)}}"><i class="icon-angle-right"></i></a>
 								</li>
 							@endif
-	   						<!-- <li>
-	   							<span aria-current='page' class='page-number current'>1</span>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/2/'>2</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/3/'>3</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/4/'>4</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/5/'>5</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/6/'>6</a>
-	   						</li>
-	   						<li>
-	   							<a class='page-number' href='https://mdbuddy.vn/shop/page/7/'>7</a>
-	   						</li>
-	   						<li>
-	   							<a class="next page-number" href="https://mdbuddy.vn/shop/page/2/"><i class="icon-angle-right"></i></a>
-	   						</li> -->
+	   						
 	   					</ul>
 	   				</nav>
 	   			</div>

@@ -54,6 +54,9 @@
 								<a href="#" menu-id="{{$menu->id}}" class="update-menu">
 									<span style="background: #3ec9bc; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-refresh" style="padding-right: 5px;"></i>Cập nhật</span>
 								</a>
+								<a class="ajaxload" menu-id="{{$menu->id}}" style="width: 20px;">
+									<span style="background-image: url(https://data.vietnambooking.com/common/gif/icon_img_default.gif);background-size: cover ; padding: 5px 14px;border-radius: 2px; color: #fff; font-weight: 800;"></span>
+								</a>
 							</td>
 							@if($menu->type ==1)
 								<td>
@@ -114,9 +117,14 @@
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/display_categorie.js')}}"></script>
 	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".ajaxload").hide();
+		});
 		$(document).on('click', '.update-menu', function(event) {
 			event.preventDefault();
+			
 			var menu_id = $(this).attr('menu-id');
+			$(".ajaxload[menu-id="+menu_id+"]").show();
 			var select = $("input[menu-id="+menu_id+"]");
 			var value = select.val();
 			url = '/auth/admin/update-menu/'+menu_id+'-'+value;
@@ -126,6 +134,7 @@
 				dataType: 'html',
 				success: function(data) {
 					console.log(data);
+					$(".ajaxload[menu-id="+menu_id+"]").hide();
 				}
 			});
 		});

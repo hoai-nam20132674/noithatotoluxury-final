@@ -21,7 +21,7 @@
 					</label>
 				</p>
 				<p class="woocommerce-LostPassword lost_password">
-					<a href="https://mdbuddy.vn/my-account/lost-password/">Quên mật khẩu?</a>
+					<a href="#">Quên mật khẩu?</a>
 					<a href="#" class="hide-login" >Chưa có tài khoản</a>
 				</p>
 			</form>
@@ -59,7 +59,7 @@
 					
 				</p>
 				<p class="woocommerce-LostPassword lost_password">
-					<a href="https://mdbuddy.vn/my-account/lost-password/">Quên mật khẩu?</a>
+					<a href="#">Quên mật khẩu?</a>
 					<a href="#" class="hide-register" >Đã có tài khoản</a>
 				</p>
 			</form>

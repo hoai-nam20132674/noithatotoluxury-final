@@ -64,7 +64,7 @@
 						<span class="s-text">Đơn hàng</span>
 					</a>
 				</li>
-				@if(Auth::user()->rold ==1)
+				@if(Auth::user()->role ==1)
 				<li class="with-sub">
 					<a href="{{URL::route('listUsers')}}" class="waves-effect  waves-light">
 						<span class="s-caret"><i class="fa fa-angle-down"></i></span>

@@ -139,6 +139,9 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::get('slide-display-block/{id}',['as'=>'slideDisplayBlock','uses'=>'Auth\AdminController@slideDisplayBlock']);
 	Route::get('product-display-none/{id}',['as'=>'productDisplayNone','uses'=>'Auth\AdminController@productDisplayNone']);
 	Route::get('product-display-block/{id}',['as'=>'productDisplayBlock','uses'=>'Auth\AdminController@productDisplayBlock']);
+	Route::get('update-product-detail-price/{id}-{value}',['as'=>'updateProductDetailPrice','uses'=>'Auth\AdminController@updateProductDetailPrice']);
+	Route::get('update-product-detail-sale/{id}-{value}',['as'=>'updateProductDetailSale','uses'=>'Auth\AdminController@updateProductDetailSale']);
+	Route::get('update-product-detail-amount/{id}-{value}',['as'=>'updateProductDetailAmount','uses'=>'Auth\AdminController@updateProductDetailAmount']);
 	Route::get('product-highlight-none/{id}',['as'=>'productHighlightNone','uses'=>'Auth\AdminController@productHighlightNone']);
 	Route::get('product-highlight-block/{id}',['as'=>'productHighlightBlock','uses'=>'Auth\AdminController@productHighlightBlock']);
 	Route::get('categorie-display-none/{id}',['as'=>'categorieDisplayNone','uses'=>'Auth\AdminController@categorieDisplayNone']);

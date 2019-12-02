@@ -8,7 +8,7 @@
 						<div id="rev_slider_1_1" class="rev_slider fullwidthabanner tp-overflow-hidden" style="display:none;" data-version="5.4.7.3">
 							<ul>	<!-- SLIDE  -->
 								@foreach($slides as $slide)
-								<li data-index="{{$slide->id}}" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="300"  data-thumb="https://mdbuddy.vn/home/wp-content/uploads/2018/07/banner_1-1-100x50.png"  data-rotate="0"  data-saveperformance="off"  data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+								<li data-index="{{$slide->id}}" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="300"  data-thumb=""  data-rotate="0"  data-saveperformance="off"  data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
 									<!-- MAIN IMAGE -->
 									<img src="{{asset('uploads/images/systems/slides/'.$slide->url_image)}}"  alt="" title="banner_1"  width="2184" height="788" data-lazyload="{{asset('uploads/images/systems/slides/'.$slide->url_image)}}" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg" data-no-retina>
 									<!-- LAYERS -->

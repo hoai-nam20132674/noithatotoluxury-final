@@ -95,10 +95,10 @@
 						<td colspan="6" class="actions clear">
 
 							<div class="continue-shopping pull-left text-left">
-								<a class="button-continue-shopping button primary is-outline" href="https://mdbuddy.vn/shop/">← Tiếp tục xem sản phẩm</a>
+								<a class="button-continue-shopping button primary is-outline" href="san-pham">← Tiếp tục xem sản phẩm</a>
 							</div>
 
-							<button id="update-cart" type="button" class="button primary mt-0 pull-left small" name="update_cart" value="Cập nhật giỏ hàng">Cập nhật giỏ hàng</button>
+							<a href="cart"><button type="button" class="button primary mt-0 pull-left small" name="update_cart" value="Cập nhật giỏ hàng">Cập nhật giỏ hàng</button></a>
 
 							<input type="hidden" id="woocommerce-cart-nonce" name="woocommerce-cart-nonce" value="74214fba4d"><input type="hidden" name="_wp_http_referer" value="/cart/">
 						</td>

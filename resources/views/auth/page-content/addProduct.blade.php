@@ -248,7 +248,7 @@
 							    	<div class="image-title-wrap image-title-wrap1" style="position: absolute;top: 0px; right: 0px;">
 							      		<button type="button" onclick="removeUploadTest(1)" class="remove-image">Ảnh chi tiết</button>
 							    	</div>
-							    	<input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input1" type='file' name="image_detail[]" onchange="readURLTest(this,1);" accept="image/*" />
+							    	<input style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input1" type='file' name="image_detail[]" onchange="readURLTest(this,1);" accept="image/*" />
 							  	</div>
 							</div>
 							<div id="more_image"></div>
@@ -292,7 +292,7 @@
 				var i = parseInt($("input[type=file]").length);
 				i=i+1;
 				var more_image = $("#more_image");
-				more_image.append('<br><br><div class="file-upload"><div class="file-upload-content file-upload-content'+i+'" style="position: relative;"><img width="100%" class="file-upload-image file-upload-image'+i+'" src="https://i.pinimg.com/originals/4b/50/f9/4b50f9eeb7d6617cc9aaaa6405f27a07.gif" alt="your image" /><div class="image-title-wrap image-title-wrap'+i+'" style="position: absolute;top: 0px; right: 0px;"><button type="button" onclick="removeUploadTest('+i+')" class="remove-image">Ảnh chi tiết</button></div><input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input'+i+'" type="file" name="image_detail[]" onchange="readURLTest(this,'+i+');" accept="image/*" /></div></div>');
+				more_image.append('<br><br><div class="file-upload"><div class="file-upload-content file-upload-content'+i+'" style="position: relative;"><img width="100%" class="file-upload-image file-upload-image'+i+'" src="https://i.pinimg.com/originals/4b/50/f9/4b50f9eeb7d6617cc9aaaa6405f27a07.gif" alt="your image" /><div class="image-title-wrap image-title-wrap'+i+'" style="position: absolute;top: 0px; right: 0px;"><button type="button" onclick="removeUploadTest('+i+')" class="remove-image">Ảnh chi tiết</button></div><input style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input'+i+'" type="file" name="image_detail[]" onchange="readURLTest(this,'+i+');" accept="image/*" /></div></div>');
 				i++;
 			};
 			

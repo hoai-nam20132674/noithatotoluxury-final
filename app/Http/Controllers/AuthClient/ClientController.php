@@ -37,7 +37,7 @@ class ClientController extends Controller
         $cates = Categories::where('systems_id',$system->id)->where('display',1)->get();
         $cates_highlight = Categories::where('display',1)->where('highlights',1)->get();
         $blogs = Blogs::where('display',1)->orderBy('id','ASC')->take(4)->get();
-        $slides = Slides::select()->get();
+        $slides = Slides::select()->orderBy('stt','ASC')->get();
         $menus = Menus::select()->orderBy('stt','ASC')->get();
         $cate = $this->arrayColumn($cates,$col='id');
         $products_highlight = Products::join('images_products', 'products.id', '=', 'images_products.products_id')->join('products_detail', 'products.id', '=', 'products_detail.products_id')->where('products.display',1)->where('products.highlights',1)->where('images_products.role',1)->orderBy('products.updated_at', 'DESC')

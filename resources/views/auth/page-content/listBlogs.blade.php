@@ -80,7 +80,7 @@
 								}
 							</script>
 							<td class="text-center">
-								<a onclick="return confirmDelete('Bạn có chắc muốn xóa tin tức này không')" href="{{ URL::route('deleteBlog',$blog->id)}}" title="Xóa danh mục"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
+								<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa tin tức này không')" href="{{ URL::route('deleteBlog',$blog->id)}}" title="Xóa danh mục"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
 								<a href="{{ URL::route('editBlog',$blog->id)}}" title="Sửa danh mục"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
 							</td>
 						</tr>
