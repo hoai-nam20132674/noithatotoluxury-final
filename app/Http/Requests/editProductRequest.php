@@ -25,24 +25,18 @@ class editProductRequest extends FormRequest
     {
         return [
             
-            'url' => 'unique:products,url,'.$this->id,
-            'url' => 'unique:blogs,url',
-            'url' => 'unique:categories,url',
-            'image' => 'image|mimes:jpg,png,gif,jpeg',
-            'short_description'=>'required',
+            'url' => 'required|unique:products,url'.$this->id,
+            'url' => 'required|unique:categories,url|unique:blogs,url',
             'content'=>'required',
-            // 'image_detail[]' => 'image|mimes:jpg,png,gif,jpeg'
+            'short_description'=>'required'
         ];
     }
     public function messages(){
         return [
+            'url.required' => 'Vui lòng nhập url',
             'url.unique' => 'Url này đã được sử dụng',
-            'image.image' =>'Định dạng ảnh đại diện không đúng',
-            'image.mimes' => 'Định dạng ảnh đại diện không đúng',
-            'short_description.required'=> 'Thiếu trường mô tả ngắn cho sản phẩm',
-            'content.required'=> 'Thiếu nội dung mô tả sản phẩm',
-            // 'image_detail[].image' =>'Định dạng ảnh chi tiết không đúng',
-            // 'image_detail[].mimes' => 'Định dạng ảnh chi tiết không đúng'
+            'content.required'=>'Vui lòng nhập nội dung giới thiệu sản phẩm',
+            'short_description.required'=>'Vui lòng nhập mô tả ngắn cho sản phẩm'
         ];
     }
 }

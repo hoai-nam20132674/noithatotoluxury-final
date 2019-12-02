@@ -36,7 +36,7 @@ class ClientController extends Controller
     	$system = Systems::where('id',1)->get()->first();
         $cates = Categories::where('systems_id',$system->id)->where('display',1)->get();
         $cates_highlight = Categories::where('display',1)->where('highlights',1)->get();
-        $blogs = Blogs::where('display',1)->orderBy('id','ASC')->take(4)->get();
+        $blogs = Blogs::where('display',1)->orderBy('id','ASC')->take(6)->get();
         $slides = Slides::select()->orderBy('stt','ASC')->get();
         $menus = Menus::select()->orderBy('stt','ASC')->get();
         $cate = $this->arrayColumn($cates,$col='id');

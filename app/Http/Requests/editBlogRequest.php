@@ -24,7 +24,15 @@ class editBlogRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'url' => 'required|unique:blogs,url'.$this->id,
+            'url' => 'required|unique:products,url|unique:categories,url'
+        ];
+    }
+    public function messages(){
+        return [
+            'url.required'=>'Vui lòng nhập url',
+            'url.unique' => 'Url này đã được sử dụng'
         ];
     }
 }

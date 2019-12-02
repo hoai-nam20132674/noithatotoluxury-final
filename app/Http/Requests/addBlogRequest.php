@@ -25,14 +25,15 @@ class addBlogRequest extends FormRequest
     {
         return [
             
-            'url' => 'unique:products,url',
-            'url' => 'unique:blogs,url',
-            'url' => 'unique:categories,url'
+            'url' => 'required|unique:blogs,url|unique:products,url|unique:categories,url',
+            'content'=>'required'
         ];
     }
     public function messages(){
         return [
-            'url.unique' => 'Url này đã được sử dụng'
+            'url.required'=>'Vui lòng nhập url',
+            'url.unique' => 'Url này đã được sử dụng',
+            'content.required'=>'Vui lòng nhập nội dung bài tin tức'
         ];
     }
 }

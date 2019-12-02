@@ -25,15 +25,17 @@ class addProductRequest extends FormRequest
     {
         return [
             
-            'url' => 'required|unique:blogs,url',
-            'url' => 'required|unique:products,url',
-            'url' => 'required|unique:categories,url'
+            'url' => 'required|unique:products,url|unique:categories,url|unique:blogs,url',
+            'content'=>'required',
+            'short_description'=>'required'
         ];
     }
     public function messages(){
         return [
-            'url.required' => 'Vui lòng nhập',
-            'url.unique' => 'Url này đã được sử dụng'
+            'url.required' => 'Vui lòng nhập url',
+            'url.unique' => 'Url này đã được sử dụng',
+            'content.required'=>'Vui lòng nhập nội dung giới thiệu sản phẩm',
+            'short_description.required'=>'Vui lòng nhập mô tả ngắn cho sản phẩm'
         ];
     }
 }

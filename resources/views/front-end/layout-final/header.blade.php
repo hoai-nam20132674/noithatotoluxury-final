@@ -32,7 +32,10 @@
             					<li id="menu-item-{{$menu->id}}" class="menu-item"><a href="{{$menu->url}}" class="nav-top-link">{{$menu->name}}</a></li>
             				@else
             					<li id="menu-item-{{$menu->id}}" class="menu-item menu-item-object-page menu-item-has-children has-dropdown">
-            						<a href="{{$menu->url}}" class="nav-top-link">{{$menu->name}}<i class="icon-angle-down" ></i></a>
+            						@php
+            							$c = App\Categories::where('id',$menu->categories_id)->get()->first();
+            						@endphp
+            						<a href="{{$c->url}}" class="nav-top-link">{{$menu->name}}<i class="icon-angle-down" ></i></a>
             						@php
             							$cates = App\Categories::where('parent_id',$menu->categories_id)->where('display',1)->get();
             						@endphp

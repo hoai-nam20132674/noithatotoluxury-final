@@ -24,7 +24,15 @@ class editCategorieRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            
+            'url' => 'required|unique:categories,url'.$this->id,
+            'url' => 'required|unique:products,url|unique:blogs,url'
+        ];
+    }
+    public function messages(){
+        return [
+            'url.required'=>'Vui lòng nhập url',
+            'url.unique' => 'Url này đã được sử dụng'
         ];
     }
 }

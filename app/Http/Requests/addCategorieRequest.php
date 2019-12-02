@@ -26,14 +26,13 @@ class addCategorieRequest extends FormRequest
     {
         return [
             
-            'url' => 'unique:products,url',
-            'url' => 'unique:blogs,url',
-            'url' => 'unique:categories,url',
+            'url' => 'required|unique:categories,url|unique:products,url|unique:blogs,url',
             'avatar'=>'image|mimes:jpg,png,gif,jpeg'
         ];
     }
     public function messages(){
         return [
+            'url.required' => 'Vui lòng nhập url',
             'url.unique' => 'Url này đã được sử dụng',
             'avatar.image' =>'Định dạng ảnh image không đúng',
             'avatar.mimes' => 'Định dạng ảnh không đúng'
