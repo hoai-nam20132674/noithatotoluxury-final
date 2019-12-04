@@ -5,10 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\ImageShare;
 use App\ImagesProducts;
+use App\ProductLogs;
+use App\ProductDetailLogs;
+use App\Categories;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
+
 
 class Products extends Model
 {
@@ -51,6 +55,7 @@ class Products extends Model
                     $productDetail->sale = $request->sale[$i];
                     $productDetail->products_id = $pr->id;
                     $productDetail->save();
+                    $this->addProductDetailLog($productDetail);
                     $countPropertiesDetail = count($products_detail[$i]);
                     for($j=0;$j<$countPropertiesDetail;$j++){
                         $productsProperties = new productsProperties;
@@ -71,6 +76,7 @@ class Products extends Model
             $productDetail->sale = $request->sale[0];
             $productDetail->products_id = $pr->id;
             $productDetail->save();
+            $this->addProductDetailLog($productDetail);
         }
         if(Input::hasFile('image_detail')){
             foreach(Input::file('image_detail') as $file){
@@ -85,7 +91,6 @@ class Products extends Model
                 }
             }
         }
-        
     	$request->file('share_image')->move('uploads/images/products/image_share/',$image_share);
         $img_share = new ImageShare;
         $img_share->url = $image_share;
@@ -96,6 +101,7 @@ class Products extends Model
         $img_avatar->url = $avatar;
         $img_avatar->products_id = $pr->id;
         $img_avatar->save();
+        $this->addProductLog($pr);
     }
     public function editProduct($request,$id){
         $pr= Products::where('id',$id)->get()->first();
@@ -148,6 +154,7 @@ class Products extends Model
                 }
             }
         }
+        $this->editProductLog($pr);
     }
     public function countAmount($countProperties,$request){
         $countAmount = 0;
@@ -164,5 +171,77 @@ class Products extends Model
             }
         }
         return $minPrice;
+    }
+    public function addProductLog($pr){
+        $prLog = new ProductLogs;
+        $cate = Categories::where('id',$pr->categories_id)->get()->first();
+        $display = '';
+        $highlight = '';
+        $link_image ='';
+        $userName = Auth::user()->name;
+        if($pr->display ==0){
+            $display ='Không xuất bản';
+        }
+        else{
+            $display ='Xuất bản';
+        }
+        if($pr->highlights ==0){
+            $highlight ='Không nổi bật';
+        }
+        else{
+            $highlight ='Nổi bật';
+        }
+        $avatar = ImagesProducts::where('products_id',$pr->id)->where('role',1)->get()->first();
+        $images = ImagesProducts::where('products_id',$pr->id)->where('role',0)->get();
+        foreach($images as $image){
+            $link_image = ''.$link_image.'<img src="{{asset("uploads/images/products/detail/'.$image->url.'")}}" />';
+        }
+        $prLog->products_id = $pr->id;
+        $prLog->content= '<p>Khởi tạo sản phẩm</p></br><p>Người thực hiện: '.$userName.'</p></br><p>Tên sản phẩm: '.$pr->name.'</p></br><p>Mã sản phẩm: '.$pr->code.'</p></br><p>Danh mục chứa: '.$cate->name.'</p></br><p>Tiêu đề: '.$pr->title.'</p></br><p>Keyword: '.$pr->seo_keyword.'</p></br><p>Description: '.$pr->seo_description.'</p></br><p>Mô tả ngắn: '.$pr->short_description.'</p></br><p>Xuất bản: '.$display.'</p></br><p>Nổi bật: '.$highlight.'</p></br><p>Video: <a href="youtube.com/watch?v='.$pr->video.'">Link video</a></p></br><p>Ảnh đại diện:</p><img src="{{asset("uploads/images/products/avatar/'.$avatar->url.'")}}" /></br><p>Ảnh chi tiết: </p>'.$link_image.'</br></br>';
+        $prLog->save();
+        return true;
+    }
+    public function editProductLog($pr){
+        $prLog = new ProductLogs;
+        $cate = Categories::where('id',$pr->categories_id)->get()->first();
+        $display = '';
+        $highlight = '';
+        $link_image ='';
+        $userName = Auth::user()->name;
+        if($pr->display ==0){
+            $display ='Không xuất bản';
+        }
+        else{
+            $display ='Xuất bản';
+        }
+        if($pr->highlights ==0){
+            $highlight ='Không nổi bật';
+        }
+        else{
+            $highlight ='Nổi bật';
+        }
+        $avatar = ImagesProducts::where('products_id',$pr->id)->where('role',1)->get()->first();
+        $images = ImagesProducts::where('products_id',$pr->id)->where('role',0)->get();
+        foreach($images as $image){
+            $link_image = ''.$link_image.'<img src="{{asset("uploads/images/products/detail/'.$image->url.'")}}" />';
+        }
+        $prLog->products_id = $pr->id;
+        $prLog->content= '<p>Chỉnh sửa sản phẩm</p></br><p>Người thực hiện: '.$userName.'</p></br><p>Tên sản phẩm: '.$pr->name.'</p></br><p>Mã sản phẩm: '.$pr->code.'</p></br><p>Danh mục chứa: '.$cate->name.'</p></br><p>Tiêu đề: '.$pr->title.'</p></br><p>Keyword: '.$pr->seo_keyword.'</p></br><p>Description: '.$pr->seo_description.'</p></br><p>Mô tả ngắn: '.$pr->short_description.'</p></br><p>Xuất bản: '.$display.'</p></br><p>Nổi bật: '.$highlight.'</p></br><p>Video: <a href="youtube.com/watch?v='.$pr->video.'">Link video</a></p></br><p>Ảnh đại diện:</p><img src="{{asset("uploads/images/products/avatar/'.$avatar->url.'")}}" /></br><p>Ảnh chi tiết: </p>'.$link_image.'</br></br>';
+        $prLog->save();
+        return true;
+    }
+    public function addProductDetailLog($productDetail){
+        $prDL = new ProductDetailLogs;
+        $prDL->products_detail_id = $productDetail->id;
+        $prDL->content = '<p>Khởi tạo sản phẩm chi tiết</p><br/><p>Giá: '.$productDetail->price.'</p><br/><p>Giá sale: '.$productDetail->sale.'</p><br/><p>Số lượng: '.$productDetail->amount.'</p>';
+        $prDL->save();
+        return true;
+    }
+    public function editProductDetailLog($productDetail){
+        $prDL = new ProductDetailLogs;
+        $prDL->products_detail_id = $productDetail->id;
+        $prDL->content = '<p>Chỉnh sửa sản phẩm chi tiết</p><br/><p>Giá: '.$productDetail->price.'</p><br/><p>Giá sale: '.$productDetail->sale.'</p><br/><p>Số lượng: '.$productDetail->amount.'</p>';
+        $prDL->save();
+        return true;
     }
 }

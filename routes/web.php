@@ -109,6 +109,12 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::get('xoa-danh-muc/{id}',['as'=>'deleteCategorie','uses'=>'Auth\AdminController@deleteCategorie']);
 	Route::get('xoa-he-thong',['as'=>'deleteSystem','uses'=>'Auth\AdminController@deleteSystem']);
 
+
+	Route::get('lich-su-chinh-sua-san-pham/{id}',['as'=>'historyEditProduct','uses'=>'Auth\AdminController@historyEditProduct']);
+	Route::get('lich-su-chinh-sua-san-pham-chi-tiet/{id}',['as'=>'historyEditProductDetail','uses'=>'Auth\AdminController@historyEditProductDetail']);
+	Route::get('lich-su-chinh-sua-don-hang/{id}',['as'=>'historyEditOrder','uses'=>'Auth\AdminController@historyEditOrder']);
+	Route::get('lich-su-chinh-sua-don-hang-chi-tiet/{id}',['as'=>'historyEditOrderDetail','uses'=>'Auth\AdminController@historyEditOrderDetail']);
+
 	Route::post('postAddUser',['as'=>'postAddUser','uses'=>'Auth\AdminController@postAddUser']);
 	Route::post('postEditUser/{id}',['as'=>'postEditUser','uses'=>'Auth\AdminController@postEditUser']);
 	Route::post('postAddProduct',['as'=>'postAddProduct','uses'=>'Auth\AdminController@postAddProduct']);
@@ -142,6 +148,7 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::get('update-product-detail-price/{id}-{value}',['as'=>'updateProductDetailPrice','uses'=>'Auth\AdminController@updateProductDetailPrice']);
 	Route::get('update-product-detail-sale/{id}-{value}',['as'=>'updateProductDetailSale','uses'=>'Auth\AdminController@updateProductDetailSale']);
 	Route::get('update-product-detail-amount/{id}-{value}',['as'=>'updateProductDetailAmount','uses'=>'Auth\AdminController@updateProductDetailAmount']);
+	Route::get('update-product-detail-all/{id}-{price}-{sale}-{amount}',['as'=>'updateProductDetailAll','uses'=>'Auth\AdminController@updateProductDetailAll']);
 	Route::get('product-highlight-none/{id}',['as'=>'productHighlightNone','uses'=>'Auth\AdminController@productHighlightNone']);
 	Route::get('product-highlight-block/{id}',['as'=>'productHighlightBlock','uses'=>'Auth\AdminController@productHighlightBlock']);
 	Route::get('categorie-display-none/{id}',['as'=>'categorieDisplayNone','uses'=>'Auth\AdminController@categorieDisplayNone']);

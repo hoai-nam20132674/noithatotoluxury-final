@@ -22,6 +22,7 @@ use App\Blogs;
 use App\Slides;
 use App\Menus;
 use App\Http\Requests\addUserClientRequest;
+use App\Http\Requests\addOrderRequest;
 use App\Http\Controllers\AuthClient\LoginController;
 use Cart;
 use Illuminate\Support\Facades\Auth;
@@ -972,7 +973,7 @@ class ClientController extends Controller
         }
 
     }
-    public function postAddOrder(Request $request){
+    public function postAddOrder(addOrderRequest $request){
         
         $cart = Cart::getContent();
         $order = new Orders;

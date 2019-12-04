@@ -20,6 +20,7 @@ use App\OrdersDetail;
 use App\Orders;
 use App\Blogs;
 use App\Menus;
+use App\ProductDetailLogs;
 use App\Http\Controllers\AuthClient\ClientController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\addUserRequest;
@@ -525,19 +526,39 @@ class AdminController extends Controller
         $product_detail = ProductsDetail::where('id',$id)->get()->first();
         $product_detail->price = $value;
         $product_detail->save();
+        $this->editProductDetailLog($product_detail);
         echo "thành công";
     }
     public function updateProductDetailSale($id,$value) {
         $product_detail = ProductsDetail::where('id',$id)->get()->first();
         $product_detail->sale = $value;
         $product_detail->save();
+        $this->editProductDetailLog($product_detail);
         echo "thành công";
     }
     public function updateProductDetailAmount($id,$value) {
         $product_detail = ProductsDetail::where('id',$id)->get()->first();
         $product_detail->amount = $value;
         $product_detail->save();
+        $this->editProductDetailLog($product_detail);
         echo "thành công";
+    }
+    public function updateProductDetailAll($id,$price,$sale,$amount){
+        $product_detail = ProductsDetail::where('id',$id)->get()->first();
+        $product_detail->price = $price;
+        $product_detail->sale = $sale;
+        $product_detail->amount = $amount;
+        $product_detail->save();
+        $this->editProductDetailLog($product_detail);
+        echo "thành công";
+
+    }
+    public function editProductDetailLog($productDetail){
+        $prDL = new ProductDetailLogs;
+        $prDL->products_detail_id = $productDetail->id;
+        $prDL->content = '<p>Chỉnh sửa sản phẩm chi tiết</p><br/><p>Giá: '.$productDetail->price.'</p><br/><p>Giá sale: '.$productDetail->sale.'</p><br/><p>Số lượng: '.$productDetail->amount.'</p>';
+        $prDL->save();
+        return true;
     }
     // public function updateImage(Request $request,$id,$file_name){
     //     $request->file->move('uploads/images/products/detail/',$file_name);
@@ -546,5 +567,21 @@ class AdminController extends Controller
     //     $image->save();
     //     echo "thành công";
     // }
+
+
+    // lịch sử chỉnh sửa
+    // ---------------
+    public function historyEditProduct($id){
+
+    }
+    public function historyEditProductDetail($id){
+        
+    }
+    public function historyEditOrder($id){
+        
+    }
+    public function historyEditOrderDetail($id){
+        
+    }
     
 }
