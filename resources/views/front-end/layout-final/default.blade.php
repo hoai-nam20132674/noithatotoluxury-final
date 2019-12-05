@@ -222,6 +222,6 @@ var wc_single_product_params = {"i18n_required_rating_text":"Vui l\u00f2ng ch\u1
 		}
 	});
 </script>
-
+@yield('script')
 </body>
 </html>

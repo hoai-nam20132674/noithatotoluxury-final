@@ -19,6 +19,7 @@ use App\ProductsDetail;
 use App\OrdersDetail;
 use App\Orders;
 use App\OrderLogs;
+use App\OrderDetailLogs;
 use App\Blogs;
 use App\Menus;
 use App\ProductLogs;
@@ -594,10 +595,22 @@ class AdminController extends Controller
     }
 
     public function historyEditOrder($id){
-        
+        if(Auth::user()->role ==1){
+            $historys = OrderLogs::where('orders_id',$id)->orderBy('id','DESC')->get();
+            return view('auth.page-content.listHistoryOrder',['historys'=>$historys]);
+        }
+        else{
+            return route('authIndex');
+        }
     }
     public function historyEditOrderDetail($id){
-        
+        if(Auth::user()->role ==1){
+            $historys = OrderDetailLogs::where('orders_detail_id',$id)->orderBy('id','DESC')->get();
+            return view('auth.page-content.listHistoryOrderDetail',['historys'=>$historys]);
+        }
+        else{
+            return route('authIndex');
+        }
     }
     public function updateOrder($id,$value){
         $order = Orders::where('id',$id)->get()->first();

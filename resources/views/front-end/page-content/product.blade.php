@@ -117,7 +117,7 @@
   			<nav class="woocommerce-breadcrumb breadcrumbs">
           <a href="/">Trang chủ</a> <span class="divider">&#47;</span> 
           <a href="{{$cate_parent->url}}">{{$cate_parent->name}}</a><span class="divider">&#47;</span> 
-          <a title="{{$products->name}}">{!! \Illuminate\Support\Str::words($products->name, 4,'...')  !!}</a>
+          <a class="plus_view" title="{{$products->name}}" product-id="{{$products->id}}">{!! \Illuminate\Support\Str::words($products->name, 4,'...')  !!}</a>
         </nav>
         <h1 class="product-title entry-title title-head" data-id="{{$products->products_detail_id}}" title="{{$products->name}}">{{$products->name}}</h1>
 
@@ -284,4 +284,21 @@
   	</div><!-- shop container -->
 
   </main><!-- #main -->
+@endsection
+@section('script')
+  <script type="text/javascript">
+    jQuery(document).ready(function () {
+      var product_id = jQuery(".plus_view").attr('product-id');
+      url = '/plus-view-product/'+product_id;
+      jQuery.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'html',
+        success: function(data) {
+          console.log(data);
+        }
+        
+      });
+    });
+  </script>
 @endsection

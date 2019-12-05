@@ -19,75 +19,23 @@
 	
 	<div class="content-area py-1">
 		<div class="container-fluid">
-			<h4>Danh sách menu</h4>
+			<h4>Lịch sử chỉnh sửa đơn hàng</h4>
 			<ol class="breadcrumb no-bg mb-1">
 				<li class="breadcrumb-item"><a href="{{URL::route('authIndex')}}">Trang chủ</a></li>
-				<li class="breadcrumb-item active">Danh sách menu</li>
+				<li class="breadcrumb-item active">Lịch sử chỉnh sửa đơn hàng</li>
 			</ol>
-			<div class="box box-block bg-white overflow-x">
-				<table class="table table-striped table-bordered dataTable" id="table-1">
-					@if( Session::has('flash_message'))
-		                <div class="alert alert-{{ Session::get('flash_level')}}">
-		                    {{ Session::get('flash_message')}}
-		                </div>
-		            @endif
-					<thead>
-						<tr>
-							<th>Tiêu đề</th>
-							<th>Url</th>
-							<th class="text-center">Thứ tự</th>
-							<th class="text-center">Loại</th>
-							<th class="text-center" style="padding: 0px; background: green;">
-								<a href="{{URL::route('addMenu')}}" title="Thêm Menu" style="color: green;"><i class="ion-android-add" style=" font-size:30px;color:#fff;"></i></a>
-							</th>
-
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($menus as $menu)
-						<tr>
-							
-							<td>{{$menu->name}}</td>
-							<td>{{$menu->url}}</td>
-							<td>
-								<input menu-id="{{$menu->id}}" type="number" min="0" value="{{$menu->stt}}">
-								<a href="#" menu-id="{{$menu->id}}" class="update-menu">
-									<span style="background: #3ec9bc; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-refresh" style="padding-right: 5px;"></i>Cập nhật</span>
-								</a>
-								<a class="ajaxload" menu-id="{{$menu->id}}" style="width: 20px;">
-									<span style="background-image: url(https://data.vietnambooking.com/common/gif/icon_img_default.gif);background-size: cover ; padding: 5px 14px;border-radius: 2px; color: #fff; font-weight: 800;"></span>
-								</a>
-							</td>
-							@if($menu->type ==1)
-								<td>
-									<a href="#" class="">
-										<span style="background: #3ec9bc; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-list" style="padding-right: 5px;"></i>Danh mục</span>
-									</a>
-								</td>
-							@else
-								<td>
-									<a href="#" class="">
-										<span style="background: #8c0000; padding: 5px;border-radius: 2px; color: #fff; font-weight: 800;"><i class="fa fa-link" style="padding-right: 5px;"></i>Custom Link</span>
-									</a>
-								</td>
-							@endif
-
-							
-							
-							<td class="text-center">
-								<a onclick="return confirmDelete('Bạn có chắc muốn xóa menu này không')" href="{{ URL::route('deleteMenu',$menu->id)}}" title="Xóa menu"><i class="fa fa-trash-o" style="width: 20%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-								<a style="pointer-events: none;" href="{{ URL::route('editMenu',$menu->id)}}" title="Sửa menu"><i class="fa fa-pencil-square-o" style="width: 20%; font-size: 18px;"></i></a>
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-			</div>
+			@foreach($historys as $history)
+				<div class="box box-block bg-white overflow-x">
+					<h1>Thời Gian: {{$history->created_at}}</h1>
+					{!!$history->content!!}
+				</div>
+			@endforeach
 		</div>
 	</div>
 	
 @endsection()
 @section('js')
+
 	<script type="text/javascript" src="{{asset('auth/vendor/jquery/jquery-1.12.3.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/vendor/tether/js/tether.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/vendor/bootstrap4/js/bootstrap.min.js')}}"></script>
@@ -115,29 +63,76 @@
 	<script type="text/javascript" src="{{asset('auth/js/app.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/demo.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
-	<script type="text/javascript" src="{{asset('auth/js/display_categorie.js')}}"></script>
+	<script type="text/javascript" src="{{asset('auth/js/display_product.js')}}"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$(".ajaxload").hide();
-		});
-		$(document).on('click', '.update-menu', function(event) {
+		$(document).on('click', '.product-display-none', function(event) {
 			event.preventDefault();
-			
-			var menu_id = $(this).attr('menu-id');
-			$(".ajaxload[menu-id="+menu_id+"]").show();
-			var select = $("input[menu-id="+menu_id+"]");
-			var value = select.val();
-			url = '/auth/admin/update-menu/'+menu_id+'-'+value;
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-display-none/'+product_id;
 			$.ajax({
 				type: 'GET',
 				url: url,
 				dataType: 'html',
 				success: function(data) {
 					console.log(data);
-					$(".ajaxload[menu-id="+menu_id+"]").hide();
 				}
 			});
+			$(".product-display-none[product-id="+product_id+"]").css('opacity',1);
+			$(".product-display-block[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-display-none[product-id="+product_id+"]").css('pointer-events','none');
+			$(".product-display-block[product-id="+product_id+"]").css('pointer-events','');
 		});
-		
+		$(document).on('click', '.product-display-block', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-display-block/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-display-none[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-display-block[product-id="+product_id+"]").css('opacity',1);
+			$(".product-display-none[product-id="+product_id+"]").css('pointer-events','');
+			$(".product-display-block[product-id="+product_id+"]").css('pointer-events','none');
+		});
+		$(document).on('click', '.product-highlight-none', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-highlight-none/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-highlight-none[product-id="+product_id+"]").css('opacity',1);
+			$(".product-highlight-block[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-highlight-none[product-id="+product_id+"]").css('pointer-events','none');
+			$(".product-highlight-block[product-id="+product_id+"]").css('pointer-events','');
+		});
+		$(document).on('click', '.product-highlight-block', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-highlight-block/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-highlight-none[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-highlight-block[product-id="+product_id+"]").css('opacity',1);
+			$(".product-highlight-none[product-id="+product_id+"]").css('pointer-events','');
+			$(".product-highlight-block[product-id="+product_id+"]").css('pointer-events','none');
+		});
 	</script>
+	
 @endsection()

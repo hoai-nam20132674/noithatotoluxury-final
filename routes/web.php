@@ -47,7 +47,7 @@ Route::get('check-feedback/{product_id}-{user_id}',['as'=>'checkFeedback','uses'
 
 Route::post('postAddFeedback',['as'=>'postAddFeedback','uses'=>'AuthClient\ClientController@postAddFeedback']);
 
-
+Route::get('plus-view-product/{url}',['as'=>'plusViewProduct','uses'=>'AuthClient\ClientController@plusViewProduct']);
 Route::get('get-price-product-detail/{url}',['as'=>'getPriceProductDetail','uses'=>'AuthClient\ClientController@getPriceProductDetail']);
 
 // login with social facebook

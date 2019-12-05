@@ -67,14 +67,15 @@
 								</td>
 								
 								<td>{{$order_detail->amount}}</td>
-								<td>{!!number_format($pr->price)!!} đ</td>
-								<td>{!!number_format($pr->price*$order_detail->amount)!!} đ</td>
+								<td>{!!number_format($pr->sale)!!} đ</td>
+								<td>{!!number_format($pr->sale*$order_detail->amount)!!} đ</td>
 								
 								
 								
 								<td class="text-center">
-									<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="" title="Xóa sản phẩm"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-									<a href="" title="Sửa danh mục"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
+									<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa đơn hàng chi tiết')" href="" title="đơn hàng chi tiết"><i class="fa fa-trash-o" style="width: 20%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
+									<a href="" title="Sửa đơn hàng chi tiết"><i class="fa fa-pencil-square-o" style="width: 20%; font-size: 18px;"></i></a>
+									<a href="{{ URL::route('historyEditOrderDetail',$order_detail->id)}}" title="Lịch sử chỉnh sửa đơn hàng chi tiết"><i class="fa fa-history" style="width: 20%; font-size: 18px;"></i></a>
 								</td>
 								
 							</tr>

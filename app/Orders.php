@@ -50,9 +50,10 @@ class Orders extends Model
             $order_detail->comment = '';
             $order_detail->status = 0;
     		$order_detail->save();
+            $prd = ProductsDetail::where('id',$order_detail->products_detail_id)->get()->first();
             $oDL = new OrderDetailLogs;
             $oDL->orders_detail_id = $order_detail->id;
-            $oDL->content = '<p>Khởi tạo đơn hàng chi tiết</p>';
+            $oDL->content = '<p>Khởi tạo đơn hàng chi tiết</p><p>Số lượng: '.$order_detail->amount.'</p><p>Giá: '.$prd->sale.'</p>';
             $oDL->save();
     		$product_detail = ProductsDetail::where('id',$item->id)->get()->first();
     		$old_amount = $product_detail->amount;

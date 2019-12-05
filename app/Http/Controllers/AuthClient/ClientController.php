@@ -1019,4 +1019,10 @@ class ClientController extends Controller
         $login->loginWithRegister($request);
         return redirect()->back();
     }
+    public function plusViewProduct($id){
+        $pr = Products::where('id',$id)->get()->first();
+        $pr->views = $pr->views + 1;
+        $pr->save();
+        echo "thành công";
+    }
 }
