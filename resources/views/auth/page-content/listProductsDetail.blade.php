@@ -19,7 +19,7 @@
 	
 	<div class="content-area py-1">
 		<div class="container-fluid">
-			<h4>Sản phẩm</h4>
+			<h4>Sản phẩm chi tiết</h4>
 			<ol class="breadcrumb no-bg mb-1">
 				<li class="breadcrumb-item"><a href="{{URL::route('authIndex')}}">Trang chủ</a></li>
 				<li class="breadcrumb-item active">Danh sách sản phẩm chi tiết</li>
@@ -36,13 +36,13 @@
 							
 							<th>Tên sản phẩm</th>
 							
-							<th>Giá</th>
+							<th width="18%" class="text-center">Giá</th>
 							
-							<th class="text-center">Sale</th>
-							<th class="text-center">Số lượng</th>
+							<th width="18%" class="text-center">Sale</th>
+							<th width="18%" class="text-center">Số lượng</th>
 							<th>Ngày tạo</th>
 							<th>Chỉnh sửa</th>
-							<th class="text-center" style="padding: 0px; background: green;">
+							<th width="10%" class="text-center" style="padding: 0px; background: green;">
 								<a href="{{URL::route('addProduct')}}" title="Thêm sản phẩm" style="color: green;"><i class="ion-android-add" style=" font-size:30px; color:#fff;"></i></a>
 							</th>
 
@@ -91,8 +91,9 @@
 								<td>{{$pr->created_at}}</td>
 								<td>{{$pr->updated_at}}</td>
 								<td class="text-center">
-									<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="{{URL::route('deleteProductDetail',$pr->id)}}" title="Xóa sản phẩm"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-									<a href="{{URL::route('editProductDetail',$pr->id)}}" title="Sửa danh mục"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
+									<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="{{URL::route('deleteProductDetail',$pr->id)}}" title="Xóa sản phẩm"><i class="fa fa-trash-o" style="width: 20%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
+									<a href="{{URL::route('editProductDetail',$pr->id)}}" title="Sửa danh mục"><i class="fa fa-pencil-square-o" style="width: 20%; font-size: 18px;"></i></a>
+									<a href="{{ URL::route('historyEditProductDetail',$pr->id)}}" title="Lịch sử chỉnh sửa sản phẩm"><i class="fa fa-history" style="width: 20%; font-size: 18px;"></i></a>
 								</td>
 								
 							</tr>

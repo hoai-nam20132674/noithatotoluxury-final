@@ -194,10 +194,10 @@ class Products extends Model
         $avatar = ImagesProducts::where('products_id',$pr->id)->where('role',1)->get()->first();
         $images = ImagesProducts::where('products_id',$pr->id)->where('role',0)->get();
         foreach($images as $image){
-            $link_image = ''.$link_image.'<img src="{{asset("uploads/images/products/detail/'.$image->url.'")}}" />';
+            $link_image = ''.$link_image.'<img width="10%" style="margin-right: 10px;" src="/uploads/images/products/detail/'.$image->url.'" />';
         }
         $prLog->products_id = $pr->id;
-        $prLog->content= '<p>Khởi tạo sản phẩm</p></br><p>Người thực hiện: '.$userName.'</p></br><p>Tên sản phẩm: '.$pr->name.'</p></br><p>Mã sản phẩm: '.$pr->code.'</p></br><p>Danh mục chứa: '.$cate->name.'</p></br><p>Tiêu đề: '.$pr->title.'</p></br><p>Keyword: '.$pr->seo_keyword.'</p></br><p>Description: '.$pr->seo_description.'</p></br><p>Mô tả ngắn: '.$pr->short_description.'</p></br><p>Xuất bản: '.$display.'</p></br><p>Nổi bật: '.$highlight.'</p></br><p>Video: <a href="youtube.com/watch?v='.$pr->video.'">Link video</a></p></br><p>Ảnh đại diện:</p><img src="{{asset("uploads/images/products/avatar/'.$avatar->url.'")}}" /></br><p>Ảnh chi tiết: </p>'.$link_image.'</br></br>';
+        $prLog->content= '<p>Khởi tạo sản phẩm</p><p>Người thực hiện: '.$userName.'</p><p>Tên sản phẩm: '.$pr->name.'</p><p>Mã sản phẩm: '.$pr->code.'</p><p>Danh mục chứa: '.$cate->name.'</p><p>Tiêu đề: '.$pr->title.'</p><p>Keyword: '.$pr->seo_keyword.'</p><p>Description: '.$pr->seo_description.'</p><p>Mô tả ngắn: '.$pr->short_description.'</p><p>Xuất bản: '.$display.'</p><p>Nổi bật: '.$highlight.'</p><p>Video: <a href="https://youtube.com/watch?v='.$pr->video.'" target="_blank">Link video</a></p><p>Ảnh đại diện:</p><img width="10%" src="/uploads/images/products/avatar/'.$avatar->url.'" /><p>Ảnh chi tiết: </p>'.$link_image.'';
         $prLog->save();
         return true;
     }
@@ -223,10 +223,10 @@ class Products extends Model
         $avatar = ImagesProducts::where('products_id',$pr->id)->where('role',1)->get()->first();
         $images = ImagesProducts::where('products_id',$pr->id)->where('role',0)->get();
         foreach($images as $image){
-            $link_image = ''.$link_image.'<img src="{{asset("uploads/images/products/detail/'.$image->url.'")}}" />';
+            $link_image = ''.$link_image.'<img width="10%" style="margin-right: 10px;" src="/uploads/images/products/detail/'.$image->url.'" />';
         }
         $prLog->products_id = $pr->id;
-        $prLog->content= '<p>Chỉnh sửa sản phẩm</p></br><p>Người thực hiện: '.$userName.'</p></br><p>Tên sản phẩm: '.$pr->name.'</p></br><p>Mã sản phẩm: '.$pr->code.'</p></br><p>Danh mục chứa: '.$cate->name.'</p></br><p>Tiêu đề: '.$pr->title.'</p></br><p>Keyword: '.$pr->seo_keyword.'</p></br><p>Description: '.$pr->seo_description.'</p></br><p>Mô tả ngắn: '.$pr->short_description.'</p></br><p>Xuất bản: '.$display.'</p></br><p>Nổi bật: '.$highlight.'</p></br><p>Video: <a href="youtube.com/watch?v='.$pr->video.'">Link video</a></p></br><p>Ảnh đại diện:</p><img src="{{asset("uploads/images/products/avatar/'.$avatar->url.'")}}" /></br><p>Ảnh chi tiết: </p>'.$link_image.'</br></br>';
+        $prLog->content= '<p>Chỉnh sửa sản phẩm</p><p>Người thực hiện: '.$userName.'</p><p>Tên sản phẩm: '.$pr->name.'</p><p>Mã sản phẩm: '.$pr->code.'</p><p>Danh mục chứa: '.$cate->name.'</p><p>Tiêu đề: '.$pr->title.'</p><p>Keyword: '.$pr->seo_keyword.'</p><p>Description: '.$pr->seo_description.'</p><p>Mô tả ngắn: '.$pr->short_description.'</p><p>Xuất bản: '.$display.'</p><p>Nổi bật: '.$highlight.'</p><p>Video: <a href="https://youtube.com/watch?v='.$pr->video.'" target="_blank">Link video</a></p><p>Ảnh đại diện:</p><img width="10%" src="/uploads/images/products/avatar/'.$avatar->url.'" /><p>Ảnh chi tiết: </p>'.$link_image.'';
         $prLog->save();
         return true;
     }
@@ -239,8 +239,9 @@ class Products extends Model
     }
     public function editProductDetailLog($productDetail){
         $prDL = new ProductDetailLogs;
+        $userName = Auth::user()->name;
         $prDL->products_detail_id = $productDetail->id;
-        $prDL->content = '<p>Chỉnh sửa sản phẩm chi tiết</p><br/><p>Giá: '.$productDetail->price.'</p><br/><p>Giá sale: '.$productDetail->sale.'</p><br/><p>Số lượng: '.$productDetail->amount.'</p>';
+        $prDL->content = '<p>Chỉnh sửa sản phẩm chi tiết</p><p>Người thực hiện: '.$userName.'</p><p>Giá: '.$productDetail->price.'</p><p>Giá sale: '.$productDetail->sale.'</p><p>Số lượng: '.$productDetail->amount.'</p>';
         $prDL->save();
         return true;
     }

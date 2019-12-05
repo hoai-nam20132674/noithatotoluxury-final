@@ -34,12 +34,12 @@
 					<thead>
 						<tr>
 							<th width="8%">Hình ảnh</th>
-							<th>Tên sản phẩm</th>
+							<th width="20%">Tên sản phẩm</th>
 							<th>Xuất bản</th>
 							<th>Nổi bật</th>
-							<th>Ngày tạo</th>
-							<th>Chỉnh sửa</th>
-							<th class="text-center" style="padding: 0px; background: green;">
+							<th width="10%">Ngày tạo</th>
+							<th width="10%">Chỉnh sửa</th>
+							<th width="10%" class="text-center" style="padding: 0px; background: green;">
 								<a href="{{URL::route('addProduct')}}" title="Thêm sản phẩm" style="color: green;"><i class="ion-android-add" style=" font-size:30px; color:#fff;"></i></a>
 							</th>
 
@@ -91,8 +91,9 @@
 								<td>{{$pr->updated_at}}</td>
 								
 								<td class="text-center">
-									<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="{{URL::route('deleteProduct',$pr->id)}}" title="Xóa sản phẩm"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-									<a href="{{URL::route('editProduct',$pr->id)}}" title="Sửa danh mục"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
+									<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="{{URL::route('deleteProduct',$pr->id)}}" title="Xóa sản phẩm"><i class="fa fa-trash-o" style="width: 20%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
+									<a href="{{URL::route('editProduct',$pr->id)}}" title="Sửa sản phẩm"><i class="fa fa-pencil-square-o" style="width: 20%; font-size: 18px;"></i></a>
+									<a href="{{ URL::route('historyEditProduct',$pr->id)}}" title="Lịch sử chỉnh sửa sản phẩm"><i class="fa fa-history" style="width: 20%; font-size: 18px;"></i></a>
 								</td>
 								
 							</tr>

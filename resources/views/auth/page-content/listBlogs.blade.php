@@ -31,9 +31,8 @@
 		            @endif
 					<thead>
 						<tr>
-							<th width="8%">Hình ảnh</th>
-							<th>Tiêu đề</th>
-							<th>Link bài tin tức</th>
+							<th width="10%">Hình ảnh</th>
+							<th width="20%">Tiêu đề</th>
 							<th class="text-center">Xuất bản</th>
 							<th>Ngày tạo</th>
 							<th>Chỉnh sửa</th>
@@ -47,8 +46,7 @@
 						@foreach ($blogs as $blog)
 						<tr>
 							<td><img src="{{asset('/uploads/images/blogs/'.$blog["image"])}}"  width="100%" /></td>
-							<td>{{$blog -> title}}</td>
-							<td><a href="{{url('/'.$blog["url"])}}" target="_blank">{{$blog -> url}}</a></td>
+							<td><a href="{{url('/'.$blog["url"])}}" target="_blank">{{$blog -> title}}</a></td>
 							<td>
 								@if($blog->display == 0)
 									<a style="opacity: 0.2;" href="#" blog-id="{{$blog->id}}" class="blog-display-block">

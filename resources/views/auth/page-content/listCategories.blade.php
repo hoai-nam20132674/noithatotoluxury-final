@@ -34,13 +34,12 @@
 					<thead>
 						<tr>
 							<th width="8%">Hình ảnh</th>
-							<th>Tên danh mục</th>
-							<th>Url</th>
+							<th width="15%">Tên danh mục</th>
 							<th class="text-center">Xuất bản</th>
 							<th class="text-center">Nổi bật</th>
-							<th>Ngày tạo</th>
-							<th>Chỉnh sửa</th>
-							<th class="text-center" style="padding: 0px; background: green;">
+							<th width="10%">Ngày tạo</th>
+							<th width="10%">Chỉnh sửa</th>
+							<th width="10%" class="text-center" style="padding: 0px; background: green;">
 								<a href="{{URL::route('addCategorie')}}" title="Thêm danh mục" style="color: green;"><i class="ion-android-add" style=" font-size:30px;color:#fff;"></i></a>
 							</th>
 
@@ -51,13 +50,10 @@
 						<tr>
 							<td><img src="{{asset('/uploads/images/categories/avatar/'.$cate["avatar"])}}"  width="100%" /></td>
 							<td>
-								@if(Auth::user()->systems_id == 1)
-								<a href="{{URL::route('addTagCategorie',$cate->id)}}">{{$cate->name}}</a>
-								@else
-								{{$cate->name}}
-								@endif
+								
+								<a href="/{{$cate->url}}" target="_blank">{{$cate->name}}</a>
+								
 							</td>
-							<td>{{$cate->url}}</td>
 							<td>
 								@if($cate->display == 0)
 									<a style="opacity: 0.2;" href="#" categorie-id="{{$cate->id}}" class="categorie-display-block">
@@ -98,6 +94,7 @@
 							<td class="text-center">
 								<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa danh mục này không')" href="{{ URL::route('deleteCategorie',$cate->id)}}" title="Xóa danh mục"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
 								<a href="{{ URL::route('editCategorie',[$cate->systems_id,$cate->id])}}" title="Sửa danh mục"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
+								
 							</td>
 						</tr>
 						@endforeach

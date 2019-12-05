@@ -18,8 +18,10 @@ use App\TagCategories;
 use App\ProductsDetail;
 use App\OrdersDetail;
 use App\Orders;
+use App\OrderLogs;
 use App\Blogs;
 use App\Menus;
+use App\ProductLogs;
 use App\ProductDetailLogs;
 use App\Http\Controllers\AuthClient\ClientController;
 use Illuminate\Support\Facades\Auth;
@@ -554,9 +556,10 @@ class AdminController extends Controller
 
     }
     public function editProductDetailLog($productDetail){
+        $userName = Auth::user()->name;
         $prDL = new ProductDetailLogs;
         $prDL->products_detail_id = $productDetail->id;
-        $prDL->content = '<p>Chỉnh sửa sản phẩm chi tiết</p><br/><p>Giá: '.$productDetail->price.'</p><br/><p>Giá sale: '.$productDetail->sale.'</p><br/><p>Số lượng: '.$productDetail->amount.'</p>';
+        $prDL->content = '<p>Chỉnh sửa sản phẩm chi tiết</p><p>Người thực hiện: '.$userName.'</p><p>Giá: '.$productDetail->price.'</p><p>Giá sale: '.$productDetail->sale.'</p><p>Số lượng: '.$productDetail->amount.'</p>';
         $prDL->save();
         return true;
     }
@@ -572,16 +575,47 @@ class AdminController extends Controller
     // lịch sử chỉnh sửa
     // ---------------
     public function historyEditProduct($id){
-
+        if(Auth::user()->role ==1){
+            $historys = ProductLogs::where('products_id',$id)->orderBy('id','DESC')->get();
+            return view('auth.page-content.listHistoryProduct',['historys'=>$historys]);
+        }
+        else{
+            return route('authIndex');
+        }
     }
     public function historyEditProductDetail($id){
-        
+        if(Auth::user()->role ==1){
+            $historys = ProductDetailLogs::where('products_detail_id',$id)->orderBy('id','DESC')->get();
+            return view('auth.page-content.listHistoryProductDetail',['historys'=>$historys]);
+        }
+        else{
+            return route('authIndex');
+        }
     }
+
     public function historyEditOrder($id){
         
     }
     public function historyEditOrderDetail($id){
         
+    }
+    public function updateOrder($id,$value){
+        $order = Orders::where('id',$id)->get()->first();
+        $order->status = $value;
+        $order->save();
+        $stt ='';
+        if($order->status ==0){
+            $stt = 'Chưa xử lý';
+        }
+        else{
+            $stt = 'Đã xử lý';
+        }
+        $userName = Auth::user()->name;
+        $orderLog = new OrderLogs;
+        $orderLog->orders_id = $order->id;
+        $orderLog->content = '<p>Chỉnh sửa đơn hàng</p><p>Người thực hiện: '.$userName.'</p><p>Trạng thái: '.$stt.'</p>';
+        $orderLog->save();
+        echo "thành công";
     }
     
 }

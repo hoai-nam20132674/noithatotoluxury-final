@@ -19,77 +19,17 @@
 	
 	<div class="content-area py-1">
 		<div class="container-fluid">
-			<h4>Đơn hàng</h4>
+			<h4>Lịch sử chỉnh sửa sản phẩm chi tiết</h4>
 			<ol class="breadcrumb no-bg mb-1">
 				<li class="breadcrumb-item"><a href="{{URL::route('authIndex')}}">Trang chủ</a></li>
-				<li class="breadcrumb-item active">Danh sách sản đơn hàng</li>
+				<li class="breadcrumb-item active">Lịch sử chỉnh sửa sản phẩm chi tiết</li>
 			</ol>
-			<div class="box box-block bg-white overflow-x">
-				<table class="table table-striped table-bordered dataTable" id="table-1">
-					@if( Session::has('flash_message'))
-		                <div class="alert alert-{{ Session::get('flash_level')}}">
-		                    {{ Session::get('flash_message')}}
-		                </div>
-		            @endif
-					<thead>
-						<tr>
-							<th>Mã đơn hàng</th>
-							<th>Họ tên</th>
-							<th>số điện thoại</th>
-							<th>email</th>
-							<th>địa chỉ</th>
-							<th>lời nhắn</th>
-							<th>Trạng thái</th>
-							<th width="10%">thời gian</th>
-
-							<th class="text-center" style="padding: 0px; background: green;">
-								<a href="{{URL::route('addProduct')}}" title="Thêm sản phẩm" style="color: green;"><i class="ion-android-add" style=" font-size:30px; color:#fff;"></i></a>
-							</th>
-
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($orders as $order)
-							
-							<tr>
-								<td><a href="{{URL::route('listOrderDetail',$order->id)}}">CREEAUTO{{$order->id}}</a></td>
-
-								<td>{{$order->name}}</td>
-								<td>{{$order->phone}}</td>
-								<td>{{$order->email}}</td>
-								<td>{{$order->address}}</td>
-								<td>{{$order->messages}}</td>
-								@if($order->status ==0)
-									<td >
-										<select style="background: #a00303; color: #fff" order-id="{{$order->id}}" onchange="updateOrder({{$order->id}})" class="form-control order_status">
-											<option value="0">Chưa xử lý</option>
-											<option value="1">Đã xử lý</option>
-										</select>
-									</td>
-								@else
-									<td>
-										<select style="background: #008000; color: #fff" order-id="{{$order->id}}" onchange="updateOrder({{$order->id}})" class="form-control order_status">
-											<option value="1">Đã xử lý</option>
-											<option value="0">Chưa xử lý</option>
-										</select>
-									</td>
-								@endif
-								<td>{{$order->created_at->format('d-m-Y')}}</td>
-								
-								
-								
-								
-								<td class="text-center">
-									<a style="pointer-events: none;" onclick="return confirmDelete('Bạn có chắc muốn xóa sản phẩm này không')" href="" title="Xóa sản phẩm"><i class="ion-trash-a" style="width: 100%; font-size: 18px; color: red; margin-right: 5px;"></i></a>
-									<a href="" title="Sửa danh mục"><i class="ion-compose" style="width: 100%; font-size: 18px;"></i></a>
-								</td>
-								
-							</tr>
-						@endforeach
-							
-					</tbody>
-				</table>
-			</div>
+			@foreach($historys as $history)
+				<div class="box box-block bg-white overflow-x">
+					<h1>Thời Gian: {{$history->created_at}}</h1>
+					{!!$history->content!!}
+				</div>
+			@endforeach
 		</div>
 	</div>
 	
@@ -125,28 +65,74 @@
 	<script type="text/javascript" src="{{asset('auth/js/tables-datatable.js')}}"></script>
 	<script type="text/javascript" src="{{asset('auth/js/display_product.js')}}"></script>
 	<script type="text/javascript">
-		function updateOrder(id){
-			var select = $(".order_status[order-id="+id+"]");
-			var value = select.val();
-			url = '/auth/admin/update-order/'+id+'-'+value;
+		$(document).on('click', '.product-display-none', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-display-none/'+product_id;
 			$.ajax({
 				type: 'GET',
 				url: url,
 				dataType: 'html',
 				success: function(data) {
-					
-					if(value==0){
-						select.css('background','#a00303');
-					}
-					else{
-						select.css('background','#008000');
-					}
 					console.log(data);
-					// old.show();
 				}
 			});
-		}
+			$(".product-display-none[product-id="+product_id+"]").css('opacity',1);
+			$(".product-display-block[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-display-none[product-id="+product_id+"]").css('pointer-events','none');
+			$(".product-display-block[product-id="+product_id+"]").css('pointer-events','');
+		});
+		$(document).on('click', '.product-display-block', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-display-block/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-display-none[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-display-block[product-id="+product_id+"]").css('opacity',1);
+			$(".product-display-none[product-id="+product_id+"]").css('pointer-events','');
+			$(".product-display-block[product-id="+product_id+"]").css('pointer-events','none');
+		});
+		$(document).on('click', '.product-highlight-none', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-highlight-none/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-highlight-none[product-id="+product_id+"]").css('opacity',1);
+			$(".product-highlight-block[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-highlight-none[product-id="+product_id+"]").css('pointer-events','none');
+			$(".product-highlight-block[product-id="+product_id+"]").css('pointer-events','');
+		});
+		$(document).on('click', '.product-highlight-block', function(event) {
+			event.preventDefault();
+			var product_id = $(this).attr('product-id');
+			url = '/auth/admin/product-highlight-block/'+product_id;
+			$.ajax({
+				type: 'GET',
+				url: url,
+				dataType: 'html',
+				success: function(data) {
+					console.log(data);
+				}
+			});
+			$(".product-highlight-none[product-id="+product_id+"]").css('opacity',0.2);
+			$(".product-highlight-block[product-id="+product_id+"]").css('opacity',1);
+			$(".product-highlight-none[product-id="+product_id+"]").css('pointer-events','');
+			$(".product-highlight-block[product-id="+product_id+"]").css('pointer-events','none');
+		});
 	</script>
-
 	
 @endsection()
