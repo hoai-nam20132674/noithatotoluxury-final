@@ -11,7 +11,7 @@
 		  	 	 <nav class="breadcrumbs heading-font checkout-breadcrumbs text-center h2 strong">
 		    	   <a href="" class="current">Chọn sản phẩm</a>
 		    	   <span class="divider hide-for-small"><i class="icon-angle-right"></i></span>
-		    	   <a href="" class="hide-for-small">Thông tin thanh toán</a>
+		    	   <a href="" class="hide-for-small">Thông tin đặt hàng</a>
 		    	   <span class="divider hide-for-small"><i class="icon-angle-right"></i></span>
 		    	   <a href="#" class="no-click hide-for-small">Hoàn thành</a>
 				 </nav>
@@ -148,7 +148,7 @@
 			<div class="wc-proceed-to-checkout">
 				
 		<a href="checkout" class="checkout-button button alt wc-forward">
-			Tiến hành thanh toán</a>
+			Tiến hành đặt hàng</a>
 			</div>
 
 			

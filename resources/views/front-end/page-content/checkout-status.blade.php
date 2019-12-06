@@ -15,7 +15,7 @@
   	 	 <nav class="breadcrumbs heading-font checkout-breadcrumbs text-center h2 strong">
     	   <a href="cart" class="hide-for-small">Chọn sản phẩm</a>
     	   <span class="divider hide-for-small"><i class="icon-angle-right" ></i></span>
-    	   <a href="checkout" class="hide-for-small">Thông tin thanh toán</a>
+    	   <a href="checkout" class="hide-for-small">Thông tin đặt hàng</a>
     	   <span class="divider hide-for-small"><i class="icon-angle-right" ></i></span>
     	   <a href="#" class="no-click current">Hoàn thành</a>
 		 </nav>
@@ -69,12 +69,9 @@
 						<th scope="row">Tổng số phụ:</th>
 						<td><span class="woocommerce-Price-amount amount">0.000<span class="woocommerce-Price-currencySymbol">&#8363;</span></span></td>
 					</tr>
+										
 										<tr>
-						<th scope="row">Giao nhận hàng:</th>
-						<td><span class="woocommerce-Price-amount amount">0.000<span class="woocommerce-Price-currencySymbol">&#8363;</span></span>&nbsp;<small class="shipped_via">qua Phí vận chuyển</small></td>
-					</tr>
-										<tr>
-						<th scope="row">Phương thức thanh toán:</th>
+						<th scope="row">Phương thức đặt hàng:</th>
 						<td>Trả tiền mặt khi nhận hàng</td>
 					</tr>
 										<tr>
@@ -119,7 +116,7 @@
 					</li>
 
 											<li class="woocommerce-order-overview__payment-method method">
-							Phương thức thanh toán:							<strong>Trả tiền mặt khi nhận hàng</strong>
+							Phương thức đặt hàng:							<strong>Trả tiền mặt khi nhận hàng</strong>
 						</li>
 					
 				</ul>

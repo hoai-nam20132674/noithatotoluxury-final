@@ -1025,4 +1025,10 @@ class ClientController extends Controller
         $pr->save();
         echo "thành công";
     }
+    public function plusViewBlog($id){
+        $blog = Blogs::where('id',$id)->get()->first();
+        $blog->view = $blog->view + 1;
+        $blog->save();
+        echo "thành công";
+    }
 }

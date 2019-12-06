@@ -10,7 +10,7 @@
   	 	 <nav class="breadcrumbs heading-font checkout-breadcrumbs text-center h2 strong">
     	   <a href="cart" class="hide-for-small">Chọn sản phẩm</a>
     	   <span class="divider hide-for-small"><i class="icon-angle-right"></i></span>
-    	   <a href="checkout" class="current">Thông tin thanh toán</a>
+    	   <a href="checkout" class="current">Thông tin đặt hàng</a>
     	   <span class="divider hide-for-small"><i class="icon-angle-right"></i></span>
     	   <a href="#" class="no-click hide-for-small">Hoàn thành</a>
 		 </nav>
@@ -59,7 +59,7 @@
   			<div class="clear">
   				<div class="woocommerce-billing-fields">
 	
-		<h3>Thanh toán và giao hàng</h3>
+		<h3>đặt hàng và giao hàng</h3>
 
 	
 		@if(Auth::guard('users_client')->user())
@@ -171,25 +171,6 @@
 			<td><span class="woocommerce-Price-amount amount">{!!number_format(Cart::getTotal())!!}<span class="woocommerce-Price-currencySymbol">₫</span></span></td>
 		</tr>
 
-		
-		
-			
-			<tr class="woocommerce-shipping-totals shipping">
-	<th>Giao hàng</th>
-	<td data-title="Giao hàng">
-					<ul id="shipping_method" class="woocommerce-shipping-methods">
-									<li>
-						<input type="hidden" name="shipping_method[0]" data-index="0" id="shipping_method_0_wbs7519c0ba_ph_v_n_chuy_n" value="wbs:7519c0ba_ph_v_n_chuy_n" class="shipping_method"><label for="shipping_method_0_wbs7519c0ba_ph_v_n_chuy_n">Phí vận chuyển: <span class="woocommerce-Price-amount amount">0.000<span class="woocommerce-Price-currencySymbol">₫</span></span></label>					</li>
-							</ul>
-					
-		
-			</td>
-</tr>
-
-			
-		
-		
-		
 		
 		<tr class="order-total">
 			<th>Tổng</th>

@@ -25,7 +25,7 @@
 			</p>
 			<p class="woocommerce-mini-cart__buttons buttons">
 				<a href="cart" class="button wc-forward">Xem giỏ hàng</a>
-				<a href="checkout" class="button checkout wc-forward">Thanh toán</a>
+				<a href="checkout" class="button checkout wc-forward">Đặt Hàng</a>
 			</p>
 		</div>
     </li>

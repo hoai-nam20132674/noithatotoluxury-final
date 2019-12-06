@@ -8,7 +8,7 @@
 				<header class="entry-header">
 					<div class="entry-header-text entry-header-text-top text-center">
 					
-						<h1 class="entry-title">{{$blog->title}}</h1>
+						<h1 class="entry-title plus_view" blog-id="{{$blog->id}}">{{$blog->title}}</h1>
 						<div class="entry-divider is-divider small"></div>
 
 						<div class="entry-meta uppercase is-xsmall">
@@ -28,4 +28,22 @@
 
 
 </main><!-- #main -->
+
+@endsection
+@section('script')
+  <script type="text/javascript">
+    jQuery(document).ready(function () {
+      var blog_id = jQuery(".plus_view").attr('blog-id');
+      url = '/plus-view-blog/'+blog_id;
+      jQuery.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'html',
+        success: function(data) {
+          console.log(data);
+        }
+        
+      });
+    });
+  </script>
 @endsection

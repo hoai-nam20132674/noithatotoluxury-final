@@ -49,9 +49,9 @@
 						@foreach($products as $pr)
 							<tr>
 								
-								<td><img src="{{asset('/uploads/images/products/avatar/'.$pr["avatar"])}}"  width="100%" /></td>
+								<td ><a href="{{URL::route('listProductsDetail',$pr->id)}}"><img src="{{asset('/uploads/images/products/avatar/'.$pr["avatar"])}}"  width="100%" /></a></td>
 										
-								<td><a href="{{URL::route('listProductsDetail',$pr->id)}}">{{$pr->name}}</a></td>
+								<td><a href="/{{$pr->url}}" target="_blank">{{$pr->name}}</a></td>
 								
 								<td>
 									@if($pr->display == 0)
