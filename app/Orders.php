@@ -9,6 +9,7 @@ use App\Products;
 use App\OrderLogs;
 use App\OrderDetailLogs;
 use Mail;
+use App\Mail\Order;
 
 class Orders extends Model
 {
@@ -65,8 +66,6 @@ class Orders extends Model
             
     	}
 
-        // Mail::send('mailfb', array('name'=>$request["name"],'email'=>$request["email"]), function($message){
-        //     $message->to('namnguyen20132674@gmail.com', 'Visitor')->subject('Visitor Feedback!');
-        // });
+        Mail::send(new Order($order));
     }
 }
