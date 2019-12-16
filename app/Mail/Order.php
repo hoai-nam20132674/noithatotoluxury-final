@@ -11,16 +11,15 @@ class Order extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct()
     {
-        $this->data = $data;
+        
     }
 
     /**
@@ -30,6 +29,6 @@ class Order extends Mailable
      */
     public function build()
     {
-        return $this->view('mailfb',['data'=>$data])->to('namnguyen20132674@gmail.com');
+        return $this->view('mailfb')->to('namnguyen20132674@gmail.com');
     }
 }

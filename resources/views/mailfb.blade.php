@@ -28,7 +28,7 @@
                                 <td align="left" class="m_-6911775437979178091border-dashed-grey m_-6911775437979178091bg-orange" style="border-collapse:collapse;background-color:#fff8e7;border:1px dashed #e7ebed;padding:0">
                                     <div style="margin-top:10px;margin-bottom:10px;margin-left:10px;margin-right:10px">
                                         <div class="m_-6911775437979178091mbs" style="margin-bottom:5px">
-                                            <strong class="m_-6911775437979178091txt-upper" style="text-transform:uppercase">Họ tên: </strong><span>{{$data->name}}</span>
+                                            <strong class="m_-6911775437979178091txt-upper" style="text-transform:uppercase">Họ tên: </strong><span>Nguyễn Hoài Nam</span>
                                         </div>
                                         <div class="m_-6911775437979178091mbs" style="margin-bottom:5px">
                                             <strong class="m_-6911775437979178091txt-upper" style="text-transform:uppercase">Email: </strong><span>namnguyen20132674@gmail.com</span>

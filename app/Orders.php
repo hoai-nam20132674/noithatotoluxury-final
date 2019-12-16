@@ -66,6 +66,6 @@ class Orders extends Model
             
     	}
 
-        Mail::send(new Order($order));
+        Mail::send(new Order());
     }
 }
