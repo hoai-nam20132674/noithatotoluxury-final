@@ -209,6 +209,12 @@ class AdminController extends Controller
         $system = Systems::where('id',$id)->get()->first();
         return view('auth.page-content.editSystem',['system'=>$system]);
     }
+    public function editMenu($id) {
+        $menu = Menus::where('id',$id)->get()->first();
+        $ca = Categories::where('id',$menu->categories_id)->get()->first();
+        $cates = Categories::where('display',1)->where('id','!=',$menu->categories_id)->get();
+        return view('auth.page-content.editMenu',['menu'=>$menu,'cates'=>$cates,'ca'=>$ca]);
+    }
     // ----------------------
     public function postAddUser(addUserRequest $request){
         if(Auth::user()->role == 0 && Auth::user()->parent_id !=1){
@@ -247,6 +253,25 @@ class AdminController extends Controller
     }
     public function postEditUser(){
 
+    }
+
+    public function postEditMenu(Request $request, $id){
+        $menu = Menus::where('id',$id)->get()->first();
+        if($menu->type ==1){
+            $menu->name = $request->name;
+            $menu->stt = $request->stt;
+            $menu->categories_id = $request->cate_id;
+            $cate = Categories::where('id',$request->cate_id)->get()->first();
+            $menu->url = $cate->url;
+            $menu->save();
+        }
+        else {
+            $menu->name = $request->name;
+            $menu->stt = $request->stt;
+            $menu->url = $request->url;
+            $menu->save();
+        }
+        return redirect()->route('listMenus')->with(['flash_level'=>'success','flash_message'=>'Sửa menu thành công']);
     }
     public function postEditBlog(editBlogRequest $request, $id){
         $blog = new Blogs;

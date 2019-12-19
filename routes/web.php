@@ -122,6 +122,7 @@ Route::group(['prefix'=>'auth/admin','middleware'=>'auth'], function(){
 	Route::post('postEditProduct/{id}',['as'=>'postEditProduct','uses'=>'Auth\AdminController@postEditProduct']);
 	Route::post('postAddBlog',['as'=>'postAddBlog','uses'=>'Auth\AdminController@postAddBlog']);
 	Route::post('postAddMenu',['as'=>'postAddMenu','uses'=>'Auth\AdminController@postAddMenu']);
+	Route::post('postEditMenu/{id}',['as'=>'postEditMenu','uses'=>'Auth\AdminController@postEditMenu']);
 	Route::post('postEditBlog/{id}',['as'=>'postEditBlog','uses'=>'Auth\AdminController@postEditBlog']);
 	Route::post('postAddCategorie',['as'=>'postAddCategorie','uses'=>'Auth\AdminController@postAddCategorie']);
 	Route::post('postEditCategorie/{id}',['as'=>'postEditCategorie','uses'=>'Auth\AdminController@postEditCategorie']);
